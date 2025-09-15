@@ -41,6 +41,11 @@
 }
 
 .header__action-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 8px;
+  width: fit-content;
   column-gap: 20px;
 }
 
@@ -111,6 +116,12 @@
   cursor: pointer;
 }
 
+.header__theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Button Styles */
 .button {
   display: flex;
@@ -175,6 +186,7 @@
 .button_type_ghost {
   color: var(--font-color-primary);
   background-color: transparent;
+  border: none;
 }
 
 .button_type_ghost:hover {
@@ -193,18 +205,20 @@
   cursor: auto;
 }
 
+.button_type_ghost:focus {
+  outline: none;
+}
+
 .button_size_small {
-  padding: 8px 16px;
-  font-size: 14px;
+  padding-inline: 23px;
 }
 
 .button_size_medium {
-  padding: var(--padding-small);
+  padding-inline: 99px;
 }
 
 .button_size_large {
-  padding: 16px 32px;
-  font-size: 18px;
+  padding-inline: 194px;
 }
 
 /* Input Styles */
