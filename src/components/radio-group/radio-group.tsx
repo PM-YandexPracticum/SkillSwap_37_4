@@ -27,7 +27,7 @@ export const RadioGroup: FC<RadioGroupProps> = ({
       {items.map((item) => (
         <label key={item.id} className={styles.radioItem}>
           <input
-            type="radio"
+            type='radio'
             name={name}
             checked={item.checked || false}
             onChange={handleRadioChange}
@@ -40,4 +40,3 @@ export const RadioGroup: FC<RadioGroupProps> = ({
     </div>
   );
 };
- 
