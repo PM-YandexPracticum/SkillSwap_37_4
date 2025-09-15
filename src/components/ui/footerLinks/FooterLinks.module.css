@@ -1,0 +1,17 @@
+/* Стили ссылок футера */
+/* Общие стили для секций */
+.section {
+  flex: 1;
+  padding-top: 6px;
+}
+
+/* Стили списка ссылок */
+.linksList {
+  list-style: disc;
+  padding: 0;
+  padding-left: 30px;  
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
