@@ -1,6 +1,7 @@
 import './App.css';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route/protected-route';
+import { Header } from '../header';
 import { useDispatch } from '../../services/store/store';
 import { useEffect } from 'react';
 import styles from './App.css';
@@ -23,8 +24,7 @@ function App() {
 
   return (
     <div className={styles.App}>
-      {/* todo */}
-      {/* <AppHeader /> */}
+      <Header isSticky ariaLabel='Главная навигация' />
       <Routes>
         <Route
           path='/'
