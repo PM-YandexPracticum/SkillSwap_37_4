@@ -1,0 +1,16 @@
+@import url('../assets/fonts/font.css');
+@import url('./variables.css');
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
