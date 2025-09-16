@@ -1,0 +1,36 @@
+.input__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 527px;
+  gap: 8px;
+  border-radius: 12px;
+  background-color: #fff;
+  padding: 12px;
+}
+
+.input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  color: #253017;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  font-family: Roboto, sans-serif;
+}
+
+.rightIcon {
+  cursor: pointer;
+  position: absolute;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #253017;
+}
+
+.icon {
+  height: 24px; 
+  width: 24px;
+}
