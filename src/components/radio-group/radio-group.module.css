@@ -1,5 +1,14 @@
 @import url('../app/assets/fonts/font.css');
 
+.title {
+  font-family: 'Jost', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #253017;
+  margin-bottom: 8px;
+}
+
 .radioGroup {
   display: flex;
   flex-direction: column;
