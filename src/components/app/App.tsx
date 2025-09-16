@@ -4,6 +4,7 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/store/store';
 import { useEffect } from 'react';
 import styles from './App.css';
+import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
           }
         />
       </Routes>
+      <AppFooter />
       {/* todo */}
       {/* <AppFooter /> */}
     </div>
