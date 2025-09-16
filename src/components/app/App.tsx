@@ -4,7 +4,7 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/store/store';
 import { useEffect } from 'react';
 import styles from './App.css';
-import { AppFooter } from '../appFooter/AppFooter';
+import { NotFound404 } from '../../pages/404';
 
 function App() {
   const navigate = useNavigate();
@@ -69,11 +69,7 @@ function App() {
         </Route>
         <Route
           path='*'
-          element={
-            <h1>NotFound404</h1>
-            // todo
-            // <NotFound404 />
-          }
+          element={<NotFound404/>}
         />
         <Route
           path='/500'
@@ -84,7 +80,8 @@ function App() {
           }
         />
       </Routes>
-      <AppFooter />
+      {/* todo */}
+      {/* <AppFooter /> */}
     </div>
   );
 }

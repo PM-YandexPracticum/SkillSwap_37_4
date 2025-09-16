@@ -1,0 +1,1 @@
+export { NotFound404UI } from './404';
