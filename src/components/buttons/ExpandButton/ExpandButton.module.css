@@ -1,4 +1,4 @@
-.skillsButton {
+.expandButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,26 +12,26 @@
   transition: opacity 0.2s ease;
 }
 
-.skillsButton:hover {
+.expandButton:hover {
   opacity: 0.7;
 }
 
-.skillsButton:focus {
+.expandButton:focus {
   outline: 2px solid #007bff;
   outline-offset: 2px;
 }
 
-.skillsButton__text {
+.expandButton__text {
   font-size: 14px;
   line-height: 1.4;
   white-space: nowrap;
 }
 
-.skillsButton__arrow {
+.expandButton__arrow {
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
 
-.skillsButton__arrow--rotated {
+.expandButton__arrow--rotated {
   transform: rotate(-180deg);
 }

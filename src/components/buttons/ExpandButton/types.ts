@@ -1,4 +1,4 @@
-export interface SkillsButtonProps {  
+export interface ExpandButtonProps {  
   color?: string;  
   onClick?: () => void;  
   className?: string;  
