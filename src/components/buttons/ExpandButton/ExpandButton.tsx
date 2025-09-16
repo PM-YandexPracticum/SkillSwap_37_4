@@ -1,7 +1,7 @@
 import React from 'react';
 import { ExpandButtonProps } from './types';
 import styles from './ExpandButton.module.css';
-import ChevronDownIcon from '../../app/assets/static/icons/chevron-down.svg';
+import { ReactComponent as ChevronDownIcon } from '../../app/assets/static/icons/chevron-down.svg';
 
 export const ExpandButton: React.FC<ExpandButtonProps> = ({
   color = '#000000',
