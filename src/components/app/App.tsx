@@ -4,6 +4,7 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/store/store';
 import { useEffect } from 'react';
 import styles from './App.css';
+import { AppFooter } from '../appFooter/AppFooter';
 
 function App() {
   const navigate = useNavigate();
@@ -83,8 +84,7 @@ function App() {
           }
         />
       </Routes>
-      {/* todo */}
-      {/* <AppFooter /> */}
+      <AppFooter />
     </div>
   );
 }
