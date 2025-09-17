@@ -1,4 +1,9 @@
 /* Стили навигационного меню */
+.skillsColumnContainer {
+  display: flex;
+  gap: 24px;
+}
+
 .skillsColumn {
   display: flex;
   flex-direction: column;

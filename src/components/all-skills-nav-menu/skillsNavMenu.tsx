@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useMemo } from 'react';
 import { SKILL_CATEGORY, SKILL_VALUE } from '../shared/lib/skillsCategoryMapping';
 import styles from './skillsNavMenu.module.css';
 
@@ -7,64 +7,102 @@ interface SkillsNavMenuProps {
   onClose: () => void;
 }
 
-export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(({ isOpen }, ref) => {
+const COLUMN_BREAK_POINT = 3;
 
-  if (!isOpen) return null;
+// Создаем тип для категорий
+type CategoryKey = keyof typeof SKILL_CATEGORY;
 
-  const renderCategory = (
-    skillsCategory: string,
-    subcategories: string[],
-    iconPath: string,
-    bgColor: string,
-  ) => (
-    <div className={styles.skillsCategory} key={skillsCategory}>
-      <div className={styles.skillscategoryHeader}>
-        <div className={styles.icon} style={{ backgroundColor: bgColor }}>
-          <div
-            className={styles.iconMask}
-            style={{
-              maskImage: `url(${iconPath})`,
-              WebkitMaskImage: `url(${iconPath})`,
-            }}
-          />
-        </div>
-        <div className={styles.categoryContent}>
-          <h3 className={styles.categoryTitle}>{skillsCategory}</h3>
-          <div className={styles.subcategories}>
-            {subcategories.map(sub => (
-              <div key={sub} className={styles.subcategory}>
-                {sub}
+export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
+  ({ isOpen, onClose }, ref) => {
+    if (!isOpen) return null;
+
+    const renderCategory = useMemo(
+      () => {
+        return (
+          category: CategoryKey,
+          subcategories: readonly string[] // Изменяем тип на readonly array
+        ) => {
+          const { color, icon } = SKILL_VALUE[category];
+
+          return (
+            <div
+              className={styles.skillsCategory}
+              key={category}
+              role="region"
+              aria-labelledby={`category-${category}`}
+            >
+              <div className={styles.skillsCategoryHeader}>
+                <div
+                  className={styles.icon}
+                  style={{ backgroundColor: color }}
+                  aria-hidden="true"
+                >
+                  <div
+                    className={styles.iconMask}
+                    style={{
+                      maskImage: `url(${icon})`,
+                      WebkitMaskImage: `url(${icon})`,
+                    }}
+                  />
+                </div>
+                <div className={styles.categoryContent}>
+                  <h3
+                    id={`category-${category}`}
+                    className={styles.categoryTitle}
+                    role="heading"
+                    aria-level={3}
+                  >
+                    {category}
+                  </h3>
+                  <div className={styles.subcategories} role="list">
+                    {subcategories.map((subcategory) => (
+                      <div
+                        key={subcategory}
+                        className={styles.subcategory}
+                        onClick={onClose}
+                        role="listitem"
+                        tabIndex={0}
+                        aria-label={`Перейти в категорию ${subcategory}`}
+                      >
+                        {subcategory}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          );
+        };
+      },
+      [SKILL_VALUE, styles]
+    );
+
+    // Исправляем типизацию для Object.entries
+    const categories = Object.entries(SKILL_CATEGORY) as [
+      CategoryKey,
+      readonly string[]
+    ][];
+
+    const firstColumn = categories.slice(0, COLUMN_BREAK_POINT);
+    const secondColumn = categories.slice(COLUMN_BREAK_POINT);
+
+    return (
+      <div
+        className={styles.skillsColumnContainer}
+        role="navigation"
+        aria-label="Навигация по категориям навыков"
+      >
+        <div className={styles.skillsColumn}>
+          {firstColumn.map(([category, subcategories]) =>
+            renderCategory(category, subcategories)
+          )}
+        </div>
+        <div className={styles.skillsColumn}>
+          {secondColumn.map(([category, subcategories]) =>
+            renderCategory(category, subcategories)
+          )}
         </div>
       </div>
-    </div>
-  );
-
-  const categories = Object.entries(SKILL_CATEGORY).map(([category, subcategories]) => {
-    return [category, subcategories];
-  });
-
-  const firstColumnCategories = [categories[0], categories[2], categories[4]];
-  const secondColumnCategories = [categories[1], categories[3], categories[5]];
-
-  return (
-    <>
-    <div className={styles.skillsColumn}>
-        {firstColumnCategories.map(([skillsCategory, subcategories]) => {
-        const { color, icon } = SKILL_VALUE[skillsCategory as keyof typeof SKILL_VALUE];
-        return renderCategory(skillsCategory, subcategories, icon, color);
-        })}
-    </div>
-    <div className={styles.skillsColumn}>
-        {secondColumnCategories.map(([skillsCategory, subcategories]) => {
-        const { color, icon } = SKILL_VALUE[skillsCategory as keyof typeof SKILL_VALUE];
-        return renderCategory(skillsCategory, subcategories, icon, color);
-        })}
-    </div>
-    </>
-
-  );
-});
-
+    );
+  }
+);
