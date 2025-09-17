@@ -3,12 +3,12 @@ import styles from './DropDown.module.css';
 import chevronDownIcon from '../app/assets/static/icons/chevron-down.svg';
 import chevronUpIcon from '../app/assets/static/icons/chevron-up.svg';
 
-interface DropDownOption {
+export interface DropDownOption {
   value: string;
   label: string;
 }
 
-interface DropDownProps {
+export interface DropDownProps {
   options: DropDownOption[];
   value?: string;
   placeholder?: string;
