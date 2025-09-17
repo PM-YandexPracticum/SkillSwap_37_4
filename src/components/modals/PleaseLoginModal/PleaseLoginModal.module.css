@@ -1,32 +1,8 @@
-.modal {
-  width: 556px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 80px 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 52px;
-  position: relative;
-}
-
 .content {
-  width: 436px;
   display: flex;
   flex-direction: column;
   gap: 32px;
   align-items: flex-start;
-}
-
-.close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
 }
 
 .iconCircle {
@@ -35,8 +11,7 @@
   border-radius: 50%;
   background: #f3f5f0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
 }
 
 .iconUser {
@@ -79,6 +54,7 @@
   flex-direction: column;
   gap: 12px;
   align-items: center;
+  margin-top: 20px;
 }
 
 .title {
