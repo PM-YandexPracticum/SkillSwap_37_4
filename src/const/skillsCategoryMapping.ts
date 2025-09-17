@@ -1,3 +1,10 @@
+import briefcaseIcon from '../components/app/assets/static/iconsSkillsCategory/briefcase.svg'
+import homeIcon from '../components/app/assets/static/iconsSkillsCategory/home.svg'
+import lifestyleIcon from '../components/app/assets/static/iconsSkillsCategory/lifestyle.svg'
+import globalIcon from '../components/app/assets/static/iconsSkillsCategory/global.svg'
+import bookIcon from '../components/app/assets/static/iconsSkillsCategory/book.svg'
+import paletteIcon from '../components/app/assets/static/iconsSkillsCategory/palette.svg'
+
 export const SKILL_CATEGORY = {
   'Бизнес и карьера': [
     'Управление командой',
@@ -59,26 +66,26 @@ export const SKILL_VALUE: Record<keyof typeof SKILL_CATEGORY, { color: string; i
   {
     'Бизнес и карьера': {
       color: '#EEE7F7',
-      icon: '/src/components/app/assets/static/iconsSkillsCategory/briefcase.svg',
+      icon: briefcaseIcon,
     },
     'Дом и уют': {
       color: '#F7EBE5',
-      icon: '/src/components/app/assets/static/iconsSkillsCategory/home.svg',
+      icon: homeIcon,
     },
     'Здоровье и лайфстайл': {
       color: '#E9F7E7',
-      icon: '/src/components/app/assets/static/iconsSkillsCategory/lifestyle.svg',
+      icon: lifestyleIcon,
     },
     'Иностранные языки': {
       color: '#EBE5C5',
-      icon: '/src/components/app/assets/static/iconsSkillsCategory/global.svg',
+      icon: globalIcon,
     },
     'Образование и развитие': {
       color: '#E7F2F6',
-      icon: '/src/components/app/assets/static/iconsSkillsCategory/book.svg',
+      icon: bookIcon,
     },
     'Творчество и искусство': {
       color: '#F7E7F2',
-      icon: '/src/components/app/assets/static/iconsSkillsCategory/palette.svg',
+      icon: paletteIcon,
     },
   };
