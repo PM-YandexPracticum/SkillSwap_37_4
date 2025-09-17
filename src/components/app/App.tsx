@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
+import { InternalError500 } from '../../pages/500';
 
 function App() {
   const navigate = useNavigate();
@@ -74,11 +75,7 @@ function App() {
         />
         <Route
           path='/500'
-          element={
-            <h1>InternalError500</h1>
-            // todo
-            // <InternalError500 />
-          }
+          element={<InternalError500/>}
         />
       </Routes>
       <AppFooter />
