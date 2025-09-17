@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
 import styles from './FooterLinks.module.css';
 
 export const FooterLinks = () => {
   return (
+    <>
         <div className={styles.section}>
           <ul className={`${styles.linksList}`}>
             <li>
@@ -34,5 +36,6 @@ export const FooterLinks = () => {
             </li>
           </ul>
         </div>
+    </>
   );
 };
