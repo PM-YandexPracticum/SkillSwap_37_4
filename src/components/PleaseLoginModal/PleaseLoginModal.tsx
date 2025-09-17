@@ -2,6 +2,9 @@ import React from 'react';
 import styles from './PleaseLoginModal.module.css';
 import userCircle from '../app/assets/static/icons/user-circle.svg';
 import { Modal } from '../modal';
+import GreenButton from '../buttons/GreenButton';
+import GreenBorderButton from '../buttons/GreenBorderButton';
+import { ReactComponent as CloseIcon } from '../app/assets/static/icons/close.svg';
 
 type PleaseLoginModalProps = {
   isOpen: boolean;
@@ -21,8 +24,8 @@ export const PleaseLoginModal: React.FC<PleaseLoginModalProps> = ({
   return (
     <Modal onClose={onClose}>
       <div className={styles.modal} role="dialog" aria-modal="true">
-        <button className={styles.close} onClick={onClose} aria-label="Закрыть">
-          ×
+        <button className={styles.close} onClick={onClose} aria-label="Закрыть" type="button">
+          <CloseIcon />
         </button>
 
         <div className={styles.iconCircle} aria-hidden="true">
@@ -38,12 +41,12 @@ export const PleaseLoginModal: React.FC<PleaseLoginModalProps> = ({
           </div>
 
           <div className={styles.buttonsRow}>
-            <button className={styles.btnSecondary} onClick={onClose} type="button">
+            <GreenBorderButton onClick={onClose} type="button" className={styles.btnSecondary}>
               Отмена
-            </button>
-            <button className={styles.btnPrimary} onClick={onLogin} type="button">
+            </GreenBorderButton>
+            <GreenButton onClick={onLogin} type="button" className={styles.btnPrimary}>
               Войти
-            </button>
+            </GreenButton>
           </div>
         </div>
       </div>
