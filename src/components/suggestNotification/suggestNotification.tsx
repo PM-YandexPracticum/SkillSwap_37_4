@@ -3,13 +3,13 @@ import styles from './suggest-notification.module.css';
 import { ReactComponent as LampIcon } from '../app/assets/static/icons/lamp.svg';
 import { ReactComponent as CloseIcon } from '../app/assets/static/icons/cross.svg';
 type suggestNotificationProps = {
-  senderName: string;
+  text: string;
   onClick: () => void;
   onAction: () => void;
 };
 
 export const SuggestNotificationUI: FC<suggestNotificationProps> = ({
-  senderName,
+  text,
   onClick,
   onAction
 }) => {
@@ -18,7 +18,7 @@ export const SuggestNotificationUI: FC<suggestNotificationProps> = ({
       <div className={styles.card} onClick={onAction}>
         <div className={styles.left}>
           <LampIcon className={styles.icon} />
-          <h3 className={styles.title}>{senderName} предлагает вам обмен</h3>
+          <h3 className={styles.title}>{text}</h3>
         </div>
 
         {/* <button className={styles.action}
