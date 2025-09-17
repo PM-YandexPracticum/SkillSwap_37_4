@@ -5,21 +5,31 @@ import { Modal } from '../modal';
 import GreenButton from '../buttons/GreenButton';
 import GreenBorderButton from '../buttons/GreenBorderButton';
 import { ReactComponent as CloseIcon } from '../app/assets/static/icons/close.svg';
+import { useNavigate } from 'react-router-dom';
 
 type PleaseLoginModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onLogin: () => void;
-  onSignup: () => void;
+  onLogin?: () => void; // опционально: позволяет переопределить дефолт
 };
 
 export const PleaseLoginModal: React.FC<PleaseLoginModalProps> = ({
   isOpen,
   onClose,
   onLogin,
-  onSignup,
 }) => {
   if (!isOpen) return null;
+
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (onLogin) {
+      onLogin();
+    } else {
+      navigate('/login');
+    }
+    onClose();
+  };
 
   return (
     <Modal onClose={onClose}>
@@ -44,7 +54,7 @@ export const PleaseLoginModal: React.FC<PleaseLoginModalProps> = ({
             <GreenBorderButton onClick={onClose} type="button" className={styles.btnSecondary}>
               Отмена
             </GreenBorderButton>
-            <GreenButton onClick={onLogin} type="button" className={styles.btnPrimary}>
+            <GreenButton onClick={handleLogin} type="button" className={styles.btnPrimary}>
               Войти
             </GreenButton>
           </div>
