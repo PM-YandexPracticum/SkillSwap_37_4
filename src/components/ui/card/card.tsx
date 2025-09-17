@@ -51,7 +51,6 @@ export const CardUI: FC<TCardUI> = ({
                 key={index}
                 name={skill.name}
                 color={skill.color}
-                className={styles.tag}
               />
             ))}
           </div>
@@ -64,7 +63,6 @@ export const CardUI: FC<TCardUI> = ({
                 key={index}
                 name={skill.name}
                 color={skill.color}
-                className={styles.tag}
               />
             ))}
             {remainingWantLearn > 0 && (

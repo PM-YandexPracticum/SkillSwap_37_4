@@ -26,12 +26,6 @@
   line-height: 24px;
 }
 
-.learnTags .tag, .skillsTags .tag {
-  min-height: 24px;
-  padding: 4px 12px;
-  font-size: 12px;
-}
-
 .header {
   position: relative;
   display: flex;
