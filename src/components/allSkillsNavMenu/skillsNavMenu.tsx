@@ -22,7 +22,7 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
           category: CategoryKey,
           subcategories: readonly string[] // Изменяем тип на readonly array
         ) => {
-          const { color, icon } = SKILL_VALUE[category];
+          const { color, icon } = SKILL_VALUE[category as keyof typeof SKILL_VALUE];
 
           return (
             <div
