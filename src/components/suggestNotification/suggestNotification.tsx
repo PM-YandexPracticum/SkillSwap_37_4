@@ -20,6 +20,13 @@ export const SuggestNotificationUI: FC<suggestNotificationProps> = ({
           <LampIcon className={styles.icon} />
           <h3 className={styles.title}>{senderName} предлагает вам обмен</h3>
         </div>
+
+        {/* <button className={styles.action}
+          onClick={onAction}
+          aria-label='Перейти к предложению'
+        > 
+          Перейти
+        </button> */}
         
         <button
           className={styles.close}
