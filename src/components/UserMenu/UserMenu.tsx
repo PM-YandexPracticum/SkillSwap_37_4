@@ -2,14 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TUser, UserMenuProps } from '../../types/user';
 import { Moon, Sun, Bell, Heart, User as UserIcon } from 'lucide-react';
+import { GreenBorderButton } from '../buttons/GreenBorderButton';
+import { useSelector } from '../../services/store/store';
 import './UserMenu.css';
 
 export const UserMenu: React.FC<UserMenuProps> = ({ 
-  user, 
   onThemeToggle, 
   isDarkTheme 
 }) => {
   const navigate = useNavigate();
+  
+   const user: TUser | null = null;
 
   const handleProfileClick = () => {
     navigate('/profile');
@@ -33,7 +36,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({
     console.log('Likes clicked');
   };
 
-  if (user && user.isAuthenticated) {
+  if (user && (user as TUser).isAuthenticated) {
     // Рендер для авторизованного пользователя
     return (
       <div className="user-menu authenticated">
@@ -68,17 +71,17 @@ export const UserMenu: React.FC<UserMenuProps> = ({
           onClick={handleProfileClick}
         >
           <div className="user-avatar">
-            {user.avatar ? (
+            {(user as TUser).avatar ? (
               <img 
-                src={user.avatar} 
-                alt={`Аватар ${user.name}`}
+                src={(user as TUser).avatar} 
+                alt={`Аватар ${(user as TUser).name}`}
                 className="avatar-image"
               />
             ) : (
               <UserIcon size={24} />
             )}
           </div>
-          <span className="user-name">{user.name}</span>
+          <span className="user-name">{(user as TUser).name}</span>
         </div>
       </div>
     );
@@ -96,19 +99,20 @@ export const UserMenu: React.FC<UserMenuProps> = ({
       </button>
       
       <div className="auth-buttons">
-        <button 
-          className="login-btn"
+        <GreenBorderButton 
           onClick={handleLoginClick}
+          className="login-btn"
         >
           Войти
-        </button>
-        <button 
-          className="register-btn"
+        </GreenBorderButton>
+        <GreenBorderButton 
           onClick={handleRegisterClick}
+          className="register-btn"
         >
           Зарегистрироваться
-        </button>
+        </GreenBorderButton>
       </div>
     </div>
   );
 };
+
