@@ -1,26 +1,28 @@
-import { useState } from "react";
+import { FC } from 'react';
+import style from './Checkbox.module.css';
 
-type CategoryCheckboxProps = {
-  categoryName: string;
-  onChange: (checked: boolean) => void;
+type CheckboxProps = {
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: (id: string, checked: boolean) => void;
 };
 
-export const Checkbox: React.FC<CategoryCheckboxProps> = ({ categoryName, onChange }) => {
-  const [checked, setChecked] = useState(false);
-
-  const handleChange = () => {
-    const newChecked = !checked;
-    setChecked(newChecked);
-    onChange(newChecked); // отдаём наружу инфу о клике
+export const Checkbox: FC<CheckboxProps> = ({ id, label, checked, onChange }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(id, event.target.checked);
   };
 
-  return <label className="flex items-center gap-2 cursor-pointer">
-    <input
-      type="checkbox"
-      checked={checked}
-      onChange={handleChange}
-      className="w-5 h-5"
-    />
-    <span>{categoryName}</span>
-  </label>
+  return (
+    <label className={style.label}>
+      <input
+        id={id}
+        type="checkbox"
+        checked={checked}
+        onChange={handleChange}
+        className={style.input}
+      />
+      <span className={style.span}>{label}</span>
+    </label>
+  );
 };
