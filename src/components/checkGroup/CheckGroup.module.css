@@ -1,0 +1,15 @@
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 284px;
+}
+
+.title_group {
+    font-family: 'Jost', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #253017;
+    margin-bottom: 8px;
+}
