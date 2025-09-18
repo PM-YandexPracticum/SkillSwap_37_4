@@ -69,7 +69,6 @@ export const CardUI: FC<TCardUI> = ({
               <CardTag
                 name={`+${remainingWantLearn}`}
                 color='#e8ecf7'
-                className={styles.tag}
               />
             )}
           </div>
