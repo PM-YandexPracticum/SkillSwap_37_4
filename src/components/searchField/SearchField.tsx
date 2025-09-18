@@ -27,8 +27,9 @@ export const SearchField: React.FC<SearchFieldProps> = ({
       value={value}
       id={`search__input-${generatedId}`}
       onChange={handleChange}
-      iconPaddingRight='32px'
+      iconPaddingRight='20px'
       placeholder={placeholder}
+      fields__container={styles.search_input__container}
       className={styles.search_input}
       rightIconAriaLabel='Очистить поле поиска'
       leftIcon={<Search className={styles.leftIcon} />}

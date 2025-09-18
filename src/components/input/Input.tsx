@@ -11,6 +11,7 @@ export interface InputProps
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   iconPaddingRight?: string;
+  fields__container?: string;
   onRightIconClick?: () => void;
   rightIconAriaLabel?: string;
 }
@@ -29,11 +30,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       id,
       iconPaddingRight,
       rightIconAriaLabel,
+      fields__container,
       ...props
     },
     ref
   ) => (
-    <div className={styles.field__container}>
+    <div className={clsx(styles.field__container, fields__container)}>
       {label && (
         <label htmlFor={id} className={styles.label}>
           {label}

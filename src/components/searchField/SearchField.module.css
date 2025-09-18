@@ -4,8 +4,11 @@
 }
 
 .search-input__right-icon {
-  padding-inline-end: 32px;
   color: var(--rightIconColor);
+}
+
+.search_input__container {
+  padding: 12px;
 }
 
 .search_input {
