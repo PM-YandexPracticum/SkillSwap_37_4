@@ -5,6 +5,7 @@ import clsx from 'clsx';
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  subLabel?: string;
   error?: string;
   success?: boolean;
   leftIcon?: React.ReactNode;
@@ -22,6 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       success,
       leftIcon,
       rightIcon,
+      subLabel,
       onRightIconClick,
       className,
       id,
@@ -31,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => (
-    <div>
+    <div className={styles.field__container}>
       {label && (
         <label htmlFor={id} className={styles.label}>
           {label}
@@ -52,13 +54,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-label={rightIconAriaLabel}
             className={clsx(styles.rightIcon, styles.icon)}
             onClick={onRightIconClick}
-            style={{right: iconPaddingRight}}
+            style={{ right: iconPaddingRight }}
           >
             {rightIcon}
           </button>
         )}
       </div>
-
+      {subLabel && <span className={styles.subLabel}>{subLabel}</span>}
       {error && <span className={styles.errorText}>{error}</span>}
     </div>
   )

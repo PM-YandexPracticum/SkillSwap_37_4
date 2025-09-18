@@ -15,11 +15,7 @@ export const DatePickerComponent = ({ onDateChange }: DatePickerProps) => {
 
   return (
     <div>
-      <DatePicker
-        showIcon
-        selected={selectedDate}
-        onChange={handleChange}
-      />
+      <DatePicker showIcon selected={selectedDate} onChange={handleChange} />
     </div>
   );
 };

@@ -41,7 +41,8 @@ export const PleaseLoginModal: React.FC<PleaseLoginModalProps> = ({
         <div className={styles.textBlock}>
           <h2 className={styles.title}>Пожалуйста, войдите в аккаунт</h2>
           <p className={styles.subtitle}>
-            Присоединяйтесь к SkillSwap и обменивайтесь знаниями и навыками с другими людьми
+            Присоединяйтесь к SkillSwap и обменивайтесь знаниями и навыками с
+            другими людьми
           </p>
         </div>
         <div className={styles.buttonsRow}>

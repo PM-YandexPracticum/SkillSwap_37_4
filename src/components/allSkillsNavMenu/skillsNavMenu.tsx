@@ -16,8 +16,8 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
   ({ isOpen, onClose }, ref) => {
     if (!isOpen) return null;
 
-    const renderCategory = useMemo(() => {
-      return (category: CategoryKey, subcategories: readonly string[]) => {
+    const renderCategory = useMemo(
+      () => (category: CategoryKey, subcategories: readonly string[]) => {
         const { color, icon } =
           SKILL_VALUE[category as keyof typeof SKILL_VALUE];
 
@@ -69,8 +69,9 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
             </div>
           </div>
         );
-      };
-    }, [SKILL_VALUE, styles]);
+      },
+      [SKILL_VALUE, styles]
+    );
 
     // Исправляем типизацию для Object.entries
     const categories = Object.entries(SKILL_CATEGORY) as [

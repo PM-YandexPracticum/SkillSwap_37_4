@@ -18,7 +18,7 @@ export const Checkbox: FC<CheckboxProps> = ({ id, label, checked, onChange, vari
     <label className={style.label}>
       <input
         id={id}
-        type="checkbox"
+        type='checkbox'
         checked={checked}
         onChange={handleChange}
         className={`${style.input} ${variant === 'minus' ? style.iconMinus : style.iconCheck}`}

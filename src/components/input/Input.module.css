@@ -7,7 +7,7 @@
   gap: 8px;
   border-radius: 12px;
   background-color: #fff;
-  padding: 12px;
+  padding-block: 12px;
 }
 
 .input {
@@ -33,4 +33,21 @@
 .icon {
   height: 24px; 
   width: 24px;
+}
+
+.label {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  color: #0C0C0C;
+  line-height: 24px;
+}
+
+.subLabel {
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+  color: #253017;
+}
+
+.field__container {
+  padding: 20px;
 }

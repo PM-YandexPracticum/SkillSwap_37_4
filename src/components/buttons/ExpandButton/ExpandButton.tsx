@@ -10,26 +10,22 @@ export const ExpandButton: React.FC<ExpandButtonProps> = ({
   text = 'Все навыки',
   iconSize = 24,
   isOpen = false
-}) => {
-  return (
-    <button
-      className={`${styles.expandButton} ${className}`}
-      onClick={onClick}
+}) => (
+  <button
+    className={`${styles.expandButton} ${className}`}
+    onClick={onClick}
+    style={{ color }}
+    type='button'
+    aria-label={text}
+  >
+    <span className={styles.expandButton__text}>{text}</span>
+    <ChevronDownIcon
+      width={iconSize}
+      height={iconSize}
+      className={`${styles.expandButton__arrow} ${isOpen ? styles['expandButton__arrow--rotated'] : ''}`}
       style={{ color }}
-      type="button"
-      aria-label={text}
-    >
-      <span className={styles.expandButton__text}>
-        {text}
-      </span>
-      <ChevronDownIcon
-        width={iconSize}
-        height={iconSize}
-        className={`${styles.expandButton__arrow} ${isOpen ? styles['expandButton__arrow--rotated'] : ''}`}
-        style={{ color }}
-      />
-    </button>
-  );
-};
+    />
+  </button>
+);
 
 export default ExpandButton;
