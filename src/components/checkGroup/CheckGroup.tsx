@@ -30,7 +30,6 @@ export const CheckGroup: FC<CheckGroupProps> = ({
           label={item.label}
           checked={!!checkedItems[item.id]}
           onChange={onChange}
-          variant={nameGroup.toLowerCase().includes('subcategory') ? 'check' : 'minus'}
         />
       ))}
     </div>

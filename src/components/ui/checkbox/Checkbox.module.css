@@ -20,30 +20,32 @@
   cursor: pointer;
 }
 
-/* Subcategory (галочка): при checked — сплошной зелёный фон */
+/* Checked (Active): фон #ABD27A */
 .input:checked {
   background-color: #ABD27A;
-  border: 1px solid #ABD27A;
+  border-color: #ABD27A;
 }
 
 /* Иконка галочки (Subcategory) */
 .iconCheck:checked {
-  background-image: url('../../app/assets/static/iconsUi/checkbox-done.svg?v=2');
+  background-image: url('../../app/assets/static/iconsUi/checkbox-done.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 18px 18px;
+  background-size: 20px 20px;
 }
 
-/* Иконка минуса (Category) */
-/* Category (минус): зелёная плашка и глиф — только когда checked */
-.iconMinus:checked {
-  background-color: #ABD27A;
-  border: 1px solid #ABD27A;
-  background-image: url('../../app/assets/static/iconsUi/checkbox-remove.svg?v=2');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 18px 18px;
-}
+/* Подсказка для Макса:
+Чтобы сделать «минус» для категории, можно добавить класс:
+  .iconMinus:checked {
+    background-color: #ABD27A;
+    border-color: #ABD27A;
+    background-image: url('../../app/assets/static/iconsUi/checkbox-remove.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px 20px;
+  }
+И навесить его на input вместо .iconCheck.
+*/
 
 .span {
   font-size: 16px;
