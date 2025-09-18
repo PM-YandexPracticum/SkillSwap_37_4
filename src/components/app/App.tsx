@@ -69,14 +69,8 @@ function App() {
             }
           />
         </Route>
-        <Route
-          path='*'
-          element={<NotFound404/>}
-        />
-        <Route
-          path='/500'
-          element={<InternalError500/>}
-        />
+        <Route path='*' element={<NotFound404 />} />
+        <Route path='/500' element={<InternalError500 />} />
       </Routes>
       <AppFooter />
       {/* todo */}
