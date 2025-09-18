@@ -10,8 +10,8 @@ interface PasswordFieldProps {
 }
 
 export const PasswordField: React.FC<PasswordFieldProps> = ({
-  placeholder = 'Введите ваш пароль', 
-  label = 'Пароль', 
+  placeholder = 'Введите ваш пароль',
+  label = 'Пароль',
   subLabel = 'Пароль должен содержать не менее 8 знаков'
 }) => {
   const [value, setValue] = useState('');
