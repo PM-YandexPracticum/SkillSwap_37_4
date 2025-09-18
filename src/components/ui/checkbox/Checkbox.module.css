@@ -1,0 +1,56 @@
+.label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+/* Бокс 24x24, внутренний отступ 2px до визуального квадрата 20x20 */
+.input {
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background: #ffffff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Subcategory (галочка): при checked — сплошной зелёный фон */
+.input:checked {
+  background-color: #ABD27A;
+  border: 1px solid #ABD27A;
+}
+
+/* Иконка галочки (Subcategory) */
+.iconCheck:checked {
+  background-image: url('../../app/assets/static/iconsUi/checkbox-done.svg?v=2');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px 18px;
+}
+
+/* Иконка минуса (Category) */
+/* Category (минус): зелёная плашка и глиф — только когда checked */
+.iconMinus:checked {
+  background-color: #ABD27A;
+  border: 1px solid #ABD27A;
+  background-image: url('../../app/assets/static/iconsUi/checkbox-remove.svg?v=2');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px 18px;
+}
+
+.span {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #253017;
+}

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Checkbox } from '../ui/сheckbox/Checkbox';
+import { Checkbox } from '../ui/checkbox/Checkbox';
 import style from "./CheckGroup.module.css"
 
 export type CheckGroupItem = {
@@ -30,6 +30,7 @@ export const CheckGroup: FC<CheckGroupProps> = ({
           label={item.label}
           checked={!!checkedItems[item.id]}
           onChange={onChange}
+          variant={nameGroup.toLowerCase().includes('subcategory') ? 'check' : 'minus'}
         />
       ))}
     </div>
