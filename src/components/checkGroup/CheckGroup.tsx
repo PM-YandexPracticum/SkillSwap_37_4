@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Checkbox } from '../ui/сheckbox/Checkbox';
+import { Checkbox } from '../ui/checkbox/Checkbox';
 import style from "./CheckGroup.module.css"
 
 export type CheckGroupItem = {
