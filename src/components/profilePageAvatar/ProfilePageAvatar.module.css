@@ -1,0 +1,48 @@
+.profileAvatarBlock {
+  position: absolute;
+  right: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileAvatar {
+  width: 244px;
+  height: 244px;
+  background-color: #ffffff;
+  background-image: url('../app/assets/static/images/userProfileAuth.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.profileEditPhotoBtn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background: #deebc5;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.profileGalleryEdit {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: var(--text, #253017);
+  mask-image: url('../app/assets/static/iconsUi/gallery-edit.svg');
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+.errorText {
+  margin-top: 4px;
+  color: #ff4d4f;
+  font-size: 12px;
+}

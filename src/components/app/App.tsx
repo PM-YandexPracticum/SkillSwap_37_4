@@ -8,6 +8,7 @@ import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
 import { CatalogPage } from '../../pages/catalog-page';
+import ProfileDetailsPage from '../../pages/profile/ProfilePage';
 
 function App() {
   const navigate = useNavigate();
@@ -66,6 +67,14 @@ function App() {
             }
           />
         </Route>
+        <Route
+          path='/profile/*'
+          element={
+            <ProtectedRoute>
+              <ProfileDetailsPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
         <Route path='/500' element={<InternalError500 />} />
       </Routes>
