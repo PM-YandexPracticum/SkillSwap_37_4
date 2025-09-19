@@ -1,1 +1,0 @@
-export { ExchangeProposedModal } from './ExchangeProposedModal';

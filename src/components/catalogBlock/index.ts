@@ -1,1 +1,0 @@
-export { CatalogBlock } from './catalogBlock';
