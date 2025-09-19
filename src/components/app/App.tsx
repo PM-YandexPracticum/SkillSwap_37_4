@@ -7,6 +7,7 @@ import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
+import { CatalogPage } from '../../pages/catalog-page';
 
 function App() {
   const navigate = useNavigate();
@@ -31,11 +32,7 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={
-            // todo
-            // <MainPage />
-            <h1>MainPage</h1>
-          }
+          element={<CatalogPage/>}
         />
         <Route
           path='/login'
@@ -69,14 +66,8 @@ function App() {
             }
           />
         </Route>
-        <Route
-          path='*'
-          element={<NotFound404/>}
-        />
-        <Route
-          path='/500'
-          element={<InternalError500/>}
-        />
+        <Route path='*' element={<NotFound404 />} />
+        <Route path='/500' element={<InternalError500 />} />
       </Routes>
       <AppFooter />
       {/* todo */}

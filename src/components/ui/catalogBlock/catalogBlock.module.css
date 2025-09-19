@@ -46,3 +46,7 @@ h1 {
 .cardContainer .card {
   opacity: 0.5;
 }
+
+.sortIcon {
+  margin-right: 8px;
+}
