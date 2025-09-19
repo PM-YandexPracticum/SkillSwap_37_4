@@ -1,0 +1,48 @@
+.wrapper {
+  width: 100%;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.swiper {
+  position: relative;
+  padding: 0 40px;
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  color: #69735D;
+}
+
+.customNext,
+.customPrev {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #E4E8DF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.customNext {
+  right: 10px;
+}
+
+.customPrev {
+  left: 10px;
+}
+
+:global(.swiper-button-disabled) {
+  display: none;
+}
