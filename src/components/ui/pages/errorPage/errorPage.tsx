@@ -7,19 +7,17 @@ export const ErrorPageUI: FC<notFoundProps> = ({
   title,
   message,
   children
-}) => {
-  return (
-    <div className={styles.container}>
-      <div>
-        <img src={imageSrc} alt='Ошибка страницы' />
-      </div>
-      <div className={styles.content}>
-        <div className={styles.textContainer}>
-          <h2>{title}</h2>
-          <p>{message}</p>
-        </div>
-        {children && <div className={styles.buttonsContainer}>{children}</div>}
-      </div>
+}) => (
+  <div className={styles.container}>
+    <div>
+      <img src={imageSrc} alt='Ошибка страницы' />
     </div>
-  );
-};
+    <div className={styles.content}>
+      <div className={styles.textContainer}>
+        <h2>{title}</h2>
+        <p>{message}</p>
+      </div>
+      {children && <div className={styles.buttonsContainer}>{children}</div>}
+    </div>
+  </div>
+);

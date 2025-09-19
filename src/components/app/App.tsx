@@ -7,6 +7,7 @@ import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
+import ProfileDetailsPage from '../../pages/profile/ProfilePage';
 
 function App() {
   const navigate = useNavigate();
@@ -57,26 +58,16 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path='/profile'>
-          <Route
-            index
-            element={
-              <ProtectedRoute onlyUnAuth={false}>
-                <h1>Profile</h1>
-                {/* todo */}
-                {/* <Profile /> */}
-              </ProtectedRoute>
-            }
-          />
-        </Route>
         <Route
-          path='*'
-          element={<NotFound404/>}
+          path='/profile/*'
+          element={
+            <ProtectedRoute>
+              <ProfileDetailsPage />
+            </ProtectedRoute>
+          }
         />
-        <Route
-          path='/500'
-          element={<InternalError500/>}
-        />
+        <Route path='*' element={<NotFound404 />} />
+        <Route path='/500' element={<InternalError500 />} />
       </Routes>
       <AppFooter />
       {/* todo */}
