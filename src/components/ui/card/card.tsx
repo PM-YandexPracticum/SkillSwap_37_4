@@ -62,10 +62,7 @@ export const CardUI: FC<TCardUI> = ({
               <CardTag key={index} name={skill.name} color={skill.color} />
             ))}
             {remainingWantLearn > 0 && (
-              <CardTag
-                name={`+${remainingWantLearn}`}
-                color='#e8ecf7'
-              />
+              <CardTag name={`+${remainingWantLearn}`} color='#e8ecf7' />
             )}
           </div>
         </div>

@@ -31,7 +31,7 @@ const ProfileActionMenu: React.FC<ProfileActionMenuProps> = () => {
       <button type='button' className={styles.menuItem} onClick={handleLogout}>
         Выйти из аккаунта
         <span>
-          <LogoutIcon/>
+          <LogoutIcon />
         </span>
       </button>
     </div>

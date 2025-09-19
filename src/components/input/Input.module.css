@@ -6,11 +6,9 @@
   max-width: 527px;
   gap: 8px;
   background-color: #fff;
-  padding-block: 4px 0;
 }
 
 .input {
-  border: none;
   outline: none;
   font-size: 16px;
   width: 100%;
