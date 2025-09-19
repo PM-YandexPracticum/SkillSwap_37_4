@@ -39,12 +39,12 @@ export const CardCarousel: FC<TCardCarousel> = ({ name, cards }) => (
           <Card {...card} />
         </SwiperSlide>
       ))}
-      <div className={styles.customNext}>
-        <img src={arrowRightIcon} className={styles.icon} alt='next' />
-      </div>
-      <div className={styles.customPrev}>
-        <img src={arrowLeftIcon} className={styles.icon} alt='prev' />
-      </div>
     </Swiper>
+    <div className={styles.customNext}>
+      <img src={arrowRightIcon} className={styles.icon} alt='next' />
+    </div>
+    <div className={styles.customPrev}>
+      <img src={arrowLeftIcon} className={styles.icon} alt='prev' />
+    </div>
   </div>
 );

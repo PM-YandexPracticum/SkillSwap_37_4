@@ -1,16 +1,21 @@
+@import url('../app/assets/fonts/font.css');
+
 .wrapper {
+  position: relative;
   width: 100%;
 }
 
 .title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 32px;
+  letter-spacing: -0.011em;
+  line-height: 28px;
 }
 
 .swiper {
-  position: relative;
-  padding: 0 40px;
+  padding: 0;
 }
 .icon {
   width: 16px;
@@ -28,19 +33,19 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 50%;
+  top: 57%;
   transform: translateY(-50%);
-  z-index: 10;
+  z-index: 1;
   cursor: pointer;
   transition: opacity 0.3s;
 }
 
 .customNext {
-  right: 10px;
+  right: -16px;
 }
 
 .customPrev {
-  left: 10px;
+  left: -16px;
 }
 
 :global(.swiper-button-disabled) {
