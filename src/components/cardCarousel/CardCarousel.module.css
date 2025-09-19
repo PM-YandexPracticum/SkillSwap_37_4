@@ -1,0 +1,53 @@
+@import url('../app/assets/fonts/font.css');
+
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.title {
+  font-family: 'Jost', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 32px;
+  letter-spacing: -0.011em;
+  line-height: 28px;
+}
+
+.swiper {
+  padding: 0;
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  color: #69735D;
+}
+
+.customNext,
+.customPrev {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #E4E8DF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 57%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.customNext {
+  right: -16px;
+}
+
+.customPrev {
+  left: -16px;
+}
+
+:global(.swiper-button-disabled) {
+  display: none;
+}
