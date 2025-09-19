@@ -12,6 +12,7 @@ export interface InputProps
   iconPaddingRight?: string;
   onRightIconClick?: () => void;
   rightIconAriaLabel?: string;
+  classNameInput?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -24,6 +25,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       rightIcon,
       onRightIconClick,
       className,
+      classNameInput,
       id,
       iconPaddingRight,
       rightIconAriaLabel,
@@ -31,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => (
-    <div>
+    <div className={classNameInput}>
       {label && (
         <label htmlFor={id} className={styles.label}>
           {label}

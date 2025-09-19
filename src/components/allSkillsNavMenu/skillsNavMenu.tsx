@@ -1,10 +1,12 @@
 import { forwardRef, useMemo } from 'react';
 import { SKILL_CATEGORY, SKILL_VALUE } from '../../const/skillsCategoryMapping';
 import styles from './skillsNavMenu.module.css';
+import clsx from 'clsx';
 
 interface SkillsNavMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  className?: string;
 }
 
 const COLUMN_BREAK_POINT = 3;
@@ -13,7 +15,7 @@ const COLUMN_BREAK_POINT = 3;
 type CategoryKey = keyof typeof SKILL_CATEGORY;
 
 export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
-  ({ isOpen, onClose }, ref) => {
+  ({ isOpen, onClose, className }, ref) => {
     if (!isOpen) return null;
 
     const renderCategory = useMemo(() => {
@@ -83,7 +85,7 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
 
     return (
       <div
-        className={styles.skillsColumnContainer}
+        className={clsx(styles.skillsColumnContainer, className)}
         role='navigation'
         aria-label='Навигация по категориям навыков'
       >
