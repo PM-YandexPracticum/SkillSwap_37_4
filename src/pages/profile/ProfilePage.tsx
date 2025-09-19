@@ -18,7 +18,7 @@ export default function ProfileDetailsPage() {
         <main className={styles.userInfo}>
           <Routes>
             <Route
-              path="/details"
+              path='/details'
               element={
                 <>
                   <ProfilePageAvatar />
@@ -26,10 +26,10 @@ export default function ProfileDetailsPage() {
                 </>
               }
             />
-            <Route path="/request" element={<ProfilePageRequest />} />
-            <Route path="/message-text" element={<ProfilePageMessageText />} />
-            <Route path="/like" element={<ProfilePageLike />} />
-            <Route path="/user-info" element={<ProfilePageUserInfo />} />
+            <Route path='/requests' element={<ProfilePageRequest />} />
+            <Route path='/message-texts' element={<ProfilePageMessageText />} />
+            <Route path='/likes' element={<ProfilePageLike />} />
+            <Route path='/skills' element={<ProfilePageUserInfo />} />
           </Routes>
         </main>
       </div>

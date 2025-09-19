@@ -36,7 +36,7 @@
   width: 24px;
   height: 24px;
   background-color: var(--text, #253017);
-  mask-image: url('@/app/assets/static/images/icons/gallery-edit.svg');
+  mask-image: url('../app/assets/static/iconsUi/gallery-edit.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }

@@ -38,35 +38,35 @@
 
 .sidebarIcon-request {
   background-color: var(--text, #253017);
-  mask-image: url('@/app/assets/static/images/icons/request.svg');
+  mask-image: url('../app/assets/static/iconsUi/request.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }
 
 .sidebarIcon-message-text {
   background-color: var(--text, #253017);
-  mask-image: url('@/app/assets/static/images/icons/message-text.svg');
+  mask-image: url('../app/assets/static/iconsUi/message-text.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }
 
 .sidebarIcon-like {
   background-color: var(--text, #253017);
-  mask-image: url('@/app/assets/static/images/icons/like.svg');
+  mask-image: url('../app/assets/static/iconsUi/like.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }
 
 .sidebarIcon-idea {
   background-color: var(--text, #253017);
-  mask-image: url('@/app/assets/static/images/icons/idea.svg');
+  mask-image: url('../app/assets/static/iconsUi/idea.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }
 
 .sidebarIcon-user {
   background-color: var(--text, #253017);
-  mask-image: url('@/app/assets/static/images/icons/user.svg');
+  mask-image: url('../app/assets/static/iconsUi/user.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }

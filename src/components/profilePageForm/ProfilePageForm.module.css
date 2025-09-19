@@ -222,19 +222,19 @@
 }
 
 .iconEdit {
-  mask-image: url('@/app/assets/static/images/icons/edit.svg');
+  mask-image: url('../app/assets/static/iconsUi/edit.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }
 
 .iconCalendar {
-  mask-image: url('@/app/assets/static/images/icons/calendar.svg');
+  mask-image: url('../app/assets/static/iconsUi//calendar.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }
 
 .iconChevron {
-  mask-image: url('@/app/assets/static/images/icons/chevron-down.svg');
+  mask-image: url('../app/assets/static/iconsUi/chevron-down.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }
