@@ -7,6 +7,7 @@ import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
+import { CatalogPage } from '../../pages/catalog-page';
 import ProfileDetailsPage from '../../pages/profile/ProfilePage';
 
 function App() {
@@ -32,11 +33,7 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={
-            // todo
-            // <MainPage />
-            <h1>MainPage</h1>
-          }
+          element={<CatalogPage/>}
         />
         <Route
           path='/login'
@@ -58,6 +55,18 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path='/profile'>
+          <Route
+            index
+            element={
+              <ProtectedRoute onlyUnAuth={false}>
+                <h1>Profile</h1>
+                {/* todo */}
+                {/* <Profile /> */}
+              </ProtectedRoute>
+            }
+          />
+        </Route>
         <Route
           path='/profile/*'
           element={
