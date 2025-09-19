@@ -7,7 +7,6 @@ import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
-import { PasswordField } from '../passwordField/PasswordField';
 
 function App() {
   const navigate = useNavigate();
@@ -35,8 +34,7 @@ function App() {
           element={
             // todo
             // <MainPage />
-            // <h1>MainPage</h1>
-            <><PasswordField/></>
+            <h1>MainPage</h1>
           }
         />
         <Route
