@@ -2,6 +2,7 @@
 .skillsColumnContainer {
   display: flex;
   gap: 24px;
+  z-index: 20;
 }
 
 .skillsColumn {

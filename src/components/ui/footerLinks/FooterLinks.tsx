@@ -1,39 +1,33 @@
-import { Link } from 'react-router-dom';
 import styles from './FooterLinks.module.css';
+import { AppLink } from '../appLink/appLink';
 
 export const FooterLinks = () => (
-  <>
-    <div className={styles.section}>
-      <ul className={`${styles.linksList}`}>
-        <li>
-          <Link to='/about'>О проекте</Link>
-        </li>
-        <li>
-          <Link to='/all_skills'>Все навыки</Link>
-        </li>
-      </ul>
-    </div>
+  <nav className={styles.nav_menu}>
+    <ul className={`${styles.linksList}`}>
+      <li>
+        <AppLink to={'/about'} text={'О проекте'}/>
+      </li>
+      <li>
+        <AppLink to={'/all_skills'} text={'Все навыки'}/>
+      </li>
+    </ul>
 
-    <div className={styles.section}>
-      <ul className={styles.linksList}>
-        <li>
-          <Link to='/contacts'>Контакты</Link>
-        </li>
-        <li>
-          <Link to='/blog'>Блог</Link>
-        </li>
-      </ul>
-    </div>
+    <ul className={styles.linksList}>
+      <li>
+        <AppLink to={'/contacts'} text={'Контакты'}/>
+      </li>
+      <li>
+        <AppLink to={'/blog'} text={'Блог'}/>
+      </li>
+    </ul>
 
-    <div className={styles.section}>
-      <ul className={styles.linksList}>
-        <li>
-          <Link to='/privacy'>Политика конфиденциальности</Link>
-        </li>
-        <li>
-          <Link to='/terms'>Пользовательское соглашение</Link>
-        </li>
-      </ul>
-    </div>
-  </>
+    <ul className={styles.linksList}>
+      <li>
+        <AppLink to={'/privacy'} text={'Политика конфиденциальности'}/>
+      </li>
+      <li>
+        <AppLink to={'/terms'} text={'Пользовательское соглашение'}/>
+      </li>
+    </ul>
+  </nav>
 );
