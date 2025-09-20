@@ -1,5 +1,6 @@
 import TransparentButton from '../../buttons/TransparentButton';
 import arrowRigth from '../../app/assets/static/iconsUi/arrow-chevron-right.svg';
+import sort from '../../app/assets/static/iconsUi/sort.svg';
 import style from './catalogBlock.module.css';
 import { Card } from '../../card';
 import { FC } from 'react';
@@ -11,7 +12,8 @@ export const CatalogBlockUI: FC<TCatalogBlockUI> = ({
   card,
   limit,
   loading,
-  infinityLoad
+  scroll = false,
+  buttonFilter = false
 }) => {
   const visibleCount = typeof limit === 'number' ? limit : card.length;
 
@@ -21,17 +23,30 @@ export const CatalogBlockUI: FC<TCatalogBlockUI> = ({
         <div>
           <h1>{title}</h1>
         </div>
-        {!infinityLoad && (
+        {buttonFilter ? (
           <div className={style.header}>
             <TransparentButton>
-              Смотреть все
               <img
-                src={arrowRigth}
-                alt='Кнопка смотреть все'
-                className={style.arrow}
+                src={sort}
+                alt='Кнопка фильтра по дате'
+                className={style.sortIcon}
               />
+              Сначала новые
             </TransparentButton>
           </div>
+        ) : (
+          !scroll && (
+            <div className={style.header}>
+              <TransparentButton>
+                Смотреть все
+                <img
+                  src={arrowRigth}
+                  alt='Кнопка смотреть все'
+                  className={style.arrow}
+                />
+              </TransparentButton>
+            </div>
+          )
         )}
       </div>
       <div className={style.cardContainer}>

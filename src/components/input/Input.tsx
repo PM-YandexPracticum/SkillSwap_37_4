@@ -1,15 +1,17 @@
-import React, { CSSProperties, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import styles from './Input.module.css';
 import clsx from 'clsx';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  subLabel?: string;
   error?: string;
   success?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   iconPaddingRight?: string;
+  fields__container?: string;
   onRightIconClick?: () => void;
   rightIconAriaLabel?: string;
   classNameInput?: string;
@@ -23,17 +25,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       success,
       leftIcon,
       rightIcon,
+      subLabel,
       onRightIconClick,
       className,
       classNameInput,
       id,
       iconPaddingRight,
       rightIconAriaLabel,
+      fields__container,
       ...props
     },
     ref
   ) => (
     <div className={classNameInput}>
+    <div className={clsx(styles.field__container, fields__container)}>
       {label && (
         <label htmlFor={id} className={styles.label}>
           {label}
@@ -54,13 +59,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-label={rightIconAriaLabel}
             className={clsx(styles.rightIcon, styles.icon)}
             onClick={onRightIconClick}
-            style={{right: iconPaddingRight}}
+            style={{ right: iconPaddingRight }}
           >
             {rightIcon}
           </button>
         )}
       </div>
-
+      {subLabel && <span className={styles.subLabel}>{subLabel}</span>}
       {error && <span className={styles.errorText}>{error}</span>}
     </div>
   )

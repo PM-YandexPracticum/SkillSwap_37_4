@@ -1,0 +1,33 @@
+/* Обёртка страницы профиля */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f9faf7;
+}
+
+/* Обёртка Контента */
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  min-inline-size: 1368px;
+  min-block-size: 752px;
+  margin: 36px auto 60px;
+  color: #253017;
+  font-size: 16px;
+  font-family: "Roboto", "Arial", sans-serif;
+}
+
+/* Информация пользователя */
+
+.userInfo {
+  position: relative;
+  min-inline-size: 900px;
+  padding: 60px;
+  background: #ffffff;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}

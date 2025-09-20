@@ -4,4 +4,6 @@ export type TCatalogBlock = {
   title: string;
   card: TCard[];
   limit: number | 'infinityLoad';
+  scroll?: boolean;
+  buttonFilter?: boolean;
 };

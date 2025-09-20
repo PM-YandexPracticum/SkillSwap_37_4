@@ -4,7 +4,7 @@ import { CatalogBlockUI } from '../ui/catalogBlock/catalogBlock';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useScroll } from '../../hooks/useScroll';
 
-export const CatalogBlock: FC<TCatalogBlock> = ({ title, card, limit }) => {
+export const CatalogBlock: FC<TCatalogBlock> = ({ title, card, limit, scroll, buttonFilter }) => {
   const [visibleCount, setVisibleCount] = useState<number>(9);
   const [loading, setLoading] = useState<boolean>(false);
   const [allLoaded, setAllLoaded] = useState<boolean>(false);
@@ -12,15 +12,15 @@ export const CatalogBlock: FC<TCatalogBlock> = ({ title, card, limit }) => {
   useEffect(() => {
     if (typeof limit === 'number') {
       setVisibleCount(limit);
-    } else if (limit === 'infinityLoad') {
+    } else if (scroll) {
       setVisibleCount(9);
       setAllLoaded(false);
     }
-  }, [limit]);
+  }, [limit, scroll]);
 
   const loadMore = useCallback(() => {
     if (allLoaded || loading) return;
-    if (limit === 'infinityLoad' && !allLoaded) {
+    if (scroll && !allLoaded) {
       setLoading(true);
       setTimeout(() => {
         setVisibleCount((prevCount) => {
@@ -31,9 +31,9 @@ export const CatalogBlock: FC<TCatalogBlock> = ({ title, card, limit }) => {
           return newCount;
         });
         setLoading(false);
-      }, 5000);
+      }, 1000);
     }
-  }, [allLoaded, loading, limit, card.length]);
+  }, [allLoaded, loading, scroll, card.length]);
 
   const debouncedLoadMore = useDebounce(loadMore, 300);
   useScroll(loading, allLoaded, debouncedLoadMore);
@@ -44,7 +44,8 @@ export const CatalogBlock: FC<TCatalogBlock> = ({ title, card, limit }) => {
       card={card}
       limit={visibleCount}
       loading={loading}
-      infinityLoad={limit === 'infinityLoad'}
+      scroll={scroll}
+      buttonFilter={buttonFilter}
     />
   );
 };
