@@ -14,6 +14,7 @@ export interface InputProps
   fields__container?: string;
   onRightIconClick?: () => void;
   rightIconAriaLabel?: string;
+  classNameInput?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -27,6 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       subLabel,
       onRightIconClick,
       className,
+      classNameInput,
       id,
       iconPaddingRight,
       rightIconAriaLabel,
@@ -35,6 +37,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => (
+    <div className={classNameInput}>
     <div className={clsx(styles.field__container, fields__container)}>
       {label && (
         <label htmlFor={id} className={styles.label}>

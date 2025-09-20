@@ -7,6 +7,7 @@ import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
+import { AppHeader } from '../appHeader/AppHeader';
 import { CatalogPage } from '../../pages/catalog-page';
 import ProfileDetailsPage from '../../pages/profile/ProfilePage';
 
@@ -28,8 +29,7 @@ function App() {
 
   return (
     <div className={styles.App}>
-      {/* todo */}
-      {/* <AppHeader /> */}
+      <AppHeader/>
       <Routes>
         <Route
           path='/'
