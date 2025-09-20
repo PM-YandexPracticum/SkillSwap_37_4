@@ -9,6 +9,10 @@
     gap: 32px;
 }
 
+.header_register {
+    background-color: transparent;
+}
+
 .headerSearchInput {
     max-width: 527px;
     height: 48px;
@@ -18,7 +22,6 @@
 .headerSearchInput input {
     padding-left: 8px;
     border-radius: 12px;
-    /* отступ после иконки */
 }
 
 .Input {

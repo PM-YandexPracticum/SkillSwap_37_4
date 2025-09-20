@@ -7,7 +7,6 @@ import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
-import { HeaderLinks } from '../ui/headerLinks/HeaderLinks';
 import { AppHeader } from '../appHeader/AppHeader';
 
 function App() {
@@ -28,11 +27,7 @@ function App() {
 
   return (
     <div className={styles.App}>
-      {/* todo */}
-      {/* <AppHeader /> */}
-
-      <AppHeader userAuth={true} />
-
+      <AppHeader/>
       <Routes>
         <Route
           path='/'
