@@ -3,6 +3,7 @@ import styles from './HeaderLinks.module.css';
 import { useState } from 'react';
 import ExpandButton from '../../buttons/ExpandButton';
 import { SkillsNavMenu } from '../../allSkillsNavMenu/skillsNavMenu';
+import { AppLink } from '../appLink/appLink';
 
 export const HeaderLinks = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,7 @@ export const HeaderLinks = () => {
     <div className={styles.section}>
       <ul className={`${styles.linksList}`}>
         <li>
-          <Link className={styles.link_about} to='/about'>О проекте</Link>
+          <AppLink to={'/about'} text={'О проекте'}/>
         </li>
         <li>
           <ExpandButton

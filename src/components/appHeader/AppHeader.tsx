@@ -41,7 +41,7 @@ export const AppHeader: React.FC<THeaderProps> = ({ userAuth }) => {
         placeholder="Искать навык"
         leftIcon={<SearchIcon width={24} height={24} />}
         className={styles.headerSearchInput}
-        classNameInput={styles.Input}
+        fields__container={styles.Input}
         id={nanoid()}
       />
       <UserMenu
