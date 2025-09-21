@@ -20,7 +20,7 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({
   onChange,
   id, 
   inputRef,
-  subLabel = 'Пароль должен содержать не менее 8 знаков'
+  subLabel
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 

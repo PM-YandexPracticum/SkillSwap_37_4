@@ -73,3 +73,7 @@
   width: 100%;
   margin-block-start: 32px;
 }
+
+.errorText {
+  color: red;
+}
