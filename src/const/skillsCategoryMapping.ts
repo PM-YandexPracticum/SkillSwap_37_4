@@ -5,6 +5,12 @@ import globalIcon from '../components/app/assets/static/iconsSkillsCategory/glob
 import bookIcon from '../components/app/assets/static/iconsSkillsCategory/book.svg'
 import paletteIcon from '../components/app/assets/static/iconsSkillsCategory/palette.svg'
 
+// Простой интерфейс для работы со списком категорий в фильтрах
+export interface SkillCategory {
+  categoryName: string;
+  subcategoryName: string[];
+}
+
 export const SKILL_CATEGORY = {
   'Бизнес и карьера': [
     'Управление командой',

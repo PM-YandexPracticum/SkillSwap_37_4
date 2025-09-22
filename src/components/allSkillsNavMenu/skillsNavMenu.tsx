@@ -20,8 +20,7 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
 
     const renderCategory = useMemo(() => {
       return (category: CategoryKey, subcategories: readonly string[]) => {
-        const { color, icon } =
-          SKILL_VALUE[category as keyof typeof SKILL_VALUE];
+        const { color, icon } = SKILL_VALUE[category];
 
         return (
           <div
