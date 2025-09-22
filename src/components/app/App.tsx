@@ -5,6 +5,7 @@ import { useDispatch } from '../../services/store/store';
 import { useEffect } from 'react';
 import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
+import { AppHeader } from '../appHeader/AppHeader';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
 
@@ -15,6 +16,7 @@ function App() {
   const closeModal = () => {
     navigate(backgroundLocation || '/');
   };
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,9 +28,9 @@ function App() {
 
   return (
     <div className={styles.App}>
-      {/* todo */}
-      {/* <AppHeader /> */}
-      <Routes>
+      <AppHeader />
+      <main>
+        <Routes>
         <Route
           path='/'
           element={
@@ -77,10 +79,9 @@ function App() {
           path='/500'
           element={<InternalError500/>}
         />
-      </Routes>
+        </Routes>
+      </main>
       <AppFooter />
-      {/* todo */}
-      {/* <AppFooter /> */}
     </div>
   );
 }

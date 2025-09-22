@@ -1,3 +1,29 @@
+:root {
+  /* Светлая тема */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-hover: #f0f0f0;
+  --bg-accent-light: rgba(40, 167, 69, 0.1);
+  
+  --text-primary: #253017;
+  --text-secondary: #6c757d;
+  
+  --border-color: #e9ecef;
+  --accent-color: #28a745;
+  
+  /* Темная тема */
+  --bg-primary-dark: #1a202c;
+  --bg-secondary-dark: #2d3748;
+  --bg-hover-dark: #2d3748;
+  --bg-accent-light-dark: rgba(72, 187, 120, 0.1);
+  
+  --text-primary-dark: #e2e8f0;
+  --text-secondary-dark: #a0aec0;
+  
+  --border-color-dark: #4a5568;
+  --accent-color-dark: #48bb78;
+}
+
 body {
   margin: 0;
   font-family:
@@ -5,6 +31,9 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {
