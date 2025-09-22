@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}

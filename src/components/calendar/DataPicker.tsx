@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { useState, useRef } from 'react';
+import { Dropdown } from '../DropDown';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import { ru } from 'date-fns/locale';
+import styles from './DataPicker.module.css';
 import 'react-datepicker/dist/react-datepicker.css';
+
+registerLocale('ru', ru);
 
 type DatePickerProps = {
   onDateChange: (date: Date | null) => void;
@@ -13,18 +18,33 @@ export const DatePickerComponent = ({ onDateChange }: DatePickerProps) => {
     onDateChange(date);
   };
 
+  const ref = useRef<any>(null);
+
+  const handleCancel = () => {
+    setSelectedDate(null);
+    ref.current?.setOpen(false);
+  };
+
+  const handleConfirm = () => {
+    setSelectedDate(selectedDate);
+    ref.current?.setOpen(false);
+  };
+
   return (
-    <div>
-      <DatePicker
-        showIcon
-        selected={selectedDate}
-        onChange={handleChange}
-      />
+    <div className={styles.wrapper}>
+      <label className={styles.label}>Дата рождения</label>
+      <DatePicker showIcon selected={selectedDate} onChange={handleChange} />
     </div>
   );
 };
 
 /*
+  return (
+    <div>
+      <DatePicker showIcon selected={selectedDate} onChange={handleChange} />
+    </div>
+  );
+
 const App = () => {
   const handleDateChange = (date: Date | null) => {
     console.log('Выбранная дата:', date);
