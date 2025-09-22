@@ -9,6 +9,7 @@ import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
 import { AppHeader } from '../appHeader/AppHeader';
 import { CatalogPage } from '../../pages/catalog-page';
+import { SkillPage } from '../../pages/skill-page';
 import ProfileDetailsPage from '../../pages/profile/ProfilePage';
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/skill/:id" element={<SkillPage />} />
         <Route path='*' element={<NotFound404 />} />
         <Route path='/500' element={<InternalError500 />} />
       </Routes>

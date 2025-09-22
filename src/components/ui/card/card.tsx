@@ -74,11 +74,11 @@ export const CardUI: FC<TCardUI> = ({
           </div>
         </div>
       </div>
-      <div className={styles.buttonContainer}>
+      {onClick && <div className={styles.buttonContainer}>
         <GreenButton onClick={onClick} className={styles.buttonWidth}>
           Подробнее
         </GreenButton>
-      </div>
+      </div>}
     </div>
   );
 };
