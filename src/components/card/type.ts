@@ -10,5 +10,5 @@ export type TCard = {
   avatar_url: string;
   canTeach: TSkillTag[];
   wantLearn: TSkillTag[];
-  onClick: () => void;
+  onClick?: () => void;
 };

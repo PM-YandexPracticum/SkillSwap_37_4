@@ -7,6 +7,8 @@
   padding-left: 52px;
   width: fit-content;
   max-width: 100%;
+  background-color: #ffffff;
+  border-radius: 12px;
 }
 
 .upperButtons {
