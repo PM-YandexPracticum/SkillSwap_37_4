@@ -6,7 +6,11 @@ import styles from './LoginForm.module.css';
 import googleIcon from "../../../src/components/app/assets/static/icons/Google.svg";
 import appleIcon from "../../../src/components/app/assets/static/icons/Apple.svg";
 
-export const LoginForm = () => {
+interface LoginFormProps {
+  buttonText: string;
+}
+
+export const LoginForm = ({buttonText}: LoginFormProps) => {
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -37,7 +41,7 @@ export const LoginForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     setTouched({ email: true, password: true });
     validate();
   };
@@ -65,7 +69,7 @@ export const LoginForm = () => {
         {errors.password && (
           <span className={styles.errorText}>{errors.password}</span>
         )}
-        <GreenButton disabled={isFormValid} className={styles.confirm_button} type="submit">Далее</GreenButton>
+        <GreenButton disabled={isFormValid} className={styles.confirm_button} type="submit">{buttonText}</GreenButton>
       </form>
     </div>
   )
