@@ -9,14 +9,20 @@ import 'react-datepicker/dist/react-datepicker.css';
 registerLocale('ru', ru);
 
 type DatePickerProps = {
-  onDateChange: (date: Date | null) => void;
+  selectedDate: Date | null;
+  setSelectedDate: (date: Date | null) => void;
 };
 
-export const DatePickerComponent = ({ onDateChange }: DatePickerProps) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+export const DatePickerComponent = ({
+  selectedDate,
+  setSelectedDate
+}: DatePickerProps) => {
   const handleChange = (date: Date | null) => {
-    setSelectedDate(date);
-    onDateChange(date);
+    if (date && date > new Date()) {
+      setSelectedDate(null);
+    } else {
+      setSelectedDate(date);
+    }
   };
 
   const ref = useRef<any>(null);
