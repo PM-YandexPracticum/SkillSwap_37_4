@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { DropDown } from '../DropDown';
 import { GreenButton } from '../buttons/GreenButton/GreenButton';
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -8,16 +8,68 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 registerLocale('ru', ru);
 
-type DatePickerProps = {
-  selectedDate: Date | null;
-  setSelectedDate: (date: Date | null) => void;
+// Общий интерфейс для опций выбора
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
+// Интерфейс для месяцев
+interface MonthOption extends SelectOption {
+  value: string;
+  label: string;
+}
+
+// Интерфейс для годов
+interface YearOption extends SelectOption {
+  value: string;
+  label: string;
+}
+
+// Утилита для получения локализованных месяцев
+const getLocalizedMonths = (locale: any): MonthOption[] => {
+  return Array.from({ length: 12 }, (_, monthIndex) => ({
+    value: monthIndex.toString(),
+    label: format(new Date(2023, monthIndex), 'LLLL', { locale }),
+  }));
 };
 
-export const DatePickerComponent = ({
+// Хук для получения месяцев
+const useLocalizedMonths = (locale: any = ru): MonthOption[] => {
+  return useMemo(() => getLocalizedMonths(locale), [locale]);
+};
+
+// Утилита для получения списка годов
+const getYears = (startYear: number, count: number): YearOption[] => {
+  return Array.from({ length: count }, (_, index) => {
+    const year = startYear - index;
+    return {
+      value: year.toString(),
+      label: format(new Date(year), 'yyyy', { locale: ru }),
+    };
+  });
+};
+
+// Хук для получения годов
+const useYears = (): YearOption[] => {
+  const currentYear = new Date().getFullYear();
+  return useMemo(() => getYears(currentYear, 100), [currentYear]);
+};
+
+interface DatePickerProps {
+  selectedDate: Date | null;
+  setSelectedDate: (date: Date | null) => void;
+}
+
+const DatePickerComponent: React.FC<DatePickerProps> = ({
   selectedDate,
-  setSelectedDate
-}: DatePickerProps) => {
-  const handleChange = (date: Date | null) => {
+  setSelectedDate,
+}) => {
+  const datePickerRef = useRef<any>(null);
+  const months = useLocalizedMonths(ru);
+  const years = useYears();
+
+  const handleDateChange = (date: Date | null) => {
     if (date && date > new Date()) {
       setSelectedDate(null);
     } else {
@@ -25,38 +77,59 @@ export const DatePickerComponent = ({
     }
   };
 
-  const ref = useRef<any>(null);
-
   const handleCancel = () => {
     setSelectedDate(null);
-    ref.current?.setOpen(false);
+    datePickerRef.current?.setOpen(false);
   };
 
   const handleConfirm = () => {
     setSelectedDate(selectedDate);
-    ref.current?.setOpen(false);
+    datePickerRef.current?.setOpen(false);
   };
 
-  const currentYear = new Date().getFullYear();
+  const renderCustomHeader = ({ date, changeYear, changeMonth }) => {
+    const selectedMonth = months.find(
+      (m) => m.value === date.getMonth().toString()
+    );
+    const selectedYear = years.find(
+      (y) => y.value === date.getFullYear().toString()
+    );
 
-  const months = Array.from({ length: 12 }, (_, i) => ({
-    value: i.toString(),
-    label: new Date(0, i).toLocaleString('ru', { month: 'long' })
-  }));
+    return (
+      <div className={styles['custom-header']}>
+        <DropDown
+          options={months}
+          value={selectedMonth?.label}
+          onChange={(option) => {
+            if (typeof option === 'string') {
+              changeMonth(Number(option));
+            }
+          }}
+          placeholder='Месяц'
+        />
 
-  const years = Array.from({ length: 100 }, (_, i) => {
-    const year = currentYear - i;
-    return { value: year.toString(), label: year.toString() };
-  });
+        <DropDown
+          options={years}
+          value={selectedYear?.label}
+          onChange={(option) => {
+            if (typeof option === 'string') {
+              changeYear(Number(option));
+            }
+          }}
+          placeholder='Год'
+        />
+      </div>
+    );
+  };
 
   return (
     <div className={styles.wrapper}>
       <label className={styles.label}>Дата рождения</label>
       <DatePicker
-        ref={ref}
+        ref={datePickerRef}
         showIcon
         selected={selectedDate}
-        onChange={handleChange}
+        onChange={handleDateChange}
         locale='ru'
         maxDate={new Date()}
         dateFormat='dd.MM.yyyy'
@@ -66,40 +139,7 @@ export const DatePickerComponent = ({
         showYearDropdown
         dropdownMode='select'
         className={styles.input}
-        renderCustomHeader={({ date, changeYear, changeMonth }) => {
-          const selectedMonth = months.find(
-            (m) => m.value === date.getMonth().toString()
-          );
-          const selectedYear = years.find(
-            (y) => y.value === date.getFullYear().toString()
-          );
-
-          return (
-            <div className={styles['custom-header']}>
-              <DropDown
-                options={months}
-                value={selectedMonth?.label}
-                onChange={(option) => {
-                  if (!Array.isArray(option)) {
-                    changeMonth(Number(option.valueOf));
-                  }
-                }}
-                placeholder='Месяц'
-              />
-
-              <DropDown
-                options={years}
-                value={selectedYear?.label}
-                onChange={(option) => {
-                  if (!Array.isArray(option)) {
-                    changeYear(Number(option.valueOf));
-                  }
-                }}
-                placeholder='Год'
-              />
-            </div>
-          );
-        }}
+        renderCustomHeader={renderCustomHeader}
         calendarContainer={({ children }) => (
           <div className={styles['calendar-container']}>
             {children}
@@ -126,23 +166,4 @@ export const DatePickerComponent = ({
   );
 };
 
-/*
-  return (
-    <div>
-      <DatePicker showIcon selected={selectedDate} onChange={handleChange} />
-    </div>
-  );
-
-const App = () => {
-  const handleDateChange = (date: Date | null) => {
-    console.log('Выбранная дата:', date);
-  };
-
-  return (
-    <div>
-      <h1>Тестовый виджет</h1>
-      <DatePickerComponent onDateChange={handleDateChange} />
-    </div>
-  );
-}; 
-*/
+export default DatePickerComponent;
