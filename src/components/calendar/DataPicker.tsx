@@ -4,6 +4,7 @@ import { GreenButton } from '../buttons/GreenButton/GreenButton';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { ru } from 'date-fns/locale';
 import styles from './DataPicker.module.css';
+import { format } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 
 registerLocale('ru', ru);
@@ -61,7 +62,7 @@ interface DatePickerProps {
   setSelectedDate: (date: Date | null) => void;
 }
 
-const DatePickerComponent: React.FC<DatePickerProps> = ({
+export const DatePickerComponent: React.FC<DatePickerProps> = ({
   selectedDate,
   setSelectedDate,
 }) => {
@@ -87,7 +88,15 @@ const DatePickerComponent: React.FC<DatePickerProps> = ({
     datePickerRef.current?.setOpen(false);
   };
 
-  const renderCustomHeader = ({ date, changeYear, changeMonth }) => {
+const renderCustomHeader = ({
+    date,
+    changeYear,
+    changeMonth
+  }: {
+    date: Date;
+    changeYear: (year: number) => void;
+    changeMonth: (month: number) => void;
+  }) => {
     const selectedMonth = months.find(
       (m) => m.value === date.getMonth().toString()
     );
