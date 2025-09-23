@@ -8,9 +8,10 @@ export interface TSkill {
 }
 
 export interface CreateSkillRequest {
-  title: string;
-  description: string;
+  photoUrl: string[];
+  name: string;
   category: string;
-  level: 'beginner' | 'intermediate' | 'advanced';
+  subCategory: string;
+  description: string;
   userId: string;
 }
