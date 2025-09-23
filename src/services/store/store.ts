@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import skillReducer from './skillSlice';
 
 import {
   TypedUseSelectorHook,
@@ -6,7 +7,9 @@ import {
   useSelector as selectorHook
 } from 'react-redux';
 
-const rootReducer = {};
+const rootReducer = {
+  skill: skillReducer
+};
 
 const store = configureStore({
   reducer: rootReducer,
