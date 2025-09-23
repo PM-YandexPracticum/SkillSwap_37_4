@@ -1,0 +1,38 @@
+
+.dropzone {
+  border: 1.5px dashed #ABD27A;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.dropzone_active {
+  background: #f0f7e7;
+}
+
+.inputFile {
+  /* по желанию стилизуй input, если надо */
+  display: none;
+}
+
+.paragraph {
+  margin: 0; /* убираем внешние отступы, если были */
+}
+
+.button {
+  color: #508826;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0; /* по желанию */
+}
+
+.error {
+  color: red;
+  margin-top: 8px;
+}

@@ -15,6 +15,7 @@ export interface InputProps
   fields__container?: string;
   onRightIconClick?: () => void;
   rightIconAriaLabel?: string;
+  inputContainer?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -28,6 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       subLabel,
       onRightIconClick,
       className,
+      inputContainer,
       id,
       onChange,
       iconPaddingRight,
@@ -52,7 +54,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         </label>
       )}
 
-      <div className={styles.input__container}>
+      <div className={clsx(styles.input__container, inputContainer)}>
         {leftIcon}
         <input
           ref={ref}

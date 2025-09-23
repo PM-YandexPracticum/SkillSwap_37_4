@@ -1,0 +1,26 @@
+.skill_form {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    padding: 50px 60px;
+    max-width: 556px;
+    max-height: 692px;
+    border-radius: 12px;
+    gap: 16px;
+}
+
+/* .skill_form_item {
+
+} */
+
+.skill_form_item_input_container {
+    max-width: 100%;
+
+}
+
+.skill_form_item_input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #69735D;
+    border-radius: 12px;
+}
