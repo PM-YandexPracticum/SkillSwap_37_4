@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import { database } from './database/db';
 import { userRoutes } from './routes/user';
+import { cardRoutes } from './routes/cards';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,11 @@ async function initializeApp() {
     
     // Подключаем маршруты
     app.use('/api/users', userRoutes);
+    app.use('/api/cards', cardRoutes);
+    
+    // app.use('/api/exchanges', userRoutes);
+
+    // app.use('/api/notify', userRoutes);
     
     // Health check endpoint
     app.get('/api/health', (req, res) => {

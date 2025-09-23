@@ -169,3 +169,36 @@ userRoutes.delete('/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+// // GET /api/users/search?city=Москва - поиск пользователей
+// userRoutes.get('/search', async (req, res) => {
+//   try {
+//     const { city, wantLearn } = req.query;
+    
+//     let sql = `SELECT id, name, email, avatarUrl, birthday, description, city, gender, wantLearn 
+//                FROM Users WHERE 1=1`;
+//     const params: any[] = [];
+    
+//     if (city) {
+//       sql += ' AND city LIKE ?';
+//       params.push(`%${city}%`);
+//     }
+    
+//     if (wantLearn) {
+//       sql += ' AND wantLearn LIKE ?';
+//       params.push(`%${wantLearn}%`);
+//     }
+    
+//     // sql += ' ORDER BY createdAt DESC';
+    
+//     const result = await database.getAllQuery<any>(sql, params);
+    
+//     if (result.success) {
+//       res.json(result.data);
+//     } else {
+//       res.status(500).json({ error: result.error });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
