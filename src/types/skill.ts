@@ -15,3 +15,7 @@ export interface CreateSkillRequest {
   description: string;
   userId: string;
 }
+
+export type UpdateSkillRequest = TSkill & {
+  userId: string;
+};

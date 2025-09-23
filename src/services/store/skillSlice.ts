@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { TSkill, CreateSkillRequest } from '../../types/skill';
+import { TSkill, CreateSkillRequest, UpdateSkillRequest } from '../../types/skill';
 
 
 interface SkillState {
@@ -27,6 +27,22 @@ export const getSkillCardById = createAsyncThunk(
 export const createSkill = createAsyncThunk(
   'skill/createSkill',
   async (skillData: CreateSkillRequest): Promise<TSkill> => {
+    // TODO: Заменить на реальный API вызов
+    throw new Error('API не реализован');
+  }
+);
+
+export const updateSkill = createAsyncThunk(
+  'skill/updateSkill',
+  async (skill: UpdateSkillRequest): Promise<TSkill> => {
+    // TODO: Заменить на реальный API вызов
+    throw new Error('API не реализован');
+  }
+);
+
+export const getSkillsByUserId = createAsyncThunk(
+  'skill/getSkillsByUserId',
+  async (userId: string): Promise<TSkill[]> => {
     // TODO: Заменить на реальный API вызов
     throw new Error('API не реализован');
   }
@@ -74,6 +90,39 @@ const skillSlice = createSlice({
       .addCase(createSkill.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Ошибка при создании навыка';
+      })
+      
+      // updateSkill
+      .addCase(updateSkill.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateSkill.fulfilled, (state, action: PayloadAction<TSkill>) => {
+        state.loading = false;
+        const index = state.skills.findIndex(skill => skill.id === action.payload.id);
+        if (index !== -1) {
+          state.skills[index] = action.payload;
+        }
+        state.error = null;
+      })
+      .addCase(updateSkill.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Ошибка при обновлении навыка';
+      })
+      
+      // getSkillsByUserId
+      .addCase(getSkillsByUserId.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getSkillsByUserId.fulfilled, (state, action: PayloadAction<TSkill[]>) => {
+        state.loading = false;
+        state.skills = action.payload;
+        state.error = null;
+      })
+      .addCase(getSkillsByUserId.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Ошибка при загрузке навыков пользователя';
       });
   }
 });
