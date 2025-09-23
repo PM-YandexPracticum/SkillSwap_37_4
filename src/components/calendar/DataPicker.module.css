@@ -1,0 +1,54 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.label {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.input {
+  position: relative;
+  width: 208px;
+  height: 48px;
+  padding: 8px;
+  font-family: 'Roboto', sans-serif;
+  background-image: url('../app/assets/static/iconsUi/calendar.svg');
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  border: 1px solid #69735d;
+  border-radius: 8px;
+  caret-color: #508826;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  border: none;
+}
+
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid rgb(105 115 93 / 100%);
+  border-radius: 12px;
+}
+
+.footer {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  height: 48px;
+  margin: 0 16px 16px;
+}
