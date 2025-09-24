@@ -228,7 +228,7 @@
 }
 
 .iconCalendar {
-  mask-image: url('../app/assets/static/iconsUi//calendar.svg');
+  mask-image: url('../app/assets/static/iconsUi/calendar.svg');
   mask-repeat: no-repeat;
   mask-size: cover;
 }
