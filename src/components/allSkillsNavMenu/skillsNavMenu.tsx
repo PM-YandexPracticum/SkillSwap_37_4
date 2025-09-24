@@ -1,5 +1,5 @@
 import { forwardRef, useMemo } from 'react';
-import { SKILL_CATEGORY, SKILL_VALUE } from '../../const/skillsCategoryMapping';
+import { SKILL_CATEGORY, getSkillValue } from '../../const/skillsCategoryMapping';
 import styles from './skillsNavMenu.module.css';
 import clsx from 'clsx';
 
@@ -11,23 +11,20 @@ interface SkillsNavMenuProps {
 
 const COLUMN_BREAK_POINT = 3;
 
-// Создаем тип для категорий
-type CategoryKey = keyof typeof SKILL_CATEGORY;
-
 export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
   ({ isOpen, onClose, className }, ref) => {
     if (!isOpen) return null;
 
     const renderCategory = useMemo(() => {
-      return (category: CategoryKey, subcategories: readonly string[]) => {
-        const { color, icon } = SKILL_VALUE[category];
+      return (category: { categoryName: string; subcategoryName: string[] }) => {
+        const { color, icon } = getSkillValue(category.categoryName);
 
         return (
           <div
             className={styles.skillsCategory}
-            key={category}
+            key={category.categoryName}
             role='region'
-            aria-labelledby={`category-${category}`}
+            aria-labelledby={`category-${category.categoryName}`}
           >
             <div className={styles.skillsCategoryHeader}>
               <div
@@ -45,15 +42,15 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
               </div>
               <div className={styles.categoryContent}>
                 <h3
-                  id={`category-${category}`}
+                  id={`category-${category.categoryName}`}
                   className={styles.categoryTitle}
                   role='heading'
                   aria-level={3}
                 >
-                  {category}
+                  {category.categoryName}
                 </h3>
                 <div className={styles.subcategories} role='list'>
-                  {subcategories.map((subcategory) => (
+                  {category.subcategoryName.map((subcategory) => (
                     <div
                       key={subcategory}
                       className={styles.subcategory}
@@ -71,16 +68,10 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
           </div>
         );
       };
-    }, [SKILL_VALUE, styles]);
+    }, [styles]);
 
-    // Исправляем типизацию для Object.entries
-    const categories = Object.entries(SKILL_CATEGORY) as [
-      CategoryKey,
-      readonly string[]
-    ][];
-
-    const firstColumn = categories.slice(0, COLUMN_BREAK_POINT);
-    const secondColumn = categories.slice(COLUMN_BREAK_POINT);
+    const firstColumn = SKILL_CATEGORY.slice(0, COLUMN_BREAK_POINT);
+    const secondColumn = SKILL_CATEGORY.slice(COLUMN_BREAK_POINT);
 
     return (
       <div
@@ -89,13 +80,13 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
         aria-label='Навигация по категориям навыков'
       >
         <div className={styles.skillsColumn}>
-          {firstColumn.map(([category, subcategories]) =>
-            renderCategory(category, subcategories)
+          {firstColumn.map((category) =>
+            renderCategory(category)
           )}
         </div>
         <div className={styles.skillsColumn}>
-          {secondColumn.map(([category, subcategories]) =>
-            renderCategory(category, subcategories)
+          {secondColumn.map((category) =>
+            renderCategory(category)
           )}
         </div>
       </div>
