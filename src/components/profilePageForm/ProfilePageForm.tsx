@@ -1,7 +1,24 @@
+import { useState, useRef, ChangeEvent } from 'react';
+import { useDispatch, useSelector } from '../../services/store/store';
+import { DatePickerComponent } from '../calendar/DataPicker';
+//import { selectCurrentUser, updateUserField } from '../../services/slices/user/userSlice'
 import styles from './ProfilePageForm.module.css';
 import { GreenButton } from '../buttons/GreenButton/GreenButton';
 
 export function ProfilePageForm() {
+  const dispatch = useDispatch();
+  {
+    /* возможные варианты переменных для формы
+  const user = useSelector(userSliceSelectors.selectUser);
+  const userSelector = useSelector(selectCurrentUser);
+  const { email, name, avatar, age: dateOfBirth, location, description, gender } = userSelector
+  const emailState = useState(email);
+  const nameState = useState(name);
+  const [date, setDate] = useState(
+    dateOfBirth ? new Date(dateOfBirth) : new Date(),
+  );*/
+  }
+
   return (
     <div className={styles.profileForm}>
       <div className={styles.profileInputBlock}>
@@ -39,6 +56,12 @@ export function ProfilePageForm() {
               aria-label='Выбрать дату рождения'
               style={{ cursor: 'pointer' }}
             >
+              {/*Добавить DatePickerComponent
+              <DatePickerComponent
+                selectedDate={date}
+                setSelectedDate={setDate}
+              />*/}
+              {/* вариант без DatePickerComponent*/}
               <input
                 type='date'
                 name='birthDate'

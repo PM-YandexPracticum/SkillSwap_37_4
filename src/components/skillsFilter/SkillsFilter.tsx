@@ -2,11 +2,9 @@ import { FC, useState } from 'react';
 import { Checkbox } from '../ui/checkbox/Checkbox';
 import { ExpandButton } from '../buttons/ExpandButton/ExpandButton';
 import styles from './SkillsFilter.module.css';
+import { SkillCategory } from '../../const/skillsCategoryMapping';
 
-export interface SkillCategory {
-  categoryName: string;
-  subcategoryName: string[];
-}
+// интерфейс перенесён в const/skillsCategoryMapping.ts
 
 export interface SkillsFilterState {
   [categoryName: string]: {
@@ -74,7 +72,7 @@ export const SkillsFilter: FC<SkillsFilterProps> = ({
     setState(newState);
     onChange(newState);
   };
-  
+
   const getCategoryVariant = (categoryName: string) => {
     const subcategories = Object.values(state[categoryName].subcategories);
     const someSelected = subcategories.some(Boolean);
