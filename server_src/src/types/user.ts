@@ -1,10 +1,10 @@
+// server/src/types/user.ts
 export interface User {
   id: string;
   name: string | null;
   email: string | null;
-  password: string | null;
   avatarUrl: string | null;
-  birthday: string | null; // ISO string или DATE
+  birthday: string | null;
   description: string | null;
   city: string | null;
   gender: string | null;
@@ -34,4 +34,14 @@ export interface UpdateUserRequest {
   city?: string;
   gender?: string;
   wantLearn?: string;
+}
+
+export type LoginRequest = {
+  email: string;
+  password: string;
+}
+
+export type LoginResponse = {
+  user: User;
+  message: string;
 }

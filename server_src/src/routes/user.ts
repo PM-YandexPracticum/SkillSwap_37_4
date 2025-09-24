@@ -1,11 +1,62 @@
-// server/src/routes/users.ts
+
 import { Router } from 'express';
 import { database } from '../database/db';
-import { CreateUserRequest, UpdateUserRequest } from '../types/user';
+import { CreateUserRequest, LoginRequest, LoginResponse, UpdateUserRequest, User } from '../types/user';
 
 export const userRoutes = Router();
 
+// POST /api/users/login - аутентификация пользователя
+userRoutes.post('/login', async (req, res) => {
+  try {
+    const { email, password }: LoginRequest = req.body;
+    
+    if (!email || !password) {
+      res.status(400).json({ error: 'Email and password are required' });
+      return;
+    }
+
+    // Ищем пользователя по email и проверяем пароль
+    const result = await database.getQuery<any>(
+      `SELECT id, name, email, password, avatarUrl, birthday, description, city, gender, wantLearn 
+       FROM Users WHERE email = ? AND password = ?`,
+      [email, password]
+    );
+    
+    if (result.success) {
+      if (result.data) {
+        // Создаем объект пользователя без пароля
+        const user: User = {
+          id: result.data.id,
+          name: result.data.name,
+          email: result.data.email,
+          avatarUrl: result.data.avatarUrl,
+          birthday: result.data.birthday,
+          description: result.data.description,
+          city: result.data.city,
+          gender: result.data.gender,
+          wantLearn: result.data.wantLearn
+        };
+        
+        const response: LoginResponse = {
+          user,
+          message: 'Login successful'
+        };
+        
+        res.json(response);
+      } else {
+        res.status(401).json({ error: 'Invalid email or password' });
+      }
+    } else {
+      res.status(500).json({ error: result.error });
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // GET /api/users - получить всех пользователей
+
 userRoutes.get('/', async (req, res) => {
   try {
     const result = await database.getAllQuery<any>(
