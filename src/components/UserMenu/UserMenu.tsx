@@ -20,13 +20,13 @@ export const UserMenu: React.FC<UserMenuProps> = ({
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   const user: TUser | null = null;
-  //  const user: TUser= {
-  //    id: '123',
-  //    name: 'aziz',
-  //    email: '12',
-  //    isAuthenticated: true,
-  //    avatar: "https://i.ytimg.com/vi/2mcK35I8sXE/maxresdefault.jpg"
-  //  };
+    {/*const user: TUser= {
+      id: '123',
+      name: 'aziz',
+      email: '12',
+      isAuthenticated: true,
+      avatar: "https://i.ytimg.com/vi/2mcK35I8sXE/maxresdefault.jpg"
+    };*/}
 
   const handleProfileClick = () => {
     // navigate('/profile');
