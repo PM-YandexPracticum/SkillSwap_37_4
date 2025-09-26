@@ -9,16 +9,88 @@ import iconPlus from 'src/components/app/assets/static/iconsUi/add.svg';
 import iconUserInfo from 'src/components/app/assets/static/images/userInfo.svg';
 import styles from './RegisterForm.module.css';
 
-const RegisterStepSecond: React.FC = () => {
-  const [formData, setFormData] = useState({
-    avatar: '',
-    name: '',
-    date: '',
-    gender: 'Не указан',
-    city: 'Не указан',
-    categories: [],
-    subcategories: [],
-  });
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Input } from 'src/components/input/Input';
+import { DatePickerComponent } from '../calendar/DataPicker';
+import { DropDown } from 'src/components/DropDown';
+import GreenButton from 'src/components/buttons/GreenButton';
+import { SKILL_CATEGORY } from 'src/const/skillsCategoryMapping';
+import styles from './RegisterStepSecondForm.module.css';
+import { setRegisterData, resetRegisterData } from 'src/store/slices/registerSlice';
+
+interface RegisterStepSecondFormProps {
+ onNext: () => void;
+ onPrev: () => void;
+}
+
+const RegisterStepSecondForm: React.FC<RegisterStepSecondFormProps> = ({ onNext, onPrev }) => {
+ const dispatch = useDispatch();
+ const registerData = useSelector((state) => state.register);
+
+ // Локальные состояния
+ const [avatar, setAvatar] = useState('');
+ const [name, setName] = useState('');
+ const [date, setDate] = useState('');
+ const [gender, setGender] = useState('Не указан');
+ const [city, setCity] = useState('Не указан');
+ const [selectedCategory, setSelectedCategory] = useState<keyof typeof SKILL_CATEGORY | ''>('');
+ const [selectedSubcategory, setSelectedSubcategory] = useState('');
+
+ useEffect(() => {
+ return () => {
+ dispatch(resetRegisterData());
+ };
+ }, [dispatch]);
+
+ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+ const { name: inputName, value } = e.target;
+ switch (inputName) {
+ case 'name':
+ setName(value);
+ dispatch(setRegisterData({ name: value }));
+ break;
+ case 'date':
+ setDate(value);
+ dispatch(setRegisterData({ date: value }));
+ break;
+ case 'gender':
+ setGender(value);
+ dispatch(setRegisterData({ gender: value }));
+ break;
+ case 'city':
+ setCity(value);
+ dispatch(setRegisterData({ city: value }));
+ break;
+ default:
+ break;
+ }
+ };
+
+ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const file = e.target.files?.[0];
+ if (file) {
+ setAvatar(URL.createObjectURL(file));
+ dispatch(setRegisterData({ avatar: URL.createObjectURL(file) }));
+ }
+ };
+
+ const handleCategoryChange = (category: keyof typeof SKILL_CATEGORY) => {
+ setSelectedCategory(category);
+ dispatch(setRegisterData({ categories: category }));
+ };
+
+ const handleSubcategoryChange = (subcategory: string) => {
+ setSelectedSubcategory(subcategory);
+ dispatch(setRegisterData({ subcategories: subcategory }));
+ };
+
+ const isContinueButtonDisabled = !selectedCategory;
+
+ const handleNext = () => {
+ // Здесь можно добавить валидацию формы перед переходом
+ onNext();
+ };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
