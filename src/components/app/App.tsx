@@ -5,9 +5,12 @@ import { useDispatch } from '../../services/store/store';
 import { useEffect } from 'react';
 import styles from './App.css';
 import { AppFooter } from '../appFooter/AppFooter';
-import { AppHeader } from '../appHeader/AppHeader';
 import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
+import { AppHeader } from '../appHeader/AppHeader';
+import { CatalogPage } from '../../pages/catalog-page';
+import { SkillPage } from '../../pages/skill-page';
+import ProfileDetailsPage from '../../pages/profile/ProfilePage';
 
 function App() {
   const navigate = useNavigate();
@@ -16,7 +19,6 @@ function App() {
   const closeModal = () => {
     navigate(backgroundLocation || '/');
   };
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,16 +30,11 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <AppHeader />
-      <main>
-        <Routes>
+      <AppHeader/>
+      <Routes>
         <Route
           path='/'
-          element={
-            // todo
-            // <MainPage />
-            <h1>MainPage</h1>
-          }
+          element={<CatalogPage/>}
         />
         <Route
           path='/login'
@@ -72,16 +69,20 @@ function App() {
           />
         </Route>
         <Route
-          path='*'
-          element={<NotFound404/>}
+          path='/profile/*'
+          element={
+            <ProtectedRoute>
+              <ProfileDetailsPage />
+            </ProtectedRoute>
+          }
         />
-        <Route
-          path='/500'
-          element={<InternalError500/>}
-        />
-        </Routes>
-      </main>
+        <Route path="/skill/:id" element={<SkillPage />} />
+        <Route path='*' element={<NotFound404 />} />
+        <Route path='/500' element={<InternalError500 />} />
+      </Routes>
       <AppFooter />
+      {/* todo */}
+      {/* <AppFooter /> */}
     </div>
   );
 }

@@ -1,20 +1,19 @@
 .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg-primary, #ffffff);
-  color: var(--text-primary, #253017);
-  transition: all 0.3s ease;
-}
-
-.App main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Темная тема */
-[data-theme="dark"] .App {
-  background: var(--bg-primary-dark, #1a202c);
-  color: var(--text-primary-dark, #e2e8f0);
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
