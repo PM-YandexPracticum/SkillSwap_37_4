@@ -7,11 +7,11 @@ interface ProfileActionMenuProps {
   // В будущем сюда можно добавить пропсы
 }
 
-const ProfileActionMenu: React.FC<ProfileActionMenuProps> = () => {
+export const ProfileActionMenu: React.FC<ProfileActionMenuProps> = () => {
   const navigate = useNavigate();
 
   const handleNavigateToProfile = () => {
-    navigate('/profile');
+    navigate('/profile/details');
   };
 
   const handleLogout = () => {
@@ -31,7 +31,7 @@ const ProfileActionMenu: React.FC<ProfileActionMenuProps> = () => {
       <button type='button' className={styles.menuItem} onClick={handleLogout}>
         Выйти из аккаунта
         <span>
-          <LogoutIcon/>
+          <LogoutIcon />
         </span>
       </button>
     </div>
