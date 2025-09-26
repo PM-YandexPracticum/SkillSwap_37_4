@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from '../slices/userSlice/userSlice'; // путь к твоему слайсу
+import userReducer from '../slices/userSlice/userSlice'; 
+import skillReducer from './skillSlice';
 
 import {
   TypedUseSelectorHook,
@@ -9,6 +10,7 @@ import {
 
 const rootReducer = {
   'user': userReducer
+  skill: skillReducer
 };
 
 const store = configureStore({

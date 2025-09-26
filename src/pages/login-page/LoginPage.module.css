@@ -1,0 +1,137 @@
+/* LoginPage - согласно макету Figma */
+
+.loginPage {
+  width: 100%;
+  min-height: calc(100vh - 104px);
+  background: #F9FAF7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+/* Header удалён: используется общий AppHeader */
+
+/* Контент временно скрыт (двигаемся поэтапно) */
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  width: 1136px;
+  height: 692px;
+  margin: 24px auto 0;
+}
+
+/* Form Section */
+.formSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  gap: 32px;
+  width: 556px;
+  height: 692px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Onboarding Section */
+.onboardingSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  gap: 40px;
+  width: 556px;
+  height: 692px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.lightbulbContainer {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.lightbulbIcon {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 436px;
+  margin: 0 auto;
+  gap: 12px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.welcomeTitle {
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  letter-spacing: -0.011em;
+  color: #253017;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.welcomeText {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #253017;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Title */
+.title {
+  width: auto;
+  height: 28px;
+  margin: 0 0 24px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: -0.011em;
+  color: #253017;
+}
+
+/* Адаптив в макете не предусмотрен — media-правила убраны */

@@ -76,6 +76,14 @@
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
+.profile-menu-overlay {
+  display: flex;
+  gap: 24px;
+  position: absolute;
+  top: 104px;
+  right: 36px;
+}
+
 .user-avatar {
   display: flex;
   flex-direction: row;
