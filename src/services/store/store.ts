@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import userReducer from '../slices/userSlice/userSlice'; 
 import skillReducer from './skillSlice';
 
 import {
@@ -8,6 +9,7 @@ import {
 } from 'react-redux';
 
 const rootReducer = {
+  'user': userReducer
   skill: skillReducer
 };
 
