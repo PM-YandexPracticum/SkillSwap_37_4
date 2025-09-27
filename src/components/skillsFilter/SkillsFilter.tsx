@@ -15,11 +15,13 @@ export interface SkillsFilterState {
 
 interface SkillsFilterProps {
   categories: SkillCategory[];
+  title: string;
   onChange: (state: SkillsFilterState) => void;
 }
 
 export const SkillsFilter: FC<SkillsFilterProps> = ({
   categories,
+  title,
   onChange
 }) => {
   const [expanded, setExpanded] = useState<string[]>([]);
@@ -88,7 +90,7 @@ export const SkillsFilter: FC<SkillsFilterProps> = ({
 
   return (
     <div className={styles.skillsFilter}>
-      <h2 className={styles.title}>Навыки</h2>
+      <h2 className={styles.title}>{title}</h2>
 
       {visibleCategories.map((category) => (
         <div key={category.categoryName} className={styles.category}>
@@ -138,7 +140,7 @@ export const SkillsFilter: FC<SkillsFilterProps> = ({
 
       {categories.length > 6 && (
         <ExpandButton
-          text={showAllCategories ? 'Скрыть' : 'Все категории'}
+          text={showAllCategories ? 'Скрыть' : title === 'Город' ? 'Все города' : 'Все категории'}
           color='#508826'
           className={styles.allCategoriesButton}
           onClick={() => setShowAllCategories(!showAllCategories)}

@@ -1,9 +1,9 @@
-import briefcaseIcon from '../components/app/assets/static/iconsSkillsCategory/briefcase.svg'
-import homeIcon from '../components/app/assets/static/iconsSkillsCategory/home.svg'
-import lifestyleIcon from '../components/app/assets/static/iconsSkillsCategory/lifestyle.svg'
-import globalIcon from '../components/app/assets/static/iconsSkillsCategory/global.svg'
-import bookIcon from '../components/app/assets/static/iconsSkillsCategory/book.svg'
-import paletteIcon from '../components/app/assets/static/iconsSkillsCategory/palette.svg'
+import briefcaseIcon from '../components/app/assets/static/iconsSkillsCategory/briefcase.svg';
+import homeIcon from '../components/app/assets/static/iconsSkillsCategory/home.svg';
+import lifestyleIcon from '../components/app/assets/static/iconsSkillsCategory/lifestyle.svg';
+import globalIcon from '../components/app/assets/static/iconsSkillsCategory/global.svg';
+import bookIcon from '../components/app/assets/static/iconsSkillsCategory/book.svg';
+import paletteIcon from '../components/app/assets/static/iconsSkillsCategory/palette.svg';
 
 // Простой интерфейс для работы со списком категорий в фильтрах
 export interface SkillCategory {
@@ -22,8 +22,8 @@ export const SKILL_CATEGORY: SkillCategory[] = [
       'Резюме и собеседование',
       'Тайм-менеджмент',
       'Проектное управление',
-      'Предпринимательство',
-    ],
+      'Предпринимательство'
+    ]
   },
   {
     categoryName: 'Творчество и искусство',
@@ -35,8 +35,8 @@ export const SKILL_CATEGORY: SkillCategory[] = [
       'Актёрское мастерство',
       'Креативное письмо',
       'Арт-терапия',
-      'Декор и DIY',
-    ],
+      'Декор и DIY'
+    ]
   },
   {
     categoryName: 'Иностранные языки',
@@ -47,8 +47,8 @@ export const SKILL_CATEGORY: SkillCategory[] = [
       'Немецкий',
       'Китайский',
       'Японский',
-      'Подготовка к экзаменам (IELTS, TOEFL)',
-    ],
+      'Подготовка к экзаменам (IELTS, TOEFL)'
+    ]
   },
   {
     categoryName: 'Образование и развитие',
@@ -58,8 +58,8 @@ export const SKILL_CATEGORY: SkillCategory[] = [
       'Когнитивные техники',
       'Скорочтение',
       'Навыки преподавания',
-      'Коучинг',
-    ],
+      'Коучинг'
+    ]
   },
   {
     categoryName: 'Дом и уют',
@@ -69,8 +69,8 @@ export const SKILL_CATEGORY: SkillCategory[] = [
       'Приготовление еды',
       'Домашние растения',
       'Ремонт',
-      'Хранение вещей',
-    ],
+      'Хранение вещей'
+    ]
   },
   {
     categoryName: 'Здоровье и лайфстайл',
@@ -81,8 +81,31 @@ export const SKILL_CATEGORY: SkillCategory[] = [
       'Осознанность',
       'Физические тренировки',
       'Сон и восстановление',
-      'Баланс жизни и работы',
-    ],
+      'Баланс жизни и работы'
+    ]
+  }
+];
+
+export const CITY_CATEGORY: SkillCategory[] = [
+  {
+    categoryName: 'Москва',
+    subcategoryName: []
+  },
+  {
+    categoryName: 'Санкт-Петербург',
+    subcategoryName: []
+  },
+  {
+    categoryName: 'Новосибирск',
+    subcategoryName: []
+  },
+  {
+    categoryName: 'Екатеринбург',
+    subcategoryName: []
+  },
+  {
+    categoryName: 'Казань',
+    subcategoryName: []
   },
 ];
 
@@ -91,29 +114,29 @@ export function getSkillValue(categoryName: string) {
   const values: Record<string, { color: string; icon: string }> = {
     'Бизнес и карьера': {
       color: '#EEE7F7',
-      icon: briefcaseIcon,
+      icon: briefcaseIcon
     },
     'Дом и уют': {
       color: '#F7EBE5',
-      icon: homeIcon,
+      icon: homeIcon
     },
     'Здоровье и лайфстайл': {
       color: '#E9F7E7',
-      icon: lifestyleIcon,
+      icon: lifestyleIcon
     },
     'Иностранные языки': {
       color: '#EBE5C5',
-      icon: globalIcon,
+      icon: globalIcon
     },
     'Образование и развитие': {
       color: '#E7F2F6',
-      icon: bookIcon,
+      icon: bookIcon
     },
     'Творчество и искусство': {
       color: '#F7E7F2',
-      icon: paletteIcon,
-    },
+      icon: paletteIcon
+    }
   };
-  
+
   return values[categoryName] || { color: '#F0F0F0', icon: '' };
 }
