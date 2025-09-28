@@ -13,18 +13,12 @@ skillRoutes.get('/:id', async (req, res) => {
       `SELECT 
         s.id,
         s.ownerId,
+        s.skillName,        
         s.categorie as category,
         s.subCategorie as subCategory,
-        s.createDate,
         s.description,
-        s.likes,
-        s.requested,
-        s.photoUrls,
-        u.name as ownerName,
-        u.avatarUrl as ownerAvatar,
-        u.city as ownerCity
+        s.photoUrls
        FROM Skills s
-       INNER JOIN Users u ON s.ownerId = u.id
        WHERE s.id = ?`,
       [id]
     );
@@ -34,20 +28,13 @@ skillRoutes.get('/:id', async (req, res) => {
         const skill = {
           id: result.data.id,
           ownerId: result.data.ownerId,
+          name: result.data.skillName,
           photoUrl: result.data.photoUrls ? result.data.photoUrls.split(',').filter((url: string) => url.trim() !== '') : [],
-          name: result.data.ownerName,
           category: result.data.category,
           subCategory: result.data.subCategory,
           description: result.data.description,
-          createDate: result.data.createDate,
-          likes: result.data.likes ? result.data.likes.split(',').filter((id: string) => id.trim() !== '') : [],
-          requested: result.data.requested ? result.data.requested.split(',').filter((id: string) => id.trim() !== '') : [],
-          ownerInfo: {
-            name: result.data.ownerName,
-            avatar: result.data.ownerAvatar,
-            city: result.data.ownerCity
-          }
         };
+        console.log(skill)
         res.json(skill);
       } else {
         res.status(404).json({ error: 'Skill not found' });
@@ -69,19 +56,13 @@ skillRoutes.get('/owner/:ownerId', async (req, res) => {
     const result = await database.getAllQuery<any>(
       `SELECT 
         s.id,
+        s.skillName,
         s.ownerId,
         s.categorie as category,
         s.subCategorie as subCategory,
-        s.createDate,
         s.description,
-        s.likes,
-        s.requested,
-        s.photoUrls,
-        u.name as ownerName,
-        u.avatarUrl as ownerAvatar,
-        u.city as ownerCity
+        s.photoUrls
        FROM Skills s
-       INNER JOIN Users u ON s.ownerId = u.id
        WHERE s.ownerId = ?
        ORDER BY s.createDate DESC`,
       [ownerId]
@@ -91,19 +72,11 @@ skillRoutes.get('/owner/:ownerId', async (req, res) => {
       const skills = result.data.map((row: any) => ({
         id: row.id,
         ownerId: row.ownerId,
+        name: result.data.skillName,
         photoUrl: row.photoUrls ? row.photoUrls.split(',').filter((url: string) => url.trim() !== '') : [],
-        name: row.ownerName,
         category: row.category,
         subCategory: row.subCategory,
         description: row.description,
-        createDate: row.createDate,
-        likes: row.likes ? row.likes.split(',').filter((id: string) => id.trim() !== '') : [],
-        requested: row.requested ? row.requested.split(',').filter((id: string) => id.trim() !== '') : [],
-        ownerInfo: {
-          name: row.ownerName,
-          avatar: row.ownerAvatar,
-          city: row.ownerCity
-        }
       }));
       
       res.json(skills);
@@ -341,6 +314,84 @@ skillRoutes.delete('/:id', async (req, res) => {
     }
   } catch (error) {
     console.error('Error deleting skill:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+skillRoutes.get('/skillPage/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const result = await database.getQuery<any>(
+      `SELECT 
+        s.id,
+        s.ownerId,
+        s.skillName,        
+        s.categorie as category,
+        s.subCategorie as subCategory,
+        s.description,
+        s.photoUrls
+       FROM Skills s
+       WHERE s.id = ?`,
+      [id]
+    );
+    
+    if (result.success) {
+      if (result.data) {
+        const skill = {
+          id: result.data.id,
+          ownerId: result.data.ownerId,
+          name: result.data.skillName,
+          photoUrl: result.data.photoUrls ? result.data.photoUrls.split(',').filter((url: string) => url.trim() !== '') : [],
+          category: result.data.category,
+          subCategory: result.data.subCategory,
+          description: result.data.description,
+        };
+        let query = `
+          SELECT 
+            s.id as skillId,
+            s.createDate,
+            s.skillName as skillName,
+            u.name,
+            u.city,
+            CAST(strftime('%Y', 'now') - strftime('%Y', u.birthday) AS INTEGER) as age,
+            u.avatarUrl as avatar_url,
+            CASE WHEN s.likes LIKE '%' || ? || '%' THEN 1 ELSE 0 END as liked,
+            CASE WHEN s.requested LIKE '%' || ? || '%' THEN 1 ELSE 0 END as onRequest,
+            s.categorie as canTeach,
+            u.wantLearn as wantLearn
+          FROM Skills s
+          INNER JOIN Users u ON s.ownerId = u.id
+          WHERE s.ownerId=? AND s.skillName=?
+        `;
+        const params: any[] = ['','', skill.ownerId, skill.name];
+
+        const result_card = await database.getAllQuery<any>(query, params);
+        console.log(result_card);
+        if (result_card.success) {
+          // Преобразуем данные в формат TCard
+          const cards = result_card.data.map((row: any) => ({
+            skillId: row.skillId,
+            createDate: row.createDate,
+            userName: row.userName,
+            city: row.city,
+            age: row.age?.toString() || '0',
+            avatar_url: row.avatar_url,
+            liked: false,
+            onRequest: false,
+            canTeach: row.canTeach ? [row.canTeach] : [],
+            wantLearn: row.wantLearn ? row.wantLearn.split(',').map((item: string) => item.trim()) : []
+          }))
+          res.json({skill:skill, card:cards});
+        };
+      } else {
+        res.status(404).json({ error: 'Skill not found' });
+      }
+    } else {
+      res.status(500).json({ error: result.error });
+    }
+  } catch (error) {
+    console.error('Error fetching skill:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

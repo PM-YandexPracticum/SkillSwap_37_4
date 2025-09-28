@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { TSkill, CreateSkillRequest, UpdateSkillRequest } from '../../types/skill';
+import { TSkill, CreateSkillRequest, UpdateSkillRequest } from '../../../../types/skill';
 
 
-interface SkillState {
+export interface SkillState {
   skills: TSkill[];
   currentSkill: TSkill | null;
   loading: boolean;
   error: string | null;
 }
 
-const initialState: SkillState = {
+export const initialState: SkillState = {
   skills: [],
   currentSkill: null,
   loading: false,
@@ -23,6 +23,15 @@ export const getSkillCardById = createAsyncThunk(
     throw new Error('API не реализован');
   }
 );
+
+export const getSkillPageById = createAsyncThunk(
+  'skill/getSkillCardById',
+  async (id: string): Promise<TSkill> => {
+    // TODO: Заменить на реальный API вызов
+    throw new Error('API не реализован');
+  }
+);
+
 
 export const createSkill = createAsyncThunk(
   'skill/createSkill',
@@ -48,7 +57,7 @@ export const getSkillsByUserId = createAsyncThunk(
   }
 );
 
-const skillSlice = createSlice({
+export const skillSlice = createSlice({
   name: 'skill',
   initialState,
   reducers: {
