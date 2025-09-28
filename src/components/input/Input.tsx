@@ -8,6 +8,7 @@ export interface InputProps
   subLabel?: string;
   error?: string;
   success?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   iconPaddingRight?: string;
@@ -28,13 +29,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       onRightIconClick,
       className,
       id,
+      onChange,
       iconPaddingRight,
       rightIconAriaLabel,
       fields__container,
       ...props
     },
     ref
-  ) => (
+  ) => {
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e);
+    };
+  
+
+    return (
     <div className={clsx(styles.field__container, fields__container)}>
       {label && (
         <label htmlFor={id} className={styles.label}>
@@ -48,6 +58,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           id={id}
           className={clsx(styles.input, className)}
+          onChange={handleChange}
           {...props}
         />
         {rightIcon && (
@@ -66,6 +77,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       {error && <span className={styles.errorText}>{error}</span>}
     </div>
   )
+}
 );
 
 Input.displayName = 'Input';

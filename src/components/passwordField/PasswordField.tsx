@@ -1,9 +1,13 @@
-import React, { useId, useRef, useState } from 'react';
+import React, { RefObject, useId, useRef, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import styles from './PasswordField.module.css';
 import { Input } from '../input/Input';
 
 interface PasswordFieldProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputRef?: RefObject<HTMLInputElement>;
+  id?: string;
   placeholder?: string;
   label?: string;
   subLabel?: string;
@@ -12,15 +16,16 @@ interface PasswordFieldProps {
 export const PasswordField: React.FC<PasswordFieldProps> = ({
   placeholder = 'Введите ваш пароль',
   label = 'Пароль',
-  subLabel = 'Пароль должен содержать не менее 8 знаков'
+  value,
+  onChange,
+  id, 
+  inputRef,
+  subLabel
 }) => {
-  const [value, setValue] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
-  const generatedId = useId();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    onChange(e);
   };
 
   const toggleShowPassword = () => {
@@ -30,11 +35,11 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({
   return (
     <Input
       label={label}
-      ref={passwordInputRef}
+      ref={inputRef}
       type={showPassword ? 'text' : 'password'}
       value={value}
       fields__container={styles.fields__container}
-      id={`password-${generatedId}`}
+      id={id}
       subLabel={subLabel}
       onChange={handleChange}
       iconPaddingRight='20px'

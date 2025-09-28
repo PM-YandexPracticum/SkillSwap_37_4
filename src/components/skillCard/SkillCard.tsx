@@ -78,27 +78,25 @@ export const SkillCard: FC<SkillCardProps> = ({
             </div>
 
             <div className={styles.thumbs}>
-              <img
-                className={styles.thumb}
-                src={photoUrl[1]}
-                onClick={() => setActive(1)}
-                role='button'
-                onKeyDown={(e) => e.key === 'Enter' && setActive(1)}
-              />
-              <img
-                className={styles.thumb}
-                src={photoUrl[2]}
-                onClick={() => setActive(2)}
-                role='button'
-                onKeyDown={(e) => e.key === 'Enter' && setActive(2)}
-              />
-              <div className={clsx(styles.thumb, styles.withOverlay)}>
-                <img src={photoUrl[3]} />
-                {photoUrl.length > 4 && (
-                  <p className={styles.moreBadge}>+{photoUrl.length - 3}</p>
-                )}
-              </div>
-            </div>
+  {photoUrl.slice(1, 3).map((url, index) => (
+    <img
+      key={index}
+      className={styles.thumb}
+      src={url}
+      onClick={() => setActive(index + 1)}
+      role="button"
+      onKeyDown={(e) => e.key === "Enter" && setActive(index + 1)}
+      alt={`preview-${index + 1}`}
+    />
+  ))}
+
+  {photoUrl.length > 3 && (
+    <div className={clsx(styles.thumb, styles.withOverlay)}>
+      <img src={photoUrl[3]} alt="more preview" />
+      <p className={styles.moreBadge}>+{photoUrl.length - 3}</p>
+    </div>
+  )}
+</div>
           </div>
         </div>
       </section>

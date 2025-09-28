@@ -1,4 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
+import userReducer from '../slices/userSlice/userSlice';
+import skillReducer from './skillSlice';
+import notifyReducer from '../slices/notifySlice/notifySlice';
 
 import {
   TypedUseSelectorHook,
@@ -6,7 +9,11 @@ import {
   useSelector as selectorHook
 } from 'react-redux';
 
-const rootReducer = {};
+const rootReducer = {
+  user: userReducer,
+  skill: skillReducer,
+  notify: notifyReducer
+};
 
 const store = configureStore({
   reducer: rootReducer,
