@@ -1,1 +1,1 @@
-export { RegisterStepSecond } from './RegistrationPage2';
+export { RegistrationPage } from './RegistrationPage2';
