@@ -3,12 +3,13 @@ export interface User {
   id: string;
   name: string | null;
   email: string | null;
+  password?: string | null,
   avatarUrl: string | null;
   birthday: string | null;
   description: string | null;
   city: string | null;
   gender: string | null;
-  wantLearn: string | null;
+  // wantLearn: string | null;
 }
 
 export interface CreateUserRequest {

@@ -1,4 +1,4 @@
-[
+export const initialExchanges = [
   {
     "id": "ex_1",
     "fromUserId": "22",

@@ -1,7 +1,9 @@
 import sqlite3 from 'sqlite3';
 import path from 'path';
 import fs from 'fs';
-
+import {initialUsers as initialUsersExport} from './mock/initialUsers'
+import {initialSkills as initialSkillsExport} from './mock/initialSkills'
+import {initialExchanges as initialExchangesExport} from './mock/initialExchanges'
 export interface QueryResult {
   success: boolean;
   error?: string;
@@ -169,56 +171,7 @@ class Database {
   
       try {
         console.log('Inserting initial users...');
-        const initialUsers = [
-        {
-          id: '1',
-          name: 'Иван Петров',
-          email: 'ivan@example.com',
-          password: 'hashed_password_123',
-          avatarUrl: 'https://example.com/avatars/ivan.jpg',
-          birthday: '1990-05-15',
-          description: 'Люблю программирование и путешествия',
-          city: 'Москва',
-          gender: 'male',
-          wantLearn: 'JavaScript, React, Node.js'
-        },
-        {
-          id: '2',
-          name: 'Мария Сидорова',
-          email: 'maria@example.com',
-          password: 'hashed_password_456',
-          avatarUrl: 'https://example.com/avatars/maria.jpg',
-          birthday: '1992-08-20',
-          description: 'Фотограф и художник',
-          city: 'Санкт-Петербург',
-          gender: 'female',
-          wantLearn: 'Photoshop, Figma, UI/UX design'
-        },
-        {
-          id: '3',
-          name: 'Алексей Иванов',
-          email: 'alex@example.com',
-          password: 'hashed_password_789',
-          avatarUrl: null,
-          birthday: '1988-12-10',
-          description: 'Преподаватель английского языка',
-          city: 'Казань',
-          gender: 'male',
-          wantLearn: 'Business English, TOEFL preparation'
-        },
-        {
-          id: '4',
-          name: 'Екатерина Волкова',
-          email: 'ekaterina@example.com',
-          password: 'hashed_password_101',
-          avatarUrl: 'https://example.com/avatars/ekaterina.jpg',
-          birthday: '1995-03-25',
-          description: 'Дизайнер интерфейсов',
-          city: 'Новосибирск',
-          gender: 'female',
-          wantLearn: 'Illustrator, After Effects'
-        }
-      ];
+        const initialUsers = initialUsersExport;
 
       for (const user of initialUsers) {
         await this.runQuery(
@@ -231,68 +184,7 @@ class Database {
 
       // 2. Инициализация навыков
       console.log('Inserting initial skills...');
-      const initialSkills = [
-        {
-          id: 'skill_1',
-          name: 'skill_1',
-          ownerId: '1', // Иван Петров
-          categorie: 'Программирование',
-          subCategorie: 'JavaScript',
-          createDate: '2024-01-15 10:00:00',
-          description: 'Обучаю основам JavaScript, современному синтаксису ES6+',
-          likes: '2,3', // Мария и Алексей лайкнули
-          requested: '2', // Мария запросила обмен
-          photoUrls: 'https://example.com/skills/js1.jpg,https://example.com/skills/js2.jpg'
-        },
-        {
-          id: 'skill_2',
-          name: 'skill_2',
-          ownerId: '2', // Мария Сидорова
-          categorie: 'Дизайн',
-          subCategorie: 'Photoshop',
-          createDate: '2024-01-16 14:30:00',
-          description: 'Уроки по Photoshop: ретушь, коллажи, работа со слоями',
-          likes: '1,3', // Иван и Алексей лайкнули
-          requested: '1,3', // Иван и Алексей запросили обмен
-          photoUrls: 'https://example.com/skills/ps1.jpg'
-        },
-        {
-          id: 'skill_3',
-          name: 'skill_3',
-          ownerId: '3', // Алексей Иванов
-          categorie: 'Языки',
-          subCategorie: 'Английский',
-          createDate: '2024-01-17 09:15:00',
-          description: 'Индивидуальные занятия английским для IT-специалистов',
-          likes: '1,2', // Иван и Мария лайкнули
-          requested: '1', // Иван запросил обмен
-          photoUrls: null
-        },
-        {
-          id: 'skill_4',
-          name: 'skill_4',
-          ownerId: '1', // Иван Петров
-          categorie: 'Программирование',
-          subCategorie: 'React',
-          createDate: '2024-01-18 16:45:00',
-          description: 'React разработка: компоненты, хуки, состояние',
-          likes: '2,4', // Мария и Екатерина лайкнули
-          requested: '4', // Екатерина запросила обмен
-          photoUrls: 'https://example.com/skills/react1.jpg'
-        },
-        {
-          id: 'skill_5',
-          name: 'skill_5',
-          ownerId: '4', // Екатерина Волкова
-          categorie: 'Дизайн',
-          subCategorie: 'Figma',
-          createDate: '2024-01-19 11:20:00',
-          description: 'Создание дизайн-систем и прототипов в Figma',
-          likes: '1,2,3', // Все лайкнули
-          requested: '1,2', // Иван и Мария запросили обмен
-          photoUrls: 'https://example.com/skills/figma1.jpg,https://example.com/skills/figma2.jpg'
-        }
-      ];
+      const initialSkills = initialSkillsExport;
 
       for (const skill of initialSkills) {
         await this.runQuery(
@@ -305,44 +197,7 @@ class Database {
 
       // 3. Инициализация истории обменов
       console.log('Inserting exchange history...');
-      const initialExchanges = [
-        {
-          id: 'exchange_1',
-          fromUserId: '1', // Иван
-          toUserId: '2',   // Мария
-          skillId: 'skill_1', // JavaScript
-          status: 'completed'
-        },
-        {
-          id: 'exchange_2',
-          fromUserId: '2', // Мария
-          toUserId: '3',   // Алексей
-          skillId: 'skill_2', // Photoshop
-          status: 'in_progress'
-        },
-        {
-          id: 'exchange_3',
-          fromUserId: '3', // Алексей
-          toUserId: '1',   // Иван
-          skillId: 'skill_3', // Английский
-          status: 'pending'
-        },
-        {
-          id: 'exchange_4',
-          fromUserId: '4', // Екатерина
-          toUserId: '1',   // Иван
-          skillId: 'skill_5', // Figma
-          status: 'completed'
-        },
-        {
-          id: 'exchange_5',
-          fromUserId: '1', // Иван
-          toUserId: '4',   // Екатерина
-          skillId: 'skill_4', // React
-          status: 'in_progress'
-        }
-      ];
-
+      const initialExchanges = initialExchangesExport;
       for (const exchange of initialExchanges) {
         await this.runQuery(
           `INSERT INTO ExchangeHistory (id, fromUserId, toUserId, skillId, status)
@@ -524,3 +379,158 @@ private getCount(tableName: string): Promise<number> {
 
 // Создаем и экспортируем экземпляр базы данных
 export const database = new Database();
+
+/*
+[
+        {
+          id: '1',
+          name: 'Иван Петров',
+          email: 'ivan@example.com',
+          password: 'hashed_password_123',
+          avatarUrl: 'https://example.com/avatars/ivan.jpg',
+          birthday: '1990-05-15',
+          description: 'Люблю программирование и путешествия',
+          city: 'Москва',
+          gender: 'male',
+          wantLearn: 'JavaScript, React, Node.js'
+        },
+        {
+          id: '2',
+          name: 'Мария Сидорова',
+          email: 'maria@example.com',
+          password: 'hashed_password_456',
+          avatarUrl: 'https://example.com/avatars/maria.jpg',
+          birthday: '1992-08-20',
+          description: 'Фотограф и художник',
+          city: 'Санкт-Петербург',
+          gender: 'female',
+          wantLearn: 'Photoshop, Figma, UI/UX design'
+        },
+        {
+          id: '3',
+          name: 'Алексей Иванов',
+          email: 'alex@example.com',
+          password: 'hashed_password_789',
+          avatarUrl: null,
+          birthday: '1988-12-10',
+          description: 'Преподаватель английского языка',
+          city: 'Казань',
+          gender: 'male',
+          wantLearn: 'Business English, TOEFL preparation'
+        },
+        {
+          id: '4',
+          name: 'Екатерина Волкова',
+          email: 'ekaterina@example.com',
+          password: 'hashed_password_101',
+          avatarUrl: 'https://example.com/avatars/ekaterina.jpg',
+          birthday: '1995-03-25',
+          description: 'Дизайнер интерфейсов',
+          city: 'Новосибирск',
+          gender: 'female',
+          wantLearn: 'Illustrator, After Effects'
+        }
+      ];
+
+      [
+        {
+          id: 'skill_1',
+          name: 'skill_1',
+          ownerId: '1', // Иван Петров
+          categorie: 'Программирование',
+          subCategorie: 'JavaScript',
+          createDate: '2024-01-15 10:00:00',
+          description: 'Обучаю основам JavaScript, современному синтаксису ES6+',
+          likes: '2,3', // Мария и Алексей лайкнули
+          requested: '2', // Мария запросила обмен
+          photoUrls: 'https://example.com/skills/js1.jpg,https://example.com/skills/js2.jpg'
+        },
+        {
+          id: 'skill_2',
+          name: 'skill_2',
+          ownerId: '2', // Мария Сидорова
+          categorie: 'Дизайн',
+          subCategorie: 'Photoshop',
+          createDate: '2024-01-16 14:30:00',
+          description: 'Уроки по Photoshop: ретушь, коллажи, работа со слоями',
+          likes: '1,3', // Иван и Алексей лайкнули
+          requested: '1,3', // Иван и Алексей запросили обмен
+          photoUrls: 'https://example.com/skills/ps1.jpg'
+        },
+        {
+          id: 'skill_3',
+          name: 'skill_3',
+          ownerId: '3', // Алексей Иванов
+          categorie: 'Языки',
+          subCategorie: 'Английский',
+          createDate: '2024-01-17 09:15:00',
+          description: 'Индивидуальные занятия английским для IT-специалистов',
+          likes: '1,2', // Иван и Мария лайкнули
+          requested: '1', // Иван запросил обмен
+          photoUrls: null
+        },
+        {
+          id: 'skill_4',
+          name: 'skill_4',
+          ownerId: '1', // Иван Петров
+          categorie: 'Программирование',
+          subCategorie: 'React',
+          createDate: '2024-01-18 16:45:00',
+          description: 'React разработка: компоненты, хуки, состояние',
+          likes: '2,4', // Мария и Екатерина лайкнули
+          requested: '4', // Екатерина запросила обмен
+          photoUrls: 'https://example.com/skills/react1.jpg'
+        },
+        {
+          id: 'skill_5',
+          name: 'skill_5',
+          ownerId: '4', // Екатерина Волкова
+          categorie: 'Дизайн',
+          subCategorie: 'Figma',
+          createDate: '2024-01-19 11:20:00',
+          description: 'Создание дизайн-систем и прототипов в Figma',
+          likes: '1,2,3', // Все лайкнули
+          requested: '1,2', // Иван и Мария запросили обмен
+          photoUrls: 'https://example.com/skills/figma1.jpg,https://example.com/skills/figma2.jpg'
+        }
+      ];
+
+      [
+        {
+          id: 'exchange_1',
+          fromUserId: '1', // Иван
+          toUserId: '2',   // Мария
+          skillId: 'skill_1', // JavaScript
+          status: 'completed'
+        },
+        {
+          id: 'exchange_2',
+          fromUserId: '2', // Мария
+          toUserId: '3',   // Алексей
+          skillId: 'skill_2', // Photoshop
+          status: 'in_progress'
+        },
+        {
+          id: 'exchange_3',
+          fromUserId: '3', // Алексей
+          toUserId: '1',   // Иван
+          skillId: 'skill_3', // Английский
+          status: 'pending'
+        },
+        {
+          id: 'exchange_4',
+          fromUserId: '4', // Екатерина
+          toUserId: '1',   // Иван
+          skillId: 'skill_5', // Figma
+          status: 'completed'
+        },
+        {
+          id: 'exchange_5',
+          fromUserId: '1', // Иван
+          toUserId: '4',   // Екатерина
+          skillId: 'skill_4', // React
+          status: 'in_progress'
+        }
+      ];
+
+*/

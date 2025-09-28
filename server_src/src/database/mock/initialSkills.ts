@@ -1,4 +1,4 @@
-[
+export const initialSkills = [
   {
     "id": "skill_1",
     "name": "Проектное управление",

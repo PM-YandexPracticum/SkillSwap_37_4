@@ -1,4 +1,19 @@
 import { TSkillTag } from "../../components/cardTag/CardTag";
+import { TUser } from "../../types/user";
+
+const URL = process.env.SKILSWAP_API_URL || 'http://localhost:5000';
+
+export type TPureUserItem = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  avatarUrl: string;
+  description: string;
+  city: string;
+  age: string;
+  gender: string;
+}
 
 export type TUserItem = {
   id: string;
@@ -10,8 +25,8 @@ export type TUserItem = {
   city: string;
   age: string;
   gender: string;
-  canTeach: TSkillTag[];
-  wantLearn: TSkillTag[];
+  canTeach: string[];
+  wantLearn: string[];
 }
 
 export enum ENotifyStatus {
@@ -63,6 +78,13 @@ type TServerResponse<T> = {
 type TUserResponse = TServerResponse<{
   data: TUserItem[];
 }>;
+type TPureUserResponse = TServerResponse<{
+  data: TPureUserItem[];
+}>;
+type TLoginResponse = TServerResponse<{
+  user: TPureUserItem,
+  message: string;
+}>;
 
 type TNotifyResponse = TServerResponse<{
   data: TNotifyHistoryItem[];
@@ -78,52 +100,47 @@ type TSortObject = {
   wantLearn?: boolean;
 };
 
-// export const getCardApi = async (skillId: string): Promise<TCard> => {
-// }
+export type TLoginData = {
+    email: string,
+    password:string
+}
 
-// export const getCardsApi = async (from:  number, to: number, sortObject: TSortObject): Promise<TCard[]> => {
-//   try {
-//     const [cardsResponse, usersResponse] = await Promise.all([
-//       fetch(`${URL}/cards.json`),
-//       fetch(`${URL}/users.json`)
-//     ]);
+export const getUserApi = (number: string) =>
+  fetch(`${URL}/api/users/${number}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((res) => checkResponse<TPureUserResponse>(res));
 
-//     const cardsData = await checkResponse<{ data: TSkillItem[] }>(cardsResponse);
-//     const usersData = await checkResponse<{ data: TUserItem[] }>(usersResponse);
-
-//     if (!cardsData?.data || !usersData?.data) {
-//       throw new Error('Invalid data format');
-//     }
-
-//     // Создаем карту пользователей для быстрого поиска по ID
-//     const usersMap = new Map(
-//       usersData.data.map(user => [user.id, user])
-//     );
-
-//     // Объединяем данные
-//     const mergedCards: TCard[] = cardsData.data.map(skillItem => {
-//       const user = usersMap.get(skillItem.ownerId);
-      
-//       if (!user) {
-//         throw new Error(`User with id ${skillItem.ownerId} not found`);
-//       }
-
-//       return {
-//         skillId: skillItem.id,
-//         createDate: skillItem.createDate,
-//         userName: user.name,
-//         city: user.city,
-//         age: user.age,
-//         avatar_url: user.avatarUrl,
-//         liked: skillItem.likes.includes(user.id), 
-//         onRequest: skillItem.requested.includes(user.id),
-//       };
-//     });
-
-//     return mergedCards;
-
-//   } catch (error) {
-//     console.error('Failed to fetch and merge cards:', error);
-//     throw error;
-//   }
-// };
+  
+  export const loginUserApi = (email: string, password: string): Promise<TLoginResponse> => {
+  const loginData: TLoginData = {
+    email: email,
+    password: password
+  };
+  
+  return fetch(`${URL}/api/users/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(loginData)
+  })
+    .then((res) => { 
+      console.log('Response status:', res.status);
+      console.log('Response headers:', res.headers);
+      return checkResponse<TLoginResponse>(res);
+    })
+    .then((data) => {
+      console.log('Parsed data:', data);
+      if (data?.success) {
+        return data;
+      }
+      return Promise.reject(data);
+    })
+    .catch((error) => {
+      console.error('Login error:', error);
+      throw error;
+    });
+};

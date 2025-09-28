@@ -24,24 +24,23 @@ userRoutes.post('/login', async (req, res) => {
     
     if (result.success) {
       if (result.data) {
-        // Создаем объект пользователя без пароля
         const user: User = {
           id: result.data.id,
           name: result.data.name,
+          password: result.data.password,
           email: result.data.email,
           avatarUrl: result.data.avatarUrl,
           birthday: result.data.birthday,
           description: result.data.description,
           city: result.data.city,
           gender: result.data.gender,
-          wantLearn: result.data.wantLearn
+          // wantLearn: result.data.wantLearn
         };
         
         const response: LoginResponse = {
           user,
           message: 'Login successful'
         };
-        
         res.json(response);
       } else {
         res.status(401).json({ error: 'Invalid email or password' });
