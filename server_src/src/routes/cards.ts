@@ -4,10 +4,11 @@ import { FilterObject, LikeRequest } from '../types/cards';
 
 export const cardRoutes = Router();
 
-// GET /api/cards - получить карточки с фильтрацией и пагинацией
+// post /api/cards/:id - получить карточки с фильтрацией и пагинацией
 cardRoutes.post('/', async (req, res) => {
   try {
-    const { startNum, endNum, ...filterParams } = req.body;
+    const { currentUserId, ...filter } = req.body;
+    const { startNum, endNum, ...filterParams } = filter;
     
     const start = parseInt(startNum as string) || 0;
     const end = parseInt(endNum as string) || 9;
@@ -33,7 +34,7 @@ cardRoutes.post('/', async (req, res) => {
       WHERE 1=1
     `;
 
-    const params: any[] = [req.query.currentUserId || '', req.query.currentUserId || ''];
+    const params: any[] = [currentUserId || '', currentUserId || ''];
 
     // Применяем фильтры
     if (filterObj.category && filterObj.category.length > 0) {
@@ -100,11 +101,8 @@ cardRoutes.post('/', async (req, res) => {
         canTeach: row.canTeach ? [row.canTeach] : [],
         wantLearn: row.wantLearn ? row.wantLearn.split(',').map((item: string) => item.trim()) : []
       }));
-      // console.log(cards);
       res.json({
         cards,
-        // total: cards.length,
-        // hasMore: cards.length === limit
       });
     } else {
       res.status(500).json({ error: result.error });
