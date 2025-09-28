@@ -41,9 +41,9 @@ notifyRoutes.get('/user/:userId', async (req, res) => {
        INNER JOIN Users u_from ON eh.fromUserId = u_from.id
        INNER JOIN Users u_to ON eh.toUserId = u_to.id
        INNER JOIN Skills s ON eh.skillId = s.id
-       WHERE eh.toUserId = ? OR eh.fromUserId = ?
+       WHERE eh.toUserId = ?
        ORDER BY n.date DESC`,
-      [userId, userId]
+      [userId]
     );
     
     if (result.success) {
@@ -54,7 +54,6 @@ notifyRoutes.get('/user/:userId', async (req, res) => {
         toUser: row.toUserId,
         notifyDate: new Date(row.notifyDate),
         status: row.status as ENotifyStatus,
-        // Дополнительная информация для удобства клиента
         additionalInfo: {
           fromUserName: row.fromUserName,
           fromUserAvatar: row.fromUserAvatar,
@@ -66,7 +65,7 @@ notifyRoutes.get('/user/:userId', async (req, res) => {
           isInitiator: row.fromUserId === userId // Пользователь является инициатором обмена
         }
       }));
-      
+      console.log(notifications)
       res.json(notifications);
     } else {
       res.status(500).json({ error: result.error });
@@ -77,37 +76,12 @@ notifyRoutes.get('/user/:userId', async (req, res) => {
   }
 });
 
-// POST /api/notify/user/:userId/clear - очистить уведомления пользователя
-notifyRoutes.post('/user/:userId/clear', async (req, res) => {
+// POST /api/notify/clear - очистить уведомления пользователя
+notifyRoutes.post('/notify/clear', async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userIds } = req.body;
     
-    // Проверяем существование пользователя
-    const userResult = await database.getQuery<any>(
-      'SELECT id FROM Users WHERE id = ?',
-      [userId]
-    );
-    
-    if (!userResult.success || !userResult.data) {
-      res.status(404).json({ error: 'User not found' });
-      return;
-    }
-
-    // Находим все уведомления, связанные с обменами пользователя
-    const findResult = await database.getAllQuery<any>(
-      `SELECT n.id 
-       FROM Notify n
-       INNER JOIN ExchangeHistory eh ON n.exchangeId = eh.id
-       WHERE eh.toUserId = ? OR eh.fromUserId = ?`,
-      [userId, userId]
-    );
-    
-    if (!findResult.success) {
-      res.status(500).json({ error: findResult.error });
-      return;
-    }
-
-    const notificationIds = findResult.data.map((row: any) => row.id);
+    const notificationIds = userIds;
     
     if (notificationIds.length === 0) {
       res.json({ 

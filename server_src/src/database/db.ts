@@ -84,9 +84,7 @@ class Database {
           "exchangeId" TEXT,
           "date" DATETIME,
           "notifiedStatus" TEXT,
-          PRIMARY KEY("id"),
-          FOREIGN KEY ("exchangeId") REFERENCES "ExchangeHistory"("id")
-          ON UPDATE NO ACTION ON DELETE NO ACTION
+          PRIMARY KEY("id")
         );`,
 
         `CREATE TABLE IF NOT EXISTS "Users" (
@@ -114,9 +112,7 @@ class Database {
           "likes" TEXT,
           "requested" TEXT,
           "photoUrls" TEXT,
-          PRIMARY KEY("id"),
-          FOREIGN KEY ("ownerId") REFERENCES "Users"("id")
-          ON UPDATE NO ACTION ON DELETE NO ACTION
+          PRIMARY KEY("id")
         );`,
 
         `CREATE TABLE IF NOT EXISTS "ExchangeHistory" (
@@ -125,13 +121,7 @@ class Database {
           "toUserId" TEXT,
           "skillId" TEXT,
           "status" TEXT,
-          PRIMARY KEY("id"),
-          FOREIGN KEY ("fromUserId") REFERENCES "Users"("id")
-          ON UPDATE NO ACTION ON DELETE NO ACTION,
-          FOREIGN KEY ("skillId") REFERENCES "Skills"("id")
-          ON UPDATE NO ACTION ON DELETE NO ACTION,
-          FOREIGN KEY ("toUserId") REFERENCES "Users"("id")
-          ON UPDATE NO ACTION ON DELETE NO ACTION
+          PRIMARY KEY("id")
         );`]
         ;
     for (const sql_q of sql) {
@@ -189,8 +179,8 @@ class Database {
       for (const skill of initialSkills) {
         await this.runQuery(
           `INSERT INTO Skills (id, skillName, ownerId, categorie, subCategorie, createDate, description, likes, requested, photoUrls)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [skill.id, skill.ownerId, skill.name, skill.categorie, skill.subCategorie, skill.createDate,
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [skill.id, skill.name, skill.ownerId, skill.categorie, skill.subCategorie, skill.createDate,
           skill.description, skill.likes, skill.requested, skill.photoUrls]
         );
       }
@@ -211,25 +201,25 @@ class Database {
       const initialNotifications = [
         {
           id: 'notify_1',
-          exchangeId: 'exchange_2',
+          exchangeId: 'ex_2',
           date: '2024-01-20 10:30:00',
           notifiedStatus: 'sent'
         },
         {
           id: 'notify_2',
-          exchangeId: 'exchange_3',
+          exchangeId: 'ex_3',
           date: '2024-01-20 14:15:00',
           notifiedStatus: 'pending'
         },
         {
           id: 'notify_3',
-          exchangeId: 'exchange_5',
+          exchangeId: 'ex_5',
           date: '2024-01-21 09:45:00',
           notifiedStatus: 'read'
         },
         {
           id: 'notify_4',
-          exchangeId: 'exchange_1',
+          exchangeId: 'ex_1',
           date: '2024-01-19 16:20:00',
           notifiedStatus: 'sent'
         }
@@ -242,7 +232,6 @@ class Database {
           [notify.id, notify.exchangeId, notify.date, notify.notifiedStatus]
         );
       }
-
       console.log('Database initialization completed successfully!');
       
     } catch (error) {

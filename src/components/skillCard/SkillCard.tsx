@@ -6,13 +6,9 @@ import { ReactComponent as Share } from '../app/assets/static/icons/share.svg';
 import { ReactComponent as More } from '../app/assets/static/icons/more.svg';
 import { ReactComponent as ChevronRight } from '../app/assets/static/icons/chevron-right.svg';
 import { ReactComponent as ChevronLeft } from '../app/assets/static/icons/chevron-left.svg';
+import { TSkill } from '../../types/skill';
 
-export type SkillCardProps = {
-  photoUrl: string[];
-  name: string;
-  category: string;
-  subCategory: string;
-  description: string;
+export type SkillCardProps = TSkill & {
   children: ReactNode;
   onLike: () => void;
   onShare: () => void;

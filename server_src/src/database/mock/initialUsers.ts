@@ -21,7 +21,7 @@ export const initialUsers = [
     "description": "Фотограф и дизайнер",
     "city": "Санкт-Петербург",
     "gender": "female",
-    "wantLearn": ["Фотография", "Французский", "Личностное развитие"]
+    "wantLearn": "Фотография, Французский, Личностное развитие"
   },
   {
     "id": "3",
@@ -33,7 +33,7 @@ export const initialUsers = [
     "description": "Преподаватель английского языка",
     "city": "Казань",
     "gender": "male",
-    "wantLearn": ["Business English", "TOEFL preparation", "Скорочтение"]
+    "wantLearn": "Business English, TOEFL preparation, Скорочтение"
   },
   {
     "id": "4",
@@ -45,7 +45,7 @@ export const initialUsers = [
     "description": "UI/UX дизайнер",
     "city": "Новосибирск",
     "gender": "female",
-    "wantLearn": ["Рисование и иллюстрация", "Английский", "Навыки преподавания"]
+    "wantLearn": "Рисование и иллюстрация, Английский, Навыки преподавания"
   },
   {
     "id": "5",
@@ -57,7 +57,7 @@ export const initialUsers = [
     "description": "Люблю спорт и активный отдых",
     "city": "Екатеринбург",
     "gender": "male",
-    "wantLearn": ["Физические тренировки", "Питание и ЗОЖ", "Осознанность"]
+    "wantLearn": "Физические тренировки, Питание и ЗОЖ, Осознанность"
   },
   {
     "id": "6",
@@ -69,7 +69,7 @@ export const initialUsers = [
     "description": "Маркетолог",
     "city": "Москва",
     "gender": "female",
-    "wantLearn": ["Маркетинг и реклама", "Личный бренд", "Креативное письмо"]
+    "wantLearn": "Маркетинг и реклама, Личный бренд, Креативное письмо"
   },
   {
     "id": "7",
@@ -81,7 +81,7 @@ export const initialUsers = [
     "description": "Фронтенд-разработчик",
     "city": "Санкт-Петербург",
     "gender": "male",
-    "wantLearn": ["React", "Node.js", "Тайм-менеджмент"]
+    "wantLearn": "React, Node.js, Тайм-менеджмент"
   },
   {
     "id": "8",
@@ -93,7 +93,7 @@ export const initialUsers = [
     "description": "Обожаю рисовать и путешествовать",
     "city": "Казань",
     "gender": "female",
-    "wantLearn": ["Рисование и иллюстрация", "Фотография", "Арт-терапия"]
+    "wantLearn": "Рисование и иллюстрация, Фотография, Арт-терапия"
   },
   {
     "id": "9",
@@ -105,7 +105,7 @@ export const initialUsers = [
     "description": "Инженер-конструктор",
     "city": "Москва",
     "gender": "male",
-    "wantLearn": ["Проектное управление", "Ремонт", "Хранение вещей"]
+    "wantLearn": "Проектное управление, Ремонт, Хранение вещей"
   },
   {
     "id": "10",
@@ -117,7 +117,7 @@ export const initialUsers = [
     "description": "Журналист и блогер",
     "city": "Екатеринбург",
     "gender": "female",
-    "wantLearn": ["Креативное письмо", "Личный бренд", "Английский"]
+    "wantLearn": "Креативное письмо, Личный бренд, Английский"
   }, 
   {
     "id": "11",
@@ -129,7 +129,7 @@ export const initialUsers = [
     "description": "Финансист, люблю цифры и аналитику",
     "city": "Москва",
     "gender": "male",
-    "wantLearn": ["Инвестиции", "Финансовая грамотность", "Публичные выступления"]
+    "wantLearn": "Инвестиции, Финансовая грамотность, Публичные выступления"
   },
   {
     "id": "12",
@@ -141,7 +141,7 @@ export const initialUsers = [
     "description": "HR-специалист",
     "city": "Санкт-Петербург",
     "gender": "female",
-    "wantLearn": ["Психология", "Управление командой", "Французский язык"]
+    "wantLearn": "Психология, Управление командой, Французский язык"
   },
   {
     "id": "13",
@@ -153,7 +153,7 @@ export const initialUsers = [
     "description": "Backend-разработчик",
     "city": "Казань",
     "gender": "male",
-    "wantLearn": ["Go", "Python", "Docker и Kubernetes"]
+    "wantLearn": "Go, Python, Docker и Kubernetes"
   },
   {
     "id": "14",
@@ -165,7 +165,7 @@ export const initialUsers = [
     "description": "Люблю книги, кино и путешествия",
     "city": "Новосибирск",
     "gender": "female",
-    "wantLearn": ["Английский", "Фотография", "Креативное письмо"]
+    "wantLearn": "Английский, Фотография, Креативное письмо"
   },
   {
     "id": "15",
@@ -177,7 +177,7 @@ export const initialUsers = [
     "description": "Архитектор",
     "city": "Москва",
     "gender": "male",
-    "wantLearn": ["3D-моделирование", "Менеджмент проектов", "История искусства"]
+    "wantLearn": "3D-моделирование, Менеджмент проектов, История искусства"
   },
   {
     "id": "16",
@@ -189,7 +189,7 @@ export const initialUsers = [
     "description": "Учитель английского языка",
     "city": "Санкт-Петербург",
     "gender": "female",
-    "wantLearn": ["Испанский язык", "Креативное письмо", "Менторство"]
+    "wantLearn": "Испанский язык, Креативное письмо, Менторство"
   },
   {
     "id": "17",
@@ -201,7 +201,7 @@ export const initialUsers = [
     "description": "Люблю спорт и активный отдых",
     "city": "Екатеринбург",
     "gender": "male",
-    "wantLearn": ["Футбол", "Силовые тренировки", "Психология"]
+    "wantLearn": "Футбол, Силовые тренировки, Психология"
   },
   {
     "id": "18",
@@ -213,7 +213,7 @@ export const initialUsers = [
     "description": "PR-менеджер",
     "city": "Москва",
     "gender": "female",
-    "wantLearn": ["Маркетинг", "Личный бренд", "Публичные выступления"]
+    "wantLearn": "Маркетинг, Личный бренд, Публичные выступления"
   },
   {
     "id": "19",
@@ -225,7 +225,7 @@ export const initialUsers = [
     "description": "IT-специалист",
     "city": "Казань",
     "gender": "male",
-    "wantLearn": ["Кибербезопасность", "Linux", "Networking"]
+    "wantLearn": "Кибербезопасность, Linux, Networking"
   },
   {
     "id": "20",
@@ -237,7 +237,7 @@ export const initialUsers = [
     "description": "Обожаю готовить и путешествовать",
     "city": "Новосибирск",
     "gender": "female",
-    "wantLearn": ["Кулинария", "Французский язык", "История"]
+    "wantLearn": "Кулинария, Французский язык, История"
   },
   {
     "id": "21",
@@ -249,7 +249,7 @@ export const initialUsers = [
     "description": "Предприниматель",
     "city": "Москва",
     "gender": "male",
-    "wantLearn": ["Бизнес", "Финансы", "Лидерство"]
+    "wantLearn": "Бизнес, Финансы, Лидерство"
   },
   {
     "id": "22",
@@ -261,7 +261,7 @@ export const initialUsers = [
     "description": "Фотограф",
     "city": "Санкт-Петербург",
     "gender": "female",
-    "wantLearn": ["Фотография", "Английский", "Сторителлинг"]
+    "wantLearn": "Фотография, Английский, Сторителлинг"
   },
   {
     "id": "23",
@@ -273,7 +273,7 @@ export const initialUsers = [
     "description": "Программист C++",
     "city": "Новосибирск",
     "gender": "male",
-    "wantLearn": ["Python", "AI/ML", "Философия"]
+    "wantLearn": "Python, AI/ML, Философия"
   },
   {
     "id": "24",
@@ -285,7 +285,7 @@ export const initialUsers = [
     "description": "Люблю искусство и музыку",
     "city": "Москва",
     "gender": "female",
-    "wantLearn": ["История искусства", "Фортепиано", "Французский язык"]
+    "wantLearn": "История искусства, Фортепиано, Французский язык"
   },
   {
     "id": "25",
@@ -297,7 +297,7 @@ export const initialUsers = [
     "description": "Инженер-программист",
     "city": "Казань",
     "gender": "male",
-    "wantLearn": ["Java", "Проектный менеджмент", "Тайм-менеджмент"]
+    "wantLearn": "Java, Проектный менеджмент, Тайм-менеджмент"
   },
   {
     "id": "26",
@@ -309,7 +309,7 @@ export const initialUsers = [
     "description": "Дизайнер одежды",
     "city": "Екатеринбург",
     "gender": "female",
-    "wantLearn": ["Шитьё", "Маркетинг", "Фотография"]
+    "wantLearn": "Шитьё, Маркетинг, Фотография"
   },
   {
     "id": "27",
@@ -321,7 +321,7 @@ export const initialUsers = [
     "description": "Музыкант",
     "city": "Санкт-Петербург",
     "gender": "male",
-    "wantLearn": ["Гитара", "Музыкальная теория", "Сведение треков"]
+    "wantLearn": "Гитара, Музыкальная теория, Сведение треков"
   },
   {
     "id": "28",
@@ -333,7 +333,7 @@ export const initialUsers = [
     "description": "Люблю танцы и театр",
     "city": "Москва",
     "gender": "female",
-    "wantLearn": ["Актёрское мастерство", "Хореография", "Английский язык"]
+    "wantLearn": "Актёрское мастерство, Хореография, Английский язык"
   },
   {
     "id": "29",
@@ -345,7 +345,7 @@ export const initialUsers = [
     "description": "Специалист по кибербезопасности",
     "city": "Новосибирск",
     "gender": "male",
-    "wantLearn": ["Криптография", "Этика хакинга", "Linux"]
+    "wantLearn": "Криптография, Этика хакинга, Linux"
   },
   {
     "id": "30",
@@ -357,7 +357,7 @@ export const initialUsers = [
     "description": "Маркетолог",
     "city": "Казань",
     "gender": "female",
-    "wantLearn": ["SMM", "Английский", "Искусство переговоров"]
+    "wantLearn": "SMM, Английский, Искусство переговоров"
   },
   {
     "id": "31",
@@ -369,7 +369,7 @@ export const initialUsers = [
     "description": "Web-разработчик",
     "city": "Москва",
     "gender": "male",
-    "wantLearn": ["Vue.js", "React", "Тайм-менеджмент"]
+    "wantLearn": "Vue.js, React, Тайм-менеджмент"
   },
   {
     "id": "32",
@@ -381,7 +381,7 @@ export const initialUsers = [
     "description": "Копирайтер",
     "city": "Санкт-Петербург",
     "gender": "female",
-    "wantLearn": ["SEO", "Креативное письмо", "Иностранные языки"]
+    "wantLearn": "SEO, Креативное письмо, Иностранные языки"
   },
   {
     "id": "33",
@@ -393,7 +393,7 @@ export const initialUsers = [
     "description": "Менеджер по продажам",
     "city": "Новосибирск",
     "gender": "male",
-    "wantLearn": ["Negotiation skills", "Leadership", "Финансы"]
+    "wantLearn": "Negotiation skills, Leadership, Финансы"
   },
   {
     "id": "34",
@@ -405,7 +405,7 @@ export const initialUsers = [
     "description": "Люблю спорт и активный отдых",
     "city": "Екатеринбург",
     "gender": "female",
-    "wantLearn": ["Йога", "Плавание", "Английский язык"]
+    "wantLearn": "Йога, Плавание, Английский язык"
   },
   {
     "id": "35",
@@ -417,7 +417,7 @@ export const initialUsers = [
     "description": "Финансовый аналитик",
     "city": "Москва",
     "gender": "male",
-    "wantLearn": ["Инвестиции", "Trading", "Экономика"]
+    "wantLearn": "Инвестиции, Trading, Экономика"
   },
   {
     "id": "36",
@@ -429,7 +429,7 @@ export const initialUsers = [
     "description": "HR-специалист",
     "city": "Казань",
     "gender": "female",
-    "wantLearn": ["Психология", "Лидерство", "SMM"]
+    "wantLearn": "Психология, Лидерство, SMM"
   },
   {
     "id": "37",
@@ -441,7 +441,7 @@ export const initialUsers = [
     "description": "Люблю активный отдых",
     "city": "Новосибирск",
     "gender": "male",
-    "wantLearn": ["Скалолазание", "Футбол", "Английский язык"]
+    "wantLearn": "Скалолазание, Футбол, Английский язык"
   },
   {
     "id": "38",
@@ -453,7 +453,7 @@ export const initialUsers = [
     "description": "Фрилансер, дизайнер",
     "city": "Москва",
     "gender": "female",
-    "wantLearn": ["Иллюстрация", "UI/UX дизайн", "Французский язык"]
+    "wantLearn": "Иллюстрация, UI/UX дизайн, Французский язык"
   },
   {
     "id": "39",
@@ -465,7 +465,7 @@ export const initialUsers = [
     "description": "Системный администратор",
     "city": "Санкт-Петербург",
     "gender": "male",
-    "wantLearn": ["Linux", "DevOps", "Networking"]
+    "wantLearn": "Linux, DevOps, Networking"
   },
   {
     "id": "40",
@@ -477,6 +477,6 @@ export const initialUsers = [
     "description": "Люблю искусство и путешествия",
     "city": "Екатеринбург",
     "gender": "female",
-    "wantLearn": ["История искусства", "Французский язык", "Кулинария"]
+    "wantLearn": "История искусства, Французский язык, Кулинария"
   }
 ]
