@@ -96,8 +96,8 @@ cardRoutes.post('/', async (req, res) => {
         city: row.city,
         age: row.age?.toString() || '0',
         avatar_url: row.avatar_url,
-        liked: Boolean(row.liked),
-        onRequest: Boolean(row.onRequest),
+        liked: currentUserId? Boolean(row.liked) : false,
+        onRequest: currentUserId? Boolean(row.onRequest): false,
         canTeach: row.canTeach ? [row.canTeach] : [],
         wantLearn: row.wantLearn ? row.wantLearn.split(',').map((item: string) => item.trim()) : []
       }));
