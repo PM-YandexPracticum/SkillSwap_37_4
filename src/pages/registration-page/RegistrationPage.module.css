@@ -1,0 +1,7 @@
+.page {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1136px;
+  margin: 0 auto;
+}

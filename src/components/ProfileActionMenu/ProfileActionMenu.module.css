@@ -1,14 +1,19 @@
 .profileActionMenu {
-  display: flex; 
+  border: 1px solid #B2B9A9; 
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
+  z-index: 20;
   gap: 24px;
   background-color: #ffffff;
   border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 40px;
   font-weight: 500;
   font-family: Roboto, sans-serif; 
   font-size: 16px;
-  border: 1px solid #B2B9A9; 
 }
 
 .menuItem {
