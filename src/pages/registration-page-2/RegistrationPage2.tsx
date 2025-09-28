@@ -1,118 +1,128 @@
-import React, { useState } from 'react';
-import { Input } from 'src/components/input/Input';
-import { DatePickerComponent } from 'src/components/calendar/DataPicker';
-import { DropDown } from 'src/components/DropDown';
-import GreenButton from 'src/components/buttons/GreenButton';
-import { SKILL_CATEGORY } from 'src/const/skillsCategoryMapping';
-import iconCalendar from 'src/components/app/assets/static/iconsUi/calendar.svg';
-import iconPlus from 'src/components/app/assets/static/iconsUi/add.svg';
-import iconUserInfo from 'src/components/app/assets/static/images/userInfo.svg';
-import styles from './RegisterForm.module.css';
-
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input } from 'src/components/input/Input';
-import { DatePickerComponent } from '../calendar/DataPicker';
-import { DropDown } from 'src/components/DropDown';
-import GreenButton from 'src/components/buttons/GreenButton';
-import { SKILL_CATEGORY } from 'src/const/skillsCategoryMapping';
+import { RootState } from '../../services/store/store';
+import { Input } from '../../components/input/Input';
+import { DatePickerComponent } from '../../components/calendar/DataPicker';
+import { DropDown } from '../../components/DropDown';
+import GreenButton from '../../components/buttons/GreenButton';
+import { SKILL_CATEGORY } from '../../const/skillsCategoryMapping';
 import styles from './RegisterStepSecondForm.module.css';
-import { setRegisterData, resetRegisterData } from 'src/store/slices/registerSlice';
+import { setRegisterData, resetRegisterData } from '../../services/slices/registerSlice';
 
 interface RegisterStepSecondFormProps {
- onNext: () => void;
- onPrev: () => void;
+  onNext: () => void;
+  onPrev: () => void;
+}
+
+export type CategoryType = string;
+export type SubcategoryType = string;
+//categories: keyof typeof SKILL_CATEGORY | '';
+
+interface FormData {
+  avatar: string;
+  name: string;
+  date: string;
+  gender: string;
+  city: string;
+  categories: CategoryType;
+  subcategories: SubcategoryType;
 }
 
 const RegisterStepSecondForm: React.FC<RegisterStepSecondFormProps> = ({ onNext, onPrev }) => {
- const dispatch = useDispatch();
- const registerData = useSelector((state) => state.register);
+  const dispatch = useDispatch();
+  const registerData = useSelector((state: RootState) => state.register);
+  const [formData, setFormData] = useState<FormData>({
+    avatar: '',
+    name: '',
+    date: '',
+    gender: 'Не указан',
+    city: 'Не указан',
+    categories: '' as CategoryType,
+    subcategories: '',
+  });
 
- // Локальные состояния
- const [avatar, setAvatar] = useState('');
- const [name, setName] = useState('');
- const [date, setDate] = useState('');
- const [gender, setGender] = useState('Не указан');
- const [city, setCity] = useState('Не указан');
- const [selectedCategory, setSelectedCategory] = useState<keyof typeof SKILL_CATEGORY | ''>('');
- const [selectedSubcategory, setSelectedSubcategory] = useState('');
+  useEffect(() => {
+    return () => {
+      dispatch(resetRegisterData());
+    };
+  }, [dispatch]);
 
- useEffect(() => {
- return () => {
- dispatch(resetRegisterData());
- };
- }, [dispatch]);
-
- const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
- const { name: inputName, value } = e.target;
- switch (inputName) {
- case 'name':
- setName(value);
- dispatch(setRegisterData({ name: value }));
- break;
- case 'date':
- setDate(value);
- dispatch(setRegisterData({ date: value }));
- break;
- case 'gender':
- setGender(value);
- dispatch(setRegisterData({ gender: value }));
- break;
- case 'city':
- setCity(value);
- dispatch(setRegisterData({ city: value }));
- break;
- default:
- break;
- }
- };
-
- const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
- const file = e.target.files?.[0];
- if (file) {
- setAvatar(URL.createObjectURL(file));
- dispatch(setRegisterData({ avatar: URL.createObjectURL(file) }));
- }
- };
-
- const handleCategoryChange = (category: keyof typeof SKILL_CATEGORY) => {
- setSelectedCategory(category);
- dispatch(setRegisterData({ categories: category }));
- };
-
- const handleSubcategoryChange = (subcategory: string) => {
- setSelectedSubcategory(subcategory);
- dispatch(setRegisterData({ subcategories: subcategory }));
- };
-
- const isContinueButtonDisabled = !selectedCategory;
-
- const handleNext = () => {
- // Здесь можно добавить валидацию формы перед переходом
- onNext();
- };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({
+  useEffect(() => {
+    // Преобразуем данные перед установкой
+    const mergedData: FormData = {
       ...formData,
-      [name]: value,
-    });
-  };
+      ...{
+        avatar: registerData.avatar || '',
+        name: registerData.name || '',
+        date: registerData.dateOfBirth || '',
+        gender: registerData.gender || 'Не указан',
+        city: registerData.city || 'Не указан',
+        categories: registerData.categories || ('' as CategoryType),
+        subcategories: registerData.subcategories || ('' as SubcategoryType),
+        },
+    };
+    
+    setFormData(mergedData);
+  }, [registerData, formData]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      const url = URL.createObjectURL(file);
       setFormData({
         ...formData,
-        avatar: URL.createObjectURL(file),
+        avatar: url,
       });
+      dispatch(setRegisterData({ avatar: url }));
     }
   };
 
-  const isContinueButtonDisabled = !formData.categories.length;
-  const onSubmit = () => {};
-  const handleBack = () => {};
+  // Обработка изменений
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+    dispatch(setRegisterData({ [name]: value }));
+  };
+
+  const handleCategoryChange = (category: CategoryType) => {
+    setFormData(prev => ({
+      ...prev,
+      categories: category,
+      subcategories: '',
+    }));
+    dispatch(setRegisterData({ categories: category }));
+  };
+
+  const handleSubcategoryChange = (subcategory: SubcategoryType) => {
+    setFormData(prev => ({
+      ...prev,
+      subcategories: subcategory,
+    }));
+    dispatch(setRegisterData({ subcategories: subcategory }));
+  };
+
+  // Валидация и отправка
+  const isContinueButtonDisabled = !formData.categories;
+
+  const handleNext = () => {
+    // Валидация формы
+    if (!formData.name || !formData.date || !formData.categories) {
+      alert('Заполните все обязательные поля');
+      return;
+    }
+    onNext();
+  };
+
+  const handleBack = () => {
+    onPrev();
+  };
+
+  function handleSubmit(onSubmit: any): (() => void) | undefined {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <form className={styles.registerForm}>
@@ -208,4 +218,4 @@ const RegisterStepSecondForm: React.FC<RegisterStepSecondFormProps> = ({ onNext,
   );
 };
 
-export default RegisterStepSecond;
+export default RegisterStepSecondForm;
