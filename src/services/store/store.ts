@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from '../slices/userSlice/userSlice'; 
-import skillReducer from './skillSlice';
+import userReducer from '../slices/userSlice/userSlice';
+import skillReducer from './slices/skillSlice/skillSlice';
+import notifyReducer from '../slices/notifySlice/notifySlice';
 import registerReducer from '../slices/registerSlice';
 
 import {
@@ -11,8 +12,8 @@ import {
 
 const rootReducer = {
   user: userReducer,
-  'skill': skillReducer,
-  register: registerReducer,
+  skill: skillReducer,
+  notify: notifyReducer
 };
 
 const store = configureStore({
