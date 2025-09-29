@@ -1,6 +1,7 @@
 import { useState, useEffect, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/store/store';
+import iconPlus from '../app/assets/static/iconsUi/add.svg';
 import { Input } from '../../components/input/Input';
 import { DatePickerComponent } from '../../components/calendar/DataPicker';
 import { DropDown } from '../../components/DropDown';
@@ -152,132 +153,104 @@ export const RegisterStepSecondForm = memo(
     };
 
     return (
-      <div className={styles.form_container}>
-        <div className={styles.iconContainer}>
-          <label htmlFor='avatar' className={styles.label}>
-            <input
-              type='file'
-              name='avatar'
-              id='avatar'
-              className={styles.hiddenInput}
-              multiple={false}
-              onChange={handleFileChange}
-              aria-label='Загрузить аватар'
-            />
-            {formData.avatar && (
-              <img
-                src={typeof formData.avatar === 'string' ? formData.avatar : ''}
-                alt='Аватар пользователя'
-              />
-            )}
-            {!formData.avatar && (
-              <svg
-                className={styles.iconUser}
-                width='54'
-                height='54'
-                viewBox='0 0 54 54'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <use href='#icon-user-circle' />
-              </svg>
-            )}
-            <svg
-              className={styles.iconAdd}
-              width='16'
-              height='16'
-              viewBox='0 0 32 32'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <use href='#icon-add' />
-            </svg>
+      <form className={styles.form_container}>
+        <div className={styles.icon__container}>
+          <label htmlFor='avatar' className={styles.avatar__label}>
+            <img className={styles.avatar__label_plusIcon} src={iconPlus} />
           </label>
+          <input
+            type='file'
+            name='avatar'
+            id='avatar'
+            className={styles.avatar__input}
+            multiple={false}
+            onChange={handleFileChange}
+            aria-label='Загрузить аватар'
+          />
+          {formData.avatar && (
+            <img
+              src={typeof formData.avatar === 'string' ? formData.avatar : ''}
+              alt='Аватар пользователя'
+            />
+          )}
         </div>
-        <form className={styles.form_inputs}>
-          <div className={styles.formGroup}>
-            <Input
-              type='text'
-              id='name'
-              title='Имя'
-              placeholder='Введите ваше имя'
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </div>
+        <div className={styles.element__input}>
+          <Input
+            label='Имя'
+            value={formData.name}
+            placeholder='Введите ваше имя'
+            onChange={handleChange}
+          />
+        </div>
+        <div className={styles.date__input}>
+          <DatePickerComponent selectedDate={date} setSelectedDate={setDate} />
+        </div>
 
-          <div className={styles.formGroup}>
-            <DatePickerComponent
-              selectedDate={date}
-              setSelectedDate={setDate}
-            />
-          </div>
+        <div className={styles.fixed__input}>
+          <select
+            name='gender'
+            id='gender'
+            title='Пол'
+            value={formData.gender}
+            onChange={handleChange}
+          >
+            <option value='Не указан'>Не указан</option>
+            <option value='Мужской'>Мужской</option>
+            <option value='Женский'>Женский</option>
+          </select>
+        </div>
 
-          <div className={styles.formGroup}>
-            <select
-              name='gender'
-              id='gender'
-              title='Пол'
-              value={formData.gender}
-              onChange={handleChange}
-            >
-              <option value='Не указан'>Не указан</option>
-              <option value='Мужской'>Мужской</option>
-              <option value='Женский'>Женский</option>
-            </select>
-          </div>
+        <div className={styles.element__input}>
+          <select
+            name='city'
+            id='city'
+            title='Город'
+            value={formData.city}
+            onChange={handleChange}
+          >
+            <option value='Не указан'>Не указан</option>
+            {/* Здесь должен быть список городов */}
+          </select>
+        </div>
 
-          <div className={styles.formGroup}>
-            <select
-              name='city'
-              id='city'
-              title='Город'
-              value={formData.city}
-              onChange={handleChange}
-            >
-              <option value='Не указан'>Не указан</option>
-              {/* Здесь должен быть список городов */}
-            </select>
-          </div>
+        <div className={styles.element__input}>
+          <DropDown
+            placeholder='Выберите категорию'
+            options={categoryOptions}
+            value={selectedCategories}
+            onChange={handleCategoryChange}
+          />
+        </div>
 
-          <div className={styles.formGroup}>
-            <DropDown
-              placeholder='Выберите категорию'
-              options={categoryOptions}
-              value={selectedCategories}
-              onChange={handleCategoryChange}
-            />
-          </div>
+        <div className={styles.element__input}>
+          <DropDown
+            placeholder='Выберите подкатегорию'
+            options={subcategoryOptions}
+            value={selectedSubcategories[0] || ''}
+            onChange={handleSubcategoryChange}
+          />
+          {isContinueButtonDisabled && (
+            <p className={styles.error}>Сначала выберите категорию</p>
+          )}
+        </div>
 
-          <div className={styles.formGroup}>
-            <DropDown
-              placeholder='Выберите подкатегорию'
-              options={subcategoryOptions}
-              value={selectedSubcategories[0] || ''}
-              onChange={handleSubcategoryChange}
-            />
-            {isContinueButtonDisabled && (
-              <p className={styles.error}>Сначала выберите категорию</p>
-            )}
-          </div>
-
-          <div className={styles.buttonGroup}>
-            <GreenBorderButton
-              className={styles.back_button}
-              onClick={handleBack}
-              type='submit'
-            >
-              {buttonPrevText}
-            </GreenBorderButton>
-            <GreenButton
-              className={styles.confirm_button}
-              onClick={handleNext}
-              type='submit'
-            >
-              {buttonNextText}
-            </GreenButton>
-          </div>
-        </form>
-      </div>
+        <div className={styles.button__group}>
+          <GreenBorderButton
+            className={styles.button_width}
+            onClick={handleBack}
+            type='submit'
+          >
+            {buttonPrevText}
+          </GreenBorderButton>
+          <GreenButton
+            className={styles.button_width}
+            onClick={handleNext}
+            type='submit'
+          >
+            {buttonNextText}
+          </GreenButton>
+        </div>
+      </form>
     );
   }
 );
