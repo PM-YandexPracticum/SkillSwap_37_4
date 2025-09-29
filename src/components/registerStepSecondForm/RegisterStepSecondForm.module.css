@@ -1,0 +1,69 @@
+.form_container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  padding: 40px 60px;
+  background-color: #fff;
+  border-radius: 12px;
+}
+
+.form_inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.icon {
+  &-container {
+    position: relative;
+    width: 72px;
+    height: 72px;
+  }
+
+  &-user {
+    position: absolute;
+    right: 9px;
+    bottom: 9px;
+    stroke: #fff;
+  }
+
+  &-add {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: #fff;
+    background-color: #abd27a;
+    border-radius: 8px;
+  }
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+}
+
+.hidden-input {
+  display: none;
+}
+
+/*
+.register-form {
+  --border-color: #69735D;
+
+  border-radius: 12px;
+  background: #fff;
+  padding: 132px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 436px;
+  font-family: Roboto, sans-serif;
+}
+*/
