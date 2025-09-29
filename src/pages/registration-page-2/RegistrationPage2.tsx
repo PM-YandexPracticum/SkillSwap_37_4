@@ -1,13 +1,16 @@
 import { FC } from 'react';
 import styles from './RegistrationPage2.module.css';
-import userInfoIcon from '../../components/app/assets/static/backgrounds/user-info.svg';
+import userInfoIcon from '../../components/app/assets/static/images/user-info.svg';
 
 import { RegisterStepSecondForm } from '../../components/registerStepSecondForm/RegisterStepSecondForm';
 import { OnboardingUI } from '../../components/ui/pages/onboarding';
 
 export const RegistrationPage = () => (
   <div className={styles.page}>
-    <RegisterStepSecondForm buttonNextText='Продолжить' buttonPrevText='Назад' />
+    <RegisterStepSecondForm
+      buttonNextText='Продолжить'
+      buttonPrevText='Назад'
+    />
     <OnboardingUI
       imageSrc={userInfoIcon}
       title='Расскажите немного о себе'

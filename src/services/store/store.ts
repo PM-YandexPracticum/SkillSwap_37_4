@@ -13,7 +13,8 @@ import {
 const rootReducer = {
   user: userReducer,
   skill: skillReducer,
-  notify: notifyReducer
+  notify: notifyReducer,
+  register: registerReducer
 };
 
 const store = configureStore({
