@@ -33,12 +33,12 @@ export interface CardState {
 }
 
 export interface FilterParams {
+  category?: string[];
+  subcategory?: string[];
+  searchType?: 'wantLearn' | 'canLearn' | 'all';
+  matchName?: string;
   sortByNew?: boolean;
   sortByLike?: boolean;
   city?: string;
   gender?: string;
-  category?: string[];
-  subcategory?: string[];
-  matchName?: string;
-  searchType?: string;
-}
+};
