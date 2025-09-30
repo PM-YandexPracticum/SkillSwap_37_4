@@ -11,29 +11,20 @@ type ProtectedRouteProps = {
   children: React.ReactElement;
 };
 
-export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) =>
-  // const isAuthChecked = useSelector(userAuthCheckedSelector); //  isAuthCheckedSelector — селектор получения состояния загрузки пользователя
-  // const user = useSelector(userDataSelector); //  userDataSelector — селектор получения пользователя из store
-  // const location = useLocation();
+export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) => {
+  // очень простая студенческая реализация без сложных селекторов
+  // берём пользователя напрямую из стора, если есть
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user: any = useSelector((state: any) => state.userSlice?.user);
+  const location = useLocation();
 
-  // if (!isAuthChecked) {
-  //   // пока идёт чекаут пользователя , показываем прелоадер
-  //   return <Preloader />;
-  // }
+  if (!onlyUnAuth && !user) {
+    return <Navigate replace to='/login' state={{ from: location }} />;
+  }
 
-  // if (!onlyUnAuth && !user) {
-  //   //  если маршрут для авторизованного пользователя, но пользователь неавторизован, то делаем редирект
-  //   return <Navigate replace to='/login' state={{ from: location }} />; // в поле from объекта location.state записываем информацию о URL
-  // }
+  if (onlyUnAuth && user) {
+    return <Navigate replace to='/' />;
+  }
 
-  // if (onlyUnAuth && user) {
-  //   //  если маршрут для неавторизованного пользователя, но пользователь авторизован
-  //   // при обратном редиректе  получаем данные о месте назначения редиректа из объекта location.state
-  //   // в случае если объекта location.state?.from нет — а такое может быть , если мы зашли на страницу логина по прямому URL
-  //   // мы сами создаём объект c указанием адреса и делаем переадресацию на главную страницу
-  //   const from = location.state?.from || { pathname: '/' };
-
-  //   return <Navigate replace to={from} />;
-  // }
-
-  children;
+  return children;
+}
