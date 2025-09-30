@@ -1,11 +1,8 @@
 import { userSelector } from '../../services/slices/userSlice/userSlice';
 import { useSelector } from '../../services/store/store';
 import { Navigate, useLocation } from 'react-router';
-// import { Preloader } from '../ui/preloader';//todo
-// import {
-//   userAuthCheckedSelector,
-//   userDataSelector
-// } from './../../services/slices/UserSlice/UserSlice';
+import { Preloader } from '../ui/preloader/preloader';//todo
+import { userSelector, isAuthSelector } from '../../services/slices/userSlice/userSlice';
 
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
@@ -13,21 +10,29 @@ type ProtectedRouteProps = {
 };
 
 export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) => {
-  // очень простая студенческая реализация без сложных селекторов
-  // берём пользователя напрямую из стора, если есть
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  
-  const user: any = useSelector(userSelector);
+  const isAuthChecked = useSelector(isAuthSelector);
+  const user = useSelector(userSelector); //  userDataSelector — селектор получения пользователя из store
   const location = useLocation();
-  // console.log(user);
+
+  if (!isAuthChecked) {
+    // пока идёт чекаут пользователя , показываем прелоадер
+    return <Preloader />;
+  }
 
   if (!onlyUnAuth && !user) {
-    return <Navigate replace to='/login' state={{ from: location }} />;
+    //  если маршрут для авторизованного пользователя, но пользователь неавторизован, то делаем редирект
+    return <Navigate replace to='/login' state={{ from: location }} />; // в поле from объекта location.state записываем информацию о URL
   }
 
   if (onlyUnAuth && user) {
-    return <Navigate replace to='/' />;
+    //  если маршрут для неавторизованного пользователя, но пользователь авторизован
+    // при обратном редиректе  получаем данные о месте назначения редиректа из объекта location.state
+    // в случае если объекта location.state?.from нет — а такое может быть , если мы зашли на страницу логина по прямому URL
+    // мы сами создаём объект c указанием адреса и делаем переадресацию на главную страницу
+    const from = location.state?.from || { pathname: '/' };
+
+    return <Navigate replace to={from} />;
   }
 
   return children;
-}
+};

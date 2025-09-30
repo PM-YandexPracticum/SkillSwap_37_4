@@ -33,10 +33,11 @@ export const mockUser: TUser = {
 };
 
 export const userInitialState: UserProfile = {
-  user: mockUser,
+  // user: mockUser,
+  user: null,
   error: '',
   loading: false,
-  isAuthChecked: false
+  isAuthChecked: true
 };
 
 // ============================
@@ -117,9 +118,10 @@ const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(checkUserAuthThunk.rejected, (state, action) => {
-        state.isAuthChecked = true;
-        state.loading = false;
-        state.error = action.error.message || 'Ошибка проверки авторизации';
+          state.user = null;
+          state.isAuthChecked = true;
+          state.loading = false;
+          state.error = action.error.message || 'Ошибка проверки авторизации';
       });
 
     // --- userLoginThunk
