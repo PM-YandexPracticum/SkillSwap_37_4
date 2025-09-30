@@ -1,4 +1,3 @@
-import { userSelector } from '../../services/slices/userSlice/userSlice';
 import { useSelector } from '../../services/store/store';
 import { Navigate, useLocation } from 'react-router';
 import { Preloader } from '../ui/preloader/preloader';//todo
