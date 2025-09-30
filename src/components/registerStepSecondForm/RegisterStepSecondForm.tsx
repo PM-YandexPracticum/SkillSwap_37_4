@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/store/store';
 import iconPlus from '../app/assets/static/iconsUi/add.svg';
@@ -15,8 +15,6 @@ import styles from './RegisterStepSecondForm.module.css';
 import {
   setRegisterData,
   resetRegisterData,
-  CategoryType,
-  SubcategoryType,
   GenderType
 } from '../../services/slices/registerSlice';
 
@@ -25,47 +23,25 @@ interface RegisterStepSecondFormProps {
   buttonNextText: string;
 }
 
-interface FormData {
-  avatar: string;
-  name: string;
-  dateOfBirth: string;
-  gender: GenderType;
-  city: string;
-  categorySkillToLearn: string;
-  subcategorySkillToLearn: string;
-  category: CategoryType;
-  subcategory: SubcategoryType;
-}
-
 export const RegisterStepSecondForm = memo(
   ({ buttonPrevText, buttonNextText }: RegisterStepSecondFormProps) => {
     const dispatch = useDispatch();
     const registerData = useSelector((state: RootState) => state.register);
-    const [formData, setFormData] = useState<FormData>({
-      avatar: '',
-      name: '',
-      dateOfBirth: '',
-      gender: 'Не указан',
-      city: '',
-      categorySkillToLearn: '',
-      subcategorySkillToLearn: '',
-      category: [],
-      subcategory: []
-    });
+    const [selectedCategories, setSelectedCategories] = useState('');
+    const [selectedSubcategories, setSelectedSubcategories] = useState('');
+    const [date, setDate] = useState<Date | null>(null);
+    const [selectedGender, setSelectedGender] = useState<GenderType>('Не указан');
 
-    useEffect(
-      () => () => {
+    useEffect(() => {
+      setSelectedGender(registerData.gender || 'Не указан');
+    }, [registerData.gender]);
+
+    useEffect(() => {
+      return () => {
         dispatch(resetRegisterData());
-      },
-      [dispatch]
-    );
+      };
+    }, [dispatch]);
 
-    const [selectedCategories, setSelectedCategories] = useState<string | ''>(
-      ''
-    );
-    const [selectedSubcategories, setSelectedSubcategories] = useState<
-      string[]
-    >([]);
     const getSubcategories = (): string[] => {
       if (!selectedCategories) return [];
       const categoryData = SKILL_CATEGORY.find(
@@ -73,15 +49,12 @@ export const RegisterStepSecondForm = memo(
       );
       return categoryData?.subcategoryName || [];
     };
-    const [date, setDate] = useState<Date | null>(null);
 
-    // Модифицируем получение опций для DropDown
     const categoryOptions: DropDownOption[] = SKILL_CATEGORY.map((item) => ({
       value: item.categoryName,
       label: item.categoryName
     }));
 
-    // Аналогично для подкатегорий
     const subcategoryOptions: DropDownOption[] = getSubcategories().map(
       (subcategory) => ({
         value: subcategory,
@@ -89,69 +62,60 @@ export const RegisterStepSecondForm = memo(
       })
     );
 
-    useEffect(
-      () => () => {
-        dispatch(resetRegisterData());
-      },
-      [dispatch]
-    );
-
-    useEffect(() => {
-      setFormData({
-        ...formData,
-        ...{
-          avatar: registerData.avatar || '',
-          name: registerData.name || '',
-          dateOfBirth: registerData.dateOfBirth || '',
-          gender: registerData.gender || 'Не указан',
-          city: registerData.city || ''
-        }
-      });
-    }, [registerData]);
-
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
         const url = URL.createObjectURL(file);
-        setFormData({ ...formData, avatar: url });
         dispatch(setRegisterData({ avatar: url }));
       }
     };
 
-    // Обработка изменений
     const handleChange = (
       e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
       const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
       dispatch(setRegisterData({ [name]: value }));
     };
 
     const handleCategoryChange = (value: string) => {
       setSelectedCategories(value);
-      setSelectedSubcategories([]);
+      setSelectedSubcategories('');
       dispatch(setRegisterData({ categorySkillToLearn: value }));
     };
 
     const handleSubcategoryChange = (value: string) => {
-      setSelectedSubcategories([value]);
+      setSelectedSubcategories(value);
       dispatch(setRegisterData({ subcategorySkillToLearn: value }));
     };
 
-    // Валидация и отправка
-    const isContinueButtonDisabled = !formData.name || !formData.dateOfBirth;
+    const handleGenderChange = (value: string) => {
+      if (['Мужской', 'Женский', 'Не указан'].includes(value)) {
+        setSelectedGender(value as GenderType);
+        dispatch(setRegisterData({ gender: value as GenderType }));
+      }
+    }
+
+    const isFormValid = (): boolean => {
+      return (
+        !!registerData.name.trim() && // Проверяем не пустую строку
+        !!registerData.dateOfBirth && // Проверяем дату
+        !!registerData.gender &&      // Проверяем пол
+        !!registerData.city.trim() && // Проверяем город
+        !!registerData.categorySkillToLearn && // Проверяем категорию
+        !!registerData.subcategorySkillToLearn // Проверяем подкатегорию
+      );
+    };
 
     const handleNext = () => {
-      // Валидация формы
-      if (!formData.name || !formData.dateOfBirth) {
+      if (!isFormValid()) {
         alert('Заполните все обязательные поля');
         return;
       }
-      //onNext();
+      // Логика перехода к следующему шагу
     };
 
     const handleBack = () => {
-      //onPrev();
+      // Логика перехода к предыдущему шагу
     };
 
     return (
@@ -159,7 +123,11 @@ export const RegisterStepSecondForm = memo(
         <form className={styles.form_container}>
           <div className={styles.icon__container}>
             <label htmlFor='avatar' className={styles.avatar__label}>
-              <img className={styles.avatar__label_plusIcon} src={iconPlus} />
+              <img
+                className={styles.avatar__label_plusIcon}
+                src={iconPlus}
+                alt='Добавить фото'
+              />
             </label>
             <input
               type='file'
@@ -170,20 +138,24 @@ export const RegisterStepSecondForm = memo(
               onChange={handleFileChange}
               aria-label='Загрузить аватар'
             />
-            {formData.avatar && (
+            {registerData.avatar && (
               <img
-                src={typeof formData.avatar === 'string' ? formData.avatar : ''}
+                src={registerData.avatar}
                 alt='Аватар пользователя'
+                className={styles.avatar_preview}
               />
             )}
           </div>
+
           <Input
             label='Имя'
-            value={formData.name}
+            value={registerData.name}
             placeholder='Введите ваше имя'
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
+            name='name'
             className={styles.input_label}
           />
+
           <div className={styles.input__drops_container}>
             <div className={styles.input__drops_birthday}>
               <DatePickerComponent
@@ -196,22 +168,23 @@ export const RegisterStepSecondForm = memo(
               <span className={styles.input__label}>Пол</span>
               <DropDown
                 options={genderData}
-                value='Пол'
-                /*onChange={handleChange}*/
+                value={registerData.gender}
+                onChange={handleGenderChange}
                 placeholder='Не указан'
-                /*className={styles.input__drops_gender_input}*/
               />
             </div>
           </div>
+
           <div className={styles.input__drops}>
             <span className={styles.input__label}>Город</span>
             <DropDown
               options={townsData}
-              /*onChange={handleChange}*/
+              value={registerData.city}
+              onChange={(value) => dispatch(setRegisterData({ city: value }))}
               placeholder='Не указан'
-              /*className={styles.input__drops_town}*/
             />
           </div>
+
           <div className={styles.input__drops}>
             <span className={styles.input__label}>
               Категория навыка, которому хотите научиться
@@ -221,9 +194,9 @@ export const RegisterStepSecondForm = memo(
               options={categoryOptions}
               value={selectedCategories}
               onChange={handleCategoryChange}
-              /*className={styles.input__drops_town}*/
             />
           </div>
+
           <div className={styles.input__drops}>
             <span className={styles.input__label}>
               Подкатегория навыка, которому хотите научиться
@@ -231,23 +204,24 @@ export const RegisterStepSecondForm = memo(
             <DropDown
               placeholder='Выберите подкатегорию'
               options={subcategoryOptions}
-              value={selectedSubcategories[0] || ''}
+              value={selectedSubcategories}
               onChange={handleSubcategoryChange}
-              /*className={styles.input__drops_town}*/
             />
           </div>
+
           <div className={styles.button__group}>
             <GreenBorderButton
               className={styles.button_width}
               onClick={handleBack}
-              type='submit'
+              disabled={isFormValid()}
             >
               {buttonPrevText}
             </GreenBorderButton>
+
             <GreenButton
               className={styles.button_width}
               onClick={handleNext}
-              type='submit'
+              disabled={!isFormValid()}
             >
               {buttonNextText}
             </GreenButton>
