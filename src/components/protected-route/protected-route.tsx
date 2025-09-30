@@ -1,3 +1,4 @@
+import { userSelector } from '../../services/slices/userSlice/userSlice';
 import { useSelector } from '../../services/store/store';
 import { Navigate, useLocation } from 'react-router';
 // import { Preloader } from '../ui/preloader';//todo
@@ -15,8 +16,10 @@ export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) =>
   // очень простая студенческая реализация без сложных селекторов
   // берём пользователя напрямую из стора, если есть
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const user: any = useSelector((state: any) => state.userSlice?.user);
+  
+  const user: any = useSelector(userSelector);
   const location = useLocation();
+  console.log(user);
 
   if (!onlyUnAuth && !user) {
     return <Navigate replace to='/login' state={{ from: location }} />;
