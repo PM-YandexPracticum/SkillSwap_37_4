@@ -36,6 +36,11 @@ cardRoutes.post('/', async (req, res) => {
 
     const params: any[] = [currentUserId || '', currentUserId || ''];
 
+    if(filterObj.likedByUser && currentUserId){
+      query += ` AND s.likes LIKE '%' || ? || '%'`;
+      params.push(currentUserId);
+    }
+
     // Применяем фильтры
     if (filterObj.category && filterObj.category.length > 0) {
       query += ` AND s.categorie IN (${filterObj.category.map(() => '?').join(',')})`;

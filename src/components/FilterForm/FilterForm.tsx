@@ -9,7 +9,7 @@ import { RadioItem } from '../radio-group/radio-group';
 import { SkillsFilter, SkillsFilterState } from '../skillsFilter';
 import styles from './FilterForm.module.css';
 
-type FilterObject = {
+export type FilterObject = {
   category?: string[];
   subcategory?: string[];
   searchType?: 'wantLearn' | 'canLearn' | 'all';
@@ -18,6 +18,7 @@ type FilterObject = {
   sortByLike?: boolean;
   city?: string;
   gender?: string;
+  likedByCurrentUser?: boolean;
 };
 
 const buildFilterObject = (
