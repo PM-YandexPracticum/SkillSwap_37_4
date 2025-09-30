@@ -22,15 +22,23 @@ export const ProfileNotificationWindow: FC<Props> = ({ initial }) => {
     viewedItems: items.filter(n => n.viewed),
   }), [items]);
 
-  const markAllAsRead = () =>
+  const markAllAsRead = () => {
     setItems(prev => prev.map(n => ({ ...n, viewed: true })));
+    const allIds = items.map(n => n.notifyId);
+    localStorage.setItem('viewedNotifications', JSON.stringify(allIds));
+  };
 
-  const clearViewed = () =>
+  const clearViewed = () => {
     setItems(prev => prev.filter(n => !n.viewed));
+    localStorage.removeItem('viewedNotifications');
+  };
 
   const handleGo = (id: string) => {
-    console.log('go /profile for', id);
     setItems(prev => prev.map(n => n.notifyId === id ? { ...n, viewed: true } : n));
+    const saved = JSON.parse(localStorage.getItem('viewedNotifications') || '[]');
+    if (!saved.includes(id)) {
+      localStorage.setItem('viewedNotifications', JSON.stringify([...saved, id]));
+    }
   };
 
   return (
