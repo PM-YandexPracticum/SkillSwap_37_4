@@ -1,0 +1,45 @@
+.wrapper {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  padding: 24px;
+  display: grid;
+  gap: 24px;
+  max-width: 440px;
+  padding:16px 20px;
+  border-radius:12px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: 'Jost', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #253017;
+}
+
+.linkBtn {
+  border: none;
+  background: none;
+  color: #3E6B2C;
+  font: 400 14px/1 'Jost', sans-serif;
+  cursor: pointer;
+}
+
+.list {
+  display: grid;
+  gap: 24px;
+}
+
+.empty {
+  margin: 0;
+  color: #8C8F85;
+  font: 400 14px/1.4 'Jost', sans-serif;
+}
