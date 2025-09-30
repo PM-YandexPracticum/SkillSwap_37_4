@@ -12,8 +12,8 @@
 
 .input {
   position: relative;
-  width: 208px;
-  height: 48px;
+  width: 181px;
+  height: 35px;
   padding: 8px;
   font-family: 'Roboto', sans-serif;
   background-image: url('../app/assets/static/iconsUi/calendar.svg');
