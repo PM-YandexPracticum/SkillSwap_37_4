@@ -5,6 +5,7 @@
   --color-background: #f9faf7;
   --color-text-primary: #253017;
   --color-text-disabled: #9ca197;
+  --color-caption: #69735d;
   --font-primary: 'Jost', sans-serif;
   --font-secondary: 'Roboto', sans-serif;
   
@@ -12,7 +13,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
-  padding: 132px 60px;
+  padding: 40px 60px;
   gap: 32px;
   max-width: 436px;
   max-height: 612px;
@@ -207,6 +208,10 @@
   line-height: 150%;
   letter-spacing: 0.02em;
   color: var(--color-text-primary);
+  padding: 12px 20px;
+  width: 100%;
+  border: 1px solid var(--border-color, #69735D);
+  border-radius: 12px;
 }
 
 .input_input {
@@ -237,16 +242,15 @@
   gap: 0px;
   width: 206px;
   height: 76px;
-  background: var(--color-accent);
-
 }
+
 .input__drops_birthday_input {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   gap: 10px;
-  border: 1px solid var(--caption);
+  border: 1px solid var(--color-caption);
   border-radius: 12px;
   padding: 12px 20px;
   width: 206px;
@@ -261,16 +265,16 @@
   gap: 0px;
   width: 206px;
   height: 76px;
-  background: var(--accent);
+  background: #fff;
 }
 
-.input__drops_gender_name {
-  font-family: var(--font-family);
+.input__label {
+  font-family: var(--font-secondary);
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0.02em;
-  color: var(--text);
+  color: var(--color-text-primary);
 }
 
 .input__drops_gender_input {
@@ -279,14 +283,14 @@
   justify-content: flex-start;
   flex-direction: row;
   gap: 10px;
-  border: 1px solid var(--caption);
+  border: 1px solid var(--color-caption);
   border-radius: 12px;
   padding: 12px 20px;
   width: 206px;
   height: 48px;
 }
 
-.input__drops_town {
+.input__drops {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;

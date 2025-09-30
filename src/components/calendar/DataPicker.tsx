@@ -1,6 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { DropDown } from '../DropDown';
 import { GreenButton } from '../buttons/GreenButton/GreenButton';
+import GreenBorderButton from '../buttons/GreenBorderButton';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { ru } from 'date-fns/locale';
 import styles from './DataPicker.module.css';
@@ -28,28 +29,25 @@ interface YearOption extends SelectOption {
 }
 
 // Утилита для получения локализованных месяцев
-const getLocalizedMonths = (locale: any): MonthOption[] => {
-  return Array.from({ length: 12 }, (_, monthIndex) => ({
+const getLocalizedMonths = (locale: any): MonthOption[] =>
+  Array.from({ length: 12 }, (_, monthIndex) => ({
     value: monthIndex.toString(),
-    label: format(new Date(2023, monthIndex), 'LLLL', { locale }),
+    label: format(new Date(2023, monthIndex), 'LLLL', { locale })
   }));
-};
 
 // Хук для получения месяцев
-const useLocalizedMonths = (locale: any = ru): MonthOption[] => {
-  return useMemo(() => getLocalizedMonths(locale), [locale]);
-};
+const useLocalizedMonths = (locale: any = ru): MonthOption[] =>
+  useMemo(() => getLocalizedMonths(locale), [locale]);
 
 // Утилита для получения списка годов
-const getYears = (startYear: number, count: number): YearOption[] => {
-  return Array.from({ length: count }, (_, index) => {
+const getYears = (startYear: number, count: number): YearOption[] =>
+  Array.from({ length: count }, (_, index) => {
     const year = startYear - index;
     return {
       value: year.toString(),
-      label: format(new Date(year), 'yyyy', { locale: ru }),
+      label: format(new Date(year), 'yyyy', { locale: ru })
     };
   });
-};
 
 // Хук для получения годов
 const useYears = (): YearOption[] => {
@@ -64,7 +62,7 @@ interface DatePickerProps {
 
 export const DatePickerComponent: React.FC<DatePickerProps> = ({
   selectedDate,
-  setSelectedDate,
+  setSelectedDate
 }) => {
   const datePickerRef = useRef<any>(null);
   const months = useLocalizedMonths(ru);
@@ -88,7 +86,7 @@ export const DatePickerComponent: React.FC<DatePickerProps> = ({
     datePickerRef.current?.setOpen(false);
   };
 
-const renderCustomHeader = ({
+  const renderCustomHeader = ({
     date,
     changeYear,
     changeMonth
@@ -105,7 +103,7 @@ const renderCustomHeader = ({
     );
 
     return (
-      <div className={styles['custom-header']}>
+      <div className={styles.custom__header}>
         <DropDown
           options={months}
           value={selectedMonth?.label}
@@ -153,13 +151,13 @@ const renderCustomHeader = ({
           <div className={styles['calendar-container']}>
             {children}
             <div className={styles.footer}>
-              <GreenButton
+              <GreenBorderButton
                 onClick={handleCancel}
                 type='button'
                 className='disabled'
               >
                 Отменить
-              </GreenButton>
+              </GreenBorderButton>
               <GreenButton
                 onClick={handleConfirm}
                 type='button'

@@ -177,13 +177,12 @@ export const RegisterStepSecondForm = memo(
               />
             )}
           </div>
-
           <Input
             label='Имя'
             value={formData.name}
             placeholder='Введите ваше имя'
             onChange={handleChange}
-            className={styles.element__input}
+            className={styles.input_label}
           />
           <div className={styles.input__drops_container}>
             <div className={styles.input__drops_birthday}>
@@ -193,36 +192,50 @@ export const RegisterStepSecondForm = memo(
               />
             </div>
 
+            <div className={styles.input__drops_gender}>
+              <span className={styles.input__label}>Пол</span>
+              <DropDown
+                options={genderData}
+                value='Пол'
+                /*onChange={handleChange}*/
+                placeholder='Не указан'
+                /*className={styles.input__drops_gender_input}*/
+              />
+            </div>
+          </div>
+          <div className={styles.input__drops}>
+            <span className={styles.input__label}>Город</span>
             <DropDown
-              options={genderData}
+              options={townsData}
               /*onChange={handleChange}*/
               placeholder='Не указан'
-              className={styles.input__drops_gender}
+              /*className={styles.input__drops_town}*/
             />
           </div>
-          <DropDown
-            options={townsData}
-            /*onChange={handleChange}*/
-            placeholder='Не указан'
-            className={styles.input__drops_town}
-          />
-          <DropDown
-            placeholder='Выберите категорию'
-            options={categoryOptions}
-            value={selectedCategories}
-            onChange={handleCategoryChange}
-            className={styles.input__drops_town}
-          />
-          <DropDown
-            placeholder='Выберите подкатегорию'
-            options={subcategoryOptions}
-            value={selectedSubcategories[0] || ''}
-            onChange={handleSubcategoryChange}
-            className={styles.input__drops_town}
-          />
-          {isContinueButtonDisabled && (
-            <p className={styles.error}>Сначала выберите категорию</p>
-          )}
+          <div className={styles.input__drops}>
+            <span className={styles.input__label}>
+              Категория навыка, которому хотите научиться
+            </span>
+            <DropDown
+              placeholder='Выберите категорию'
+              options={categoryOptions}
+              value={selectedCategories}
+              onChange={handleCategoryChange}
+              /*className={styles.input__drops_town}*/
+            />
+          </div>
+          <div className={styles.input__drops}>
+            <span className={styles.input__label}>
+              Подкатегория навыка, которому хотите научиться
+            </span>
+            <DropDown
+              placeholder='Выберите подкатегорию'
+              options={subcategoryOptions}
+              value={selectedSubcategories[0] || ''}
+              onChange={handleSubcategoryChange}
+              /*className={styles.input__drops_town}*/
+            />
+          </div>
           <div className={styles.button__group}>
             <GreenBorderButton
               className={styles.button_width}

@@ -1,10 +1,16 @@
 .page {
-  display: grid;
-  gap: 24px;
-  grid-template-columns: 1fr 1fr;
-  max-width: 1136px;
-  max-height: 692px;
-  margin: 0 auto;
+  --font-primary: 'Jost', sans-serif;
+  --font-h2-size: 24px;
+  --font-h2-line-height: 28px;
+  --font-weight-medium: 500;
+  --color-accent: #abd27a;
+  --color-disabled: #e4e8df;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 36px;
   /*display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -23,6 +29,12 @@
   width: 212px;
   height: 44px;
 }
+.steps p {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-line-height);
+  font-family: var(--font-primary);
+}
 
 .steps__progress_bar {
   display: flex;
@@ -34,10 +46,25 @@
   height: 4px;
 }
 
-.steps__line {
+.steps__line_active {
   border-radius: 8px;
   width: 60px;
   height: 4px;
-  background: var(--accent);
-  /*background: var(--disabled);*/
+  background: var(--color-accent, #abd27a);
+}
+
+.steps__line_disabled {
+  border-radius: 8px;
+  width: 60px;
+  height: 4px;
+  background: var(--color-disabled, #e4e8df);
+}
+
+.content {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1136px;
+  max-height: 692px;
+  margin: 0 auto;
 }
