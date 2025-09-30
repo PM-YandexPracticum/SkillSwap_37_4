@@ -19,7 +19,7 @@ export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) =>
   
   const user: any = useSelector(userSelector);
   const location = useLocation();
-  console.log(user);
+  // console.log(user);
 
   if (!onlyUnAuth && !user) {
     return <Navigate replace to='/login' state={{ from: location }} />;
