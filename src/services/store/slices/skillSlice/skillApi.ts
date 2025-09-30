@@ -73,4 +73,4 @@ export const deleteSkillApi = (id: string) =>
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then((res) => checkResponse<DeleteSkillResponse>(res));
+  }).then((res) => checkResponse<string>(res));

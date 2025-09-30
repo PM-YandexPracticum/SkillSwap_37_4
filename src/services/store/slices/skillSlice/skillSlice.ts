@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { TSkill, CreateSkillRequest, UpdateSkillRequest } from '../../../../types/skill';
+import { createSkillApi, deleteSkillApi, getSkillByIdApi, getSkillPageByIdApi, getSkillsByOwnerApi, TSkillPage, updateSkillApi } from './skillApi';
 
 
 export interface SkillState {
@@ -19,16 +20,16 @@ export const initialState: SkillState = {
 export const getSkillCardById = createAsyncThunk(
   'skill/getSkillCardById',
   async (id: string): Promise<TSkill> => {
-    // TODO: Заменить на реальный API вызов
-    throw new Error('API не реализован');
+    const data = await getSkillByIdApi(id);
+    return data;
   }
 );
 
 export const getSkillPageById = createAsyncThunk(
   'skill/getSkillCardById',
-  async (id: string): Promise<TSkill> => {
-    // TODO: Заменить на реальный API вызов
-    throw new Error('API не реализован');
+  async (id: string): Promise<TSkillPage> => {
+    const page = await getSkillPageByIdApi(id);
+    return page;
   }
 );
 
@@ -36,24 +37,32 @@ export const getSkillPageById = createAsyncThunk(
 export const createSkill = createAsyncThunk(
   'skill/createSkill',
   async (skillData: CreateSkillRequest): Promise<TSkill> => {
-    // TODO: Заменить на реальный API вызов
-    throw new Error('API не реализован');
+    const newSkill = await createSkillApi(skillData);
+    return newSkill
   }
 );
 
 export const updateSkill = createAsyncThunk(
   'skill/updateSkill',
-  async (skill: UpdateSkillRequest): Promise<TSkill> => {
-    // TODO: Заменить на реальный API вызов
-    throw new Error('API не реализован');
+  async ({ id, skill }: {id: string, skill: UpdateSkillRequest}): Promise<TSkill> => {
+    const updatedSkill = await updateSkillApi(id, skill);
+    return updatedSkill
   }
 );
 
 export const getSkillsByUserId = createAsyncThunk(
   'skill/getSkillsByUserId',
   async (userId: string): Promise<TSkill[]> => {
-    // TODO: Заменить на реальный API вызов
-    throw new Error('API не реализован');
+    const userSkills = await getSkillsByOwnerApi(userId);
+    return userSkills;
+  }
+);
+
+export const deleteSkillById = createAsyncThunk(
+  'skill/deleteSkillById',
+  async (skillId: string): Promise<string> => {
+    const deletedSkill = await deleteSkillApi(skillId);
+    return deletedSkill;
   }
 );
 
@@ -132,7 +141,22 @@ export const skillSlice = createSlice({
       .addCase(getSkillsByUserId.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Ошибка при загрузке навыков пользователя';
-      });
+      })
+
+      /// deleteSkillById
+       .addCase(deleteSkillById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteSkillById.fulfilled, (state, action: PayloadAction<string>) => {
+        state.loading = false;
+        state.skills = state.skills.filter(skill => skill.id !== action.payload);
+        state.error = null;
+      })
+      .addCase(deleteSkillById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Ошибка при удалении скилла';
+      })
   }
 });
 
