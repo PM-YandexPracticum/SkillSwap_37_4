@@ -16,27 +16,87 @@ const transformApiDataToCardData = (apiData: TCardDataApi): TCardData => ({
   wantLearn: apiData.wantLearn.map((skill) => ({ name: skill }))
 });
 
-export const fetchCards = createAsyncThunk(
-  'cards/fetchCards',
-  async ({
-    startNum,
-    endNum,
-    filter
-  }: {
-    startNum: number;
-    endNum: number;
-    filter: FilterParams;
-  }) => {
-    const apiFilter: ApiFilterParams = {
+// Общая функция для создания thunk
+const createCardsThunk = (
+  name: string,
+  defaultFilter: Partial<FilterParams> = {}
+) =>
+  createAsyncThunk(
+    `cards/${name}`,
+    async ({
       startNum,
       endNum,
-      ...filter
-    };
+      filter
+    }: {
+      startNum: number;
+      endNum: number;
+      filter: FilterParams;
+    }) => {
+      const apiFilter: ApiFilterParams = {
+        startNum,
+        endNum,
+        ...filter,
+        ...defaultFilter
+      };
 
-    const response = await getCardsApi(apiFilter);
-    return response.cards.map(transformApiDataToCardData);
+      const response = await getCardsApi(apiFilter);
+      return {
+        cards: response.cards.map(transformApiDataToCardData),
+        filter: apiFilter,
+        actionType: name
+      };
+    }
+  );
+
+// Создаем thunks с помощью общей функции
+export const getCards = createCardsThunk('getCards');
+export const fetchCards = createCardsThunk('fetchCards');
+export const getNewCards = createCardsThunk('getNewCards', { sortByNew: true });
+export const getPopularCards = createCardsThunk('getPopularCards', {
+  sortByLike: true
+});
+
+// Общие обработчики состояний
+const handlePending = (state: CardState) => {
+  state.loading = true;
+  state.error = null;
+};
+
+const handleRejected = (
+  state: CardState,
+  action: any,
+  errorMessage: string
+) => {
+  state.loading = false;
+  state.error = action.error.message || errorMessage;
+};
+
+const handleFulfilled = (state: CardState, action: any) => {
+  state.loading = false;
+  const { cards, filter, actionType } = action.payload;
+
+  switch (actionType) {
+    case 'getCards':
+      state.cards = cards;
+      if (filter.sortByNew) state.filteredCardsByNew = cards;
+      if (filter.sortByLike) state.filteredCardsByLike = cards;
+      break;
+
+    case 'fetchCards':
+      state.cards.push(...cards);
+      if (filter.sortByNew) state.filteredCardsByNew.push(...cards);
+      if (filter.sortByLike) state.filteredCardsByLike.push(...cards);
+      break;
+
+    case 'getNewCards':
+      state.filteredCardsByNew = cards;
+      break;
+
+    case 'getPopularCards':
+      state.filteredCardsByLike = cards;
+      break;
   }
-);
+};
 
 const cardSlice = createSlice({
   name: 'cards',
@@ -44,6 +104,11 @@ const cardSlice = createSlice({
   reducers: {
     resetError: (state) => {
       state.error = null;
+    },
+    clearCards: (state) => {
+      state.cards = [];
+      state.filteredCardsByNew = [];
+      state.filteredCardsByLike = [];
     }
   },
   selectors: {
@@ -54,26 +119,14 @@ const cardSlice = createSlice({
     errorSelector: (state) => state.error
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchCards.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(
-        fetchCards.fulfilled,
-        (state, action: PayloadAction<TCardData[]>) => {
-          state.loading = false;
-          state.cards.push(...action.payload);
-
-          const newCards = action.payload.filter(() => true); // здесь можно добавить логику фильтрации
-          state.filteredCardsByNew.push(...newCards);
-          state.filteredCardsByLike.push(...newCards);
-        }
-      )
-      .addCase(fetchCards.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Ошибка загрузки карточек';
-      });
+    [getCards, fetchCards, getNewCards, getPopularCards].forEach((thunk) => {
+      builder
+        .addCase(thunk.pending, handlePending)
+        .addCase(thunk.fulfilled, handleFulfilled)
+        .addCase(thunk.rejected, (state, action) =>
+          handleRejected(state, action, `Ошибка ${thunk.typePrefix}`)
+        );
+    });
   }
 });
 
@@ -85,5 +138,5 @@ export const {
   errorSelector
 } = cardSlice.selectors;
 
-export const { resetError } = cardSlice.actions;
+export const { resetError, clearCards } = cardSlice.actions;
 export default cardSlice.reducer;
