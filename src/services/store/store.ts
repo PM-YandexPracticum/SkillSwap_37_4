@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '../slices/userSlice/userSlice';
-import skillReducer from './skillSlice';
+import skillReducer from './slices/skillSlice/skillSlice';
 import notifyReducer from '../slices/notifySlice/notifySlice';
 
 import {
