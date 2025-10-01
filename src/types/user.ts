@@ -7,7 +7,7 @@ export interface TUser {
 }
 
 export interface UserMenuProps {
-  onThemeToggle: () => void;
-  isDarkTheme: boolean;
+  onThemeToggle?: () => void;
+  isDarkTheme?: boolean;
 }
 

@@ -2,7 +2,9 @@
   --social_button__font-color: #253017;
   --border-color: #69735D;
 
-  padding: 60px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 132px 60px;
   display: flex;
   flex-direction: column;
   gap: 24px;

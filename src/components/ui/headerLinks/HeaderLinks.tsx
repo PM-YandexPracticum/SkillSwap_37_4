@@ -23,7 +23,6 @@ export const HeaderLinks = () => {
             text="Все навыки"
             isOpen={isOpen}
             onClick={handleToggle}
-            color='black'
             className={styles.expand_button}
           />
         <SkillsNavMenu isOpen={isOpen} onClose={() => {handleToggle}} className={styles.skillsNavMenu} />
