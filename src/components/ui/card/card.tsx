@@ -5,6 +5,7 @@ import styles from './card.module.css';
 import likeIcon from '../../app/assets/static/icons/like.svg';
 import likeIconActive from '../../app/assets/static/icons/like-active.svg';
 import { CardTag } from '../../cardTag';
+import { useNavigate } from 'react-router-dom';
 
 export const CardUI: FC<TCardUI> = ({
   avatar_url,
@@ -20,6 +21,8 @@ export const CardUI: FC<TCardUI> = ({
   const handleLike = () => {
     setLiked(prevLiked => !prevLiked);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className={styles.card}>
@@ -51,6 +54,7 @@ export const CardUI: FC<TCardUI> = ({
                 key={index}
                 name={skill.name}
                 color={skill.color}
+                onClick={() => navigate(`/skill/${index}`)}
               />
             ))}
           </div>
@@ -63,6 +67,7 @@ export const CardUI: FC<TCardUI> = ({
                 key={index}
                 name={skill.name}
                 color={skill.color}
+                onClick={() => navigate(`/skill/${index}`)}
               />
             ))}
             {remainingWantLearn > 0 && (
