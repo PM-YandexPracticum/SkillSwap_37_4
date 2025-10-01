@@ -97,16 +97,35 @@ export const RegisterStepSecondForm = memo(
       }
     };
 
-    const isFormValid = (): boolean =>
-      !!registerData.name.trim() && // Проверяем не пустую строку
-      !!registerData.dateOfBirth && // Проверяем дату
-      !!registerData.gender && // Проверяем пол
-      !!registerData.city.trim() && // Проверяем город
-      !!registerData.categorySkillToLearn && // Проверяем категорию
-      !!registerData.subcategorySkillToLearn; // Проверяем подкатегорию
+    const useValidation = (
+        conditions: boolean[]
+    ) => {
+        const [isValid, setValid] = useState<boolean>();
+
+        const getValid = () => {
+            return !conditions.some((condition) => {
+                return !condition;
+            });
+        }
+
+        useEffect(() => {
+            setValid(getValid())
+        }, conditions)
+
+        return isValid;
+    }
+
+    const isFormValid = useValidation ([
+      registerData.name !== null,
+      registerData.dateOfBirth !== null,
+      registerData.gender !== null,
+      registerData.city !== null,
+      registerData.categorySkillToLearn !== null,
+      registerData.subcategorySkillToLearn !== null,
+    ])
 
     const handleNext = () => {
-      if (!isFormValid()) {
+      if (!isFormValid) {
         alert('Заполните все обязательные поля');
         return;
       }
@@ -121,29 +140,29 @@ export const RegisterStepSecondForm = memo(
       <div className={styles.page_container}>
         <form className={styles.form_container}>
           <div className={styles.icon__container}>
-            <label htmlFor='avatar' className={styles.avatar__label}>
+            <label htmlFor='avatar' className={styles.avatar__label}>            
+              <input
+                type='file'
+                name='avatar'
+                id='avatar'
+                className={styles.avatar__input}
+                multiple={false}
+                onChange={handleFileChange}
+                aria-label='Загрузить аватар'
+              />
+              {registerData.avatar && (
+                <img
+                  src={registerData.avatar}
+                  alt='Аватар пользователя'
+                  className={styles.avatar__preview}
+                />
+              )}
               <img
                 className={styles.avatar__label_plusIcon}
                 src={iconPlus}
                 alt='Добавить фото'
               />
             </label>
-            <input
-              type='file'
-              name='avatar'
-              id='avatar'
-              className={styles.avatar__input}
-              multiple={false}
-              onChange={handleFileChange}
-              aria-label='Загрузить аватар'
-            />
-            {registerData.avatar && (
-              <img
-                src={registerData.avatar}
-                alt='Аватар пользователя'
-                className={styles.avatar_preview}
-              />
-            )}
           </div>
 
           <Input
@@ -212,7 +231,7 @@ export const RegisterStepSecondForm = memo(
             <GreenBorderButton
               className={styles.button_width}
               onClick={handleBack}
-              disabled={isFormValid()}
+              disabled={!isFormValid}
             >
               {buttonPrevText}
             </GreenBorderButton>
@@ -220,7 +239,7 @@ export const RegisterStepSecondForm = memo(
             <GreenButton
               className={styles.button_width}
               onClick={handleNext}
-              disabled={!isFormValid()}
+              disabled={!isFormValid}
             >
               {buttonNextText}
             </GreenButton>
