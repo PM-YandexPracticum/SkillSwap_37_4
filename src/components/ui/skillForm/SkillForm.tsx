@@ -1,55 +1,20 @@
-import { DropDown } from '../DropDown';
-import { Input } from '../input/Input';
+
 import styles from './SkillForm.module.css';
-import { SKILL_CATEGORY } from '../../const/skillsCategoryMapping';
-import { useRef, useState } from 'react';
-import DropzoneIconCategory from '../ui/dropzone/DropzoneIconCategory';
-import GreenBorderButton from '../buttons/GreenBorderButton';
-import GreenButton from '../buttons/GreenButton';
 import clsx from 'clsx';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-export interface ConstatsType {
-  name_item_text: string;
-  name_item_input: string;
-
-  category_item_text: string;
-  category_item_input: string;
-
-  subcategory_item_text: string;
-  subcategory_item_input: string;
-
-  description_item_text: string;
-  description_item_input: string;
-
-  image_item_text: string;
-  image_item_input: string;
-
-  close_item_button: string;
-  continue_item_button: string;
+import { SKILL_CATEGORY } from '../../../const/skillsCategoryMapping';
+import GreenBorderButton from '../../buttons/GreenBorderButton';
+import GreenButton from '../../buttons/GreenButton';
+import DropDown from '../../DropDown';
+import { Input } from '../../input/Input';
+import DropzoneIconCategory from '../dropzone/DropzoneIconCategory';
+import { TSTEP_THREE_FORM_LABELS } from '../../../const/constLag';
+interface SkillFormProps {
+  languageConst: TSTEP_THREE_FORM_LABELS;
 }
 
-// const CONSTATS: ConstatsType = {
-//   name_item_text: 'Название навыка',
-//   name_item_input: 'Введите название вашего навыка',
-
-//   category_item_text: 'Категория навыка',
-//   category_item_input: 'Выберите категорию навыка',
-
-//   subcategory_item_text: 'Подкатегория навыка',
-//   subcategory_item_input: 'Выберите подкатегорию навыка',
-
-//   description_item_text: 'Описание',
-//   description_item_input: 'Коротко опишите, чему можете научить',
-
-//   image_item_text: 'Перетащите или выберите изображения навыка',
-//   image_item_input: 'Выбрать изображения',
-
-//   close_item_button: 'Назад',
-//   continue_item_button: 'Продолжить'
-// };
-
-export const SkillForm = (CONSTATS: ConstatsType) => {
+export const SkillForm: React.FC<SkillFormProps> = ({ languageConst }) => {
   const [selectedCategory, setSelectedCategory] = useState<
     keyof typeof SKILL_CATEGORY | ''
   >('');
@@ -100,7 +65,7 @@ export const SkillForm = (CONSTATS: ConstatsType) => {
       ? (
           SKILL_CATEGORY[
             selectedCategory as keyof typeof SKILL_CATEGORY
-          ] as readonly string[]
+          ] as unknown as readonly string[]
         ).map((sub) => ({
           value: sub,
           label: sub
@@ -110,14 +75,14 @@ export const SkillForm = (CONSTATS: ConstatsType) => {
   return (
     <form className={styles.skill_form} noValidate onSubmit={handleSubmit}>
       <div className={styles.skill_form_item}>
-        <p className={styles.skill_form_item_text}>{CONSTATS.name_item_text}</p>
+        <p className={styles.skill_form_item_text}>{languageConst.name_item_text}</p>
         <Input
           ref={nameRef}
-          inputContainer={styles.skill_form_item_input_container}
+          fields__container={styles.skill_form_item_input_container}
           className={
             errors.name ? styles.input_error : styles.skill_form_item_input
           }
-          placeholder={CONSTATS.name_item_input}
+          placeholder={languageConst.name_item_input}
           maxLength={50}
           minLength={3}
           required
@@ -134,12 +99,12 @@ export const SkillForm = (CONSTATS: ConstatsType) => {
 
       <div className={styles.skill_form_item}>
         <p className={styles.skill_form_item_text}>
-          {CONSTATS.category_item_text}
+          {languageConst.category_item_text}
         </p>
         <DropDown
-          placeholder={CONSTATS.category_item_input}
+          placeholder={languageConst.category_item_input}
           options={categoryOptions}
-          value={selectedCategory}
+          value={selectedCategory ? String(selectedCategory) : undefined}
           onChange={(val) => {
             setSelectedCategory(val as keyof typeof SKILL_CATEGORY | '');
             setSelectedSubcategory('');
@@ -154,12 +119,12 @@ export const SkillForm = (CONSTATS: ConstatsType) => {
 
       <div className={styles.skill_form_item}>
         <p className={styles.skill_form_item_text}>
-          {CONSTATS.subcategory_item_text}
+          {languageConst.subcategory_item_text}
         </p>
         <DropDown
           options={subcategoryOptions}
           value={selectedSubcategory}
-          placeholder={CONSTATS.subcategory_item_input}
+          placeholder={languageConst.subcategory_item_input}
           onChange={(val) => {
             setSelectedSubcategory(val);
             setErrors((prev) => ({ ...prev, subcategory: '' }));
@@ -174,15 +139,15 @@ export const SkillForm = (CONSTATS: ConstatsType) => {
 
       <div className={styles.skill_form_item}>
         <p className={styles.skill_form_item_text}>
-          {CONSTATS.description_item_text}
+          {languageConst.description_item_text}
         </p>
         <Input
           ref={descRef}
-          inputContainer={styles.skill_form_item_input_container}
+          fields__container={styles.skill_form_item_input_container}
           className={
             errors.desc ? styles.input_error : styles.skill_form_item_input
           }
-          placeholder={CONSTATS.description_item_input}
+          placeholder={languageConst.description_item_input}
           maxLength={500}
           required
           onBlur={() => {
@@ -200,8 +165,8 @@ export const SkillForm = (CONSTATS: ConstatsType) => {
       <DropzoneIconCategory
         className={styles.skill_form_item}
         onFilesSelected={() => {}}
-        placeholder={CONSTATS.image_item_text}
-        buttonText={CONSTATS.image_item_input}
+        placeholder={languageConst.image_item_text}
+        buttonText={languageConst.image_item_input}
       />
 
       <div className={clsx(styles.skill_form_item, styles.skill_form_button)}>
@@ -210,10 +175,10 @@ export const SkillForm = (CONSTATS: ConstatsType) => {
           type='reset'
           onClick={returnBack}
         >
-          <span>{CONSTATS.close_item_button}</span>
+          <span>{languageConst.close_item_button}</span>
         </GreenBorderButton>
         <GreenButton className={styles.button} type='submit'>
-          <span>{CONSTATS.continue_item_button}</span>
+          <span>{languageConst.continue_item_button}</span>
         </GreenButton>
       </div>
     </form>

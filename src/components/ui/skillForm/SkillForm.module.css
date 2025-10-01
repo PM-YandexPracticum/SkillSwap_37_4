@@ -52,3 +52,7 @@
     color: red;
     font-size: 0.7rem;
 }
+
+.skill_form_item_text {
+    color: rgba(37, 48, 23, 1);
+}

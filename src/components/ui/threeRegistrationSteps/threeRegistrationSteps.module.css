@@ -1,0 +1,29 @@
+.stepContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  padding: 10px;
+}
+
+.stepText {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.progressBar {
+  display: flex;
+  gap: 4px;
+}
+
+.progressSegment {
+  width: 60px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #e0e0e0; /* inactive color */
+}
+
+.progressSegmentActive {
+  background-color: #A1CF6B; /* active color (зелёный) */
+}

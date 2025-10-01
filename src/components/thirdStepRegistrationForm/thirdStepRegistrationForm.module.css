@@ -1,0 +1,20 @@
+.page_register_third {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info {
+    padding: 50px 60px;
+    max-width: 556px;
+    max-height: 692px;
+    border-radius: 12px;
+}
+
+.two_block {
+    display: flex;
+    gap: 24px;
+}
