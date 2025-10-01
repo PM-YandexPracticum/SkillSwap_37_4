@@ -4,7 +4,6 @@ import styles from './ExpandButton.module.css';
 import { ReactComponent as ChevronDownIcon } from '../../app/assets/static/icons/chevron-down.svg';
 
 export const ExpandButton: React.FC<ExpandButtonProps> = ({
-  color = '#000000',
   onClick,
   className = '',
   text = 'Все навыки',
@@ -15,7 +14,6 @@ export const ExpandButton: React.FC<ExpandButtonProps> = ({
     <button
       className={`${styles.expandButton} ${className}`}
       onClick={onClick}
-      style={{ color }}
       type="button"
       aria-label={text}
     >
@@ -26,7 +24,6 @@ export const ExpandButton: React.FC<ExpandButtonProps> = ({
         width={iconSize}
         height={iconSize}
         className={`${styles.expandButton__arrow} ${isOpen ? styles['expandButton__arrow--rotated'] : ''}`}
-        style={{ color }}
       />
     </button>
   );

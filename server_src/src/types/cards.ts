@@ -21,6 +21,7 @@ export type FilterObject = {
   sortByLike?: boolean;
   city?: string;
   gender?: string;
+  likedByUser?: boolean;
 }
 
 export type LikeRequest = {

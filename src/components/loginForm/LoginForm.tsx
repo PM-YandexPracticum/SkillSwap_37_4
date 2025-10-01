@@ -5,12 +5,20 @@ import { PasswordField } from '../passwordField/PasswordField';
 import styles from './LoginForm.module.css';
 import googleIcon from "../../../src/components/app/assets/static/icons/Google.svg";
 import appleIcon from "../../../src/components/app/assets/static/icons/Apple.svg";
+import { useDispatch, useSelector } from '../../services/store/store';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { errorSelector, userLoadingSelector, userLoginThunk } from '../../services/slices/userSlice/userSlice';
 
 interface LoginFormProps {
   buttonText: string;
 }
 
 export const LoginForm = ({buttonText}: LoginFormProps) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const loading = useSelector(userLoadingSelector);
+  const error = useSelector(errorSelector);
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -34,16 +42,23 @@ export const LoginForm = ({buttonText}: LoginFormProps) => {
     }
 
     setErrors(newErrors);
-    setIsFormValid(Object.keys(newErrors).length !== 0)
+    setIsFormValid(Object.keys(newErrors).length === 0)
 
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setTouched({ email: true, password: true });
-    validate();
+    if (validate()) {
+      const result = await dispatch(userLoginThunk({ email: emailValue, password: passwordValue }));
+      
+      if (userLoginThunk.fulfilled.match(result)) {
+        const from = location.state?.from?.pathname || '/';
+        navigate(from, { replace: true });
+      }
+    }
   };
 
   useEffect(() => {
@@ -63,13 +78,31 @@ export const LoginForm = ({buttonText}: LoginFormProps) => {
       </div>
       <div className={styles.form_divider}>или</div>
       <form className={styles.form__inputs} onSubmit={handleSubmit}>
-        <Input label="Email" value={emailValue}
-    error={errors.email}  onChange={e =>{ setEmailValue(e.target.value);}}  placeholder='Введите email' className={styles.text__input}/>
-        <PasswordField value={passwordValue} onChange={e =>{ setPasswordValue(e.target.value);}}/>
+        <Input 
+          label="Email" 
+          value={emailValue}
+          error={errors.email}  
+          onChange={e => setEmailValue(e.target.value)}  
+          placeholder='Введите email' 
+          className={styles.text__input}
+        />
+        <PasswordField 
+          value={passwordValue} 
+          onChange={e => setPasswordValue(e.target.value)}
+        />
         {errors.password && (
           <span className={styles.errorText}>{errors.password}</span>
         )}
-        <GreenButton disabled={isFormValid} className={styles.confirm_button} type="submit">{buttonText}</GreenButton>
+        {error && (
+          <span className={styles.errorText}>{error}</span>
+        )}
+        <GreenButton 
+          disabled={!isFormValid || loading} 
+          className={styles.confirm_button} 
+          type="submit"
+        >
+          {loading ? 'Вход...' : buttonText}
+        </GreenButton>
       </form>
     </div>
   )

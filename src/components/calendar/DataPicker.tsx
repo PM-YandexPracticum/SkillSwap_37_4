@@ -106,7 +106,6 @@ export const DatePickerComponent: React.FC<DatePickerProps> = ({
       <div className={styles.custom__header}>
         <DropDown
           options={months}
-          //value={selectedMonth?.label}
           onChange={(option) => {
             if (typeof option === 'string') {
               changeMonth(Number(option));
@@ -117,7 +116,7 @@ export const DatePickerComponent: React.FC<DatePickerProps> = ({
 
         <DropDown
           options={years}
-          value={selectedYear?.label}
+          value={selectedYear?.value}
           onChange={(option) => {
             if (typeof option === 'string') {
               changeYear(Number(option));

@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProfileActionMenu.module.css';
 import { ReactComponent as LogoutIcon } from '../app/assets/static/icons/logout.svg';
+import { useDispatch } from '../../services/store/store';
+import { logoutUserThunk } from '../../services/slices/userSlice/userSlice';
 
 interface ProfileActionMenuProps {
   // В будущем сюда можно добавить пропсы
@@ -9,14 +11,15 @@ interface ProfileActionMenuProps {
 
 export const ProfileActionMenu: React.FC<ProfileActionMenuProps> = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleNavigateToProfile = () => {
     navigate('/profile/details');
   };
 
-  const handleLogout = () => {
-    // Здесь в будущем будет логика выхода из аккаунта
-    console.log('Выход из аккаунта...');
+  const handleLogout = async () => {
+    await dispatch(logoutUserThunk());
+    navigate('/');
   };
 
   return (

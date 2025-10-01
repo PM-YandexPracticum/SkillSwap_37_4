@@ -14,6 +14,7 @@ import ProfileDetailsPage from '../../pages/profile/ProfilePage';
 import { LoginPage } from '../../pages/login-page';
 import { DefaultLayout } from '../../layouts/DefaultLayout';
 import { AuthLayout } from '../../layouts/AuthLayout';
+import { checkUserAuthThunk } from '../../services/slices/userSlice/userSlice';
 
 function App() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    'load data here';
+    dispatch(checkUserAuthThunk());
   }, [dispatch]);
 
   // todo protectedRoutes

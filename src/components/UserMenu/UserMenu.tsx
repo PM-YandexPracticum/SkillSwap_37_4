@@ -12,6 +12,8 @@ import { ReactComponent as Heart } from '../app/assets/static/icons/heart.svg';
 import GreenButton from '../buttons/GreenButton';
 import { ProfileActionMenu } from '../ProfileActionMenu';
 
+import { userSelector } from '../../services/slices/userSlice/userSlice';
+
 export const UserMenu: React.FC<UserMenuProps> = ({
   onThemeToggle,
   isDarkTheme
@@ -19,7 +21,8 @@ export const UserMenu: React.FC<UserMenuProps> = ({
   const navigate = useNavigate();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
-  const user: TUser | null = null;
+  const user = useSelector(userSelector);
+  // const user: TUser | null = null;
     {/*const user: TUser= {
       id: '123',
       name: 'aziz',
@@ -71,7 +74,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({
     };
   }, [isProfileMenuOpen]);
 
-  if (user && (user as TUser).isAuthenticated) {
+  if (user) {
     // Рендер для авторизованного пользователя
     return (
       <div className='user-menu authenticated'>
@@ -102,11 +105,11 @@ export const UserMenu: React.FC<UserMenuProps> = ({
         </div>
 
         <div className='user-profile-block' onClick={handleProfileClick}>
-          <p className='user-name'>{(user as TUser).name}</p>
-          {(user as TUser).avatar ? (
+          <p className='user-name'>{user.name}</p>
+          {user.avatarUrl ? (
             <img
-              src={(user as TUser).avatar}
-              alt={`Аватар ${(user as TUser).name}`}
+              src={user.avatarUrl}
+              alt={`Аватар ${user.name}`}
               className='avatar-image'
             />
           ) : (

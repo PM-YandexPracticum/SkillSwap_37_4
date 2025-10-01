@@ -7,7 +7,7 @@ import { FilterForm } from '../../components/FilterForm/FilterForm';
 export const CatalogPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const hasFilter = queryParams.has('filter');
+  const hasFilter = queryParams.has('searchType');
 
   return (
     <div className={style.catalogPage}>
