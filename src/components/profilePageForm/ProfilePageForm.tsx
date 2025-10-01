@@ -1,23 +1,33 @@
-import { useState, useRef, ChangeEvent } from 'react';
-import { useDispatch, useSelector } from '../../services/store/store';
+import { FC } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { DatePickerComponent } from '../calendar/DataPicker';
-//import { selectCurrentUser, updateUserField } from '../../services/slices/user/userSlice'
 import styles from './ProfilePageForm.module.css';
 import { GreenButton } from '../buttons/GreenButton/GreenButton';
+import { TSkillTag } from "../../components/cardTag/CardTag"
+import { cities } from "../../const/cities"
 
-export function ProfilePageForm() {
-  const dispatch = useDispatch();
-  {
-    /* возможные варианты переменных для формы
-  const user = useSelector(userSliceSelectors.selectUser);
-  const userSelector = useSelector(selectCurrentUser);
-  const { email, name, avatar, age: dateOfBirth, location, description, gender } = userSelector
-  const emailState = useState(email);
-  const nameState = useState(name);
-  const [date, setDate] = useState(
-    dateOfBirth ? new Date(dateOfBirth) : new Date(),
-  );*/
+export type ProfilePageFormProps = {
+  user: {
+    id: number | undefined,
+    name: string | undefined,
+    email: string | undefined,
+    password: string | undefined,
+    avatarUrl: string | undefined,
+    birthday: Date | undefined,
+    aboutMe: string | undefined,
+    city: string | undefined,
+    gender: string | undefined,
+    wantLearn: TSkillTag[] | undefined, 
+    canLearn: TSkillTag[] | undefined
   }
+  handleSubmit: () => void;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+};
+
+export function ProfilePageForm({ user, handleSubmit, handleInputChange }: ProfilePageFormProps) {
+   const [date, setDate] = useState(
+    user?.birthday ? user.birthday : null,
+  );
 
   return (
     <div className={styles.profileForm}>
@@ -28,7 +38,8 @@ export function ProfilePageForm() {
             type='email'
             name='email'
             className={styles.profileEmailInput}
-            disabled
+            value={user?.email}
+            onChange={handleInputChange}
           />
           <span className={`${styles.profileEditIcon} ${styles.iconEdit}`} />
         </div>
@@ -42,41 +53,34 @@ export function ProfilePageForm() {
               type='text'
               name='name'
               className={styles.profileEmailInput}
+              value={user?.name}
+              onChange={handleInputChange}
             />
             <span className={`${styles.profileEditIcon} ${styles.iconEdit}`} />
           </div>
         </div>
         <div className={styles.profileInputRow}>
-          <div className={styles.profileInputBlock}>
-            <label>Дата рождения</label>
-            <div
-              className={styles.profileDateInputWrapper}
-              tabIndex={0}
-              role='button'
-              aria-label='Выбрать дату рождения'
-              style={{ cursor: 'pointer' }}
-            >
-              {/*Добавить DatePickerComponent
-              <DatePickerComponent
-                selectedDate={date}
-                setSelectedDate={setDate}
-              />*/}
-              {/* вариант без DatePickerComponent*/}
-              <input
-                type='date'
-                name='birthDate'
-                className={styles.profileDateInput}
-              />
-              <span
-                className={`${styles.profileCalendarIcon} ${styles.iconCalendar}`}
-              />
-            </div>
-          </div>
+          <DatePickerComponent
+            selectedDate={date}
+            setSelectedDate={(newDate) => {
+              setDate(newDate);
+              handleInputChange({
+              target: {
+                name: "birthday",
+                value: newDate,
+              },
+            } as any)}}
+          />
           <div className={styles.profileInputBlock}>
             <label>Пол</label>
             <div className={styles.profileGenderInputWrapper}>
               <div className={styles.profileSelectInputWrapper}>
-                <select name='gender' className={styles.profileInputHalf}>
+                <select 
+                  name='gender'
+                  value={user?.gender}
+                  onChange={handleInputChange}
+                  className={styles.profileInputHalf}
+                >
                   <option value='female'>Женский</option>
                   <option value='male'>Мужской</option>
                 </select>
@@ -97,7 +101,18 @@ export function ProfilePageForm() {
               className={styles.profileSelectInputWrapper}
               style={{ width: '100%' }}
             >
-              <select name='city' style={{ width: '100%' }} />
+              <select 
+                name='city'
+                style={{ width: '100%' }}
+                onChange={handleInputChange}
+                value={user?.city}
+              >
+              {cities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
             </div>
             <span
               className={`${styles.profileChevronIcon} ${styles.iconChevron}`}
@@ -108,9 +123,11 @@ export function ProfilePageForm() {
           <label>О себе</label>
           <div className={styles.profileAboutInputWrapper}>
             <textarea
-              name='about'
+              name='aboutMe'
               rows={5}
               className={styles.profileAboutTextarea}
+              value={user?.aboutMe}
+              onChange={handleInputChange}
             />
             <span
               className={`${styles.profileAboutEditIcon} ${styles.iconEdit}`}
@@ -121,8 +138,7 @@ export function ProfilePageForm() {
       <div className={styles.profileSaveBtnWrapper}>
         <GreenButton
           type='submit'
-          /*onClick={}
-          disabled={}*/
+          onClick={handleSubmit}
         >
           {'Сохранить'}
         </GreenButton>

@@ -46,7 +46,7 @@ const getYears = (startYear: number, count: number): YearOption[] => {
     const year = startYear - index;
     return {
       value: year.toString(),
-      label: format(new Date(year), 'yyyy', { locale: ru }),
+      label: format(new Date(year, 0, 1), 'yyyy', { locale: ru }),
     };
   });
 };
@@ -108,7 +108,7 @@ const renderCustomHeader = ({
       <div className={styles['custom-header']}>
         <DropDown
           options={months}
-          value={selectedMonth?.label}
+          value={selectedMonth?.value}
           onChange={(option) => {
             if (typeof option === 'string') {
               changeMonth(Number(option));
@@ -119,7 +119,7 @@ const renderCustomHeader = ({
 
         <DropDown
           options={years}
-          value={selectedYear?.label}
+          value={selectedYear?.value}
           onChange={(option) => {
             if (typeof option === 'string') {
               changeYear(Number(option));
