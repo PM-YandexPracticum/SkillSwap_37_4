@@ -15,9 +15,7 @@ interface SkillFormProps {
 }
 
 export const SkillForm: React.FC<SkillFormProps> = ({ languageConst }) => {
-  const [selectedCategory, setSelectedCategory] = useState<
-    keyof typeof SKILL_CATEGORY | ''
-  >('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   let navigate = useNavigate();
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>('');
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -55,17 +53,15 @@ export const SkillForm: React.FC<SkillFormProps> = ({ languageConst }) => {
     navigate(-1);
   };
 
-  const categoryOptions = Object.keys(SKILL_CATEGORY).map((cat) => ({
-    value: cat,
-    label: cat
+  const categoryOptions = SKILL_CATEGORY.map((cat) => ({
+    value: cat.categoryName,
+    label: cat.categoryName
   }));
 
   const subcategoryOptions =
-    selectedCategory && selectedCategory in SKILL_CATEGORY
+    selectedCategory
       ? (
-          SKILL_CATEGORY[
-            selectedCategory as keyof typeof SKILL_CATEGORY
-          ] as unknown as readonly string[]
+          SKILL_CATEGORY.find((cat) => cat.categoryName === selectedCategory)?.subcategoryName || []
         ).map((sub) => ({
           value: sub,
           label: sub
@@ -104,9 +100,9 @@ export const SkillForm: React.FC<SkillFormProps> = ({ languageConst }) => {
         <DropDown
           placeholder={languageConst.category_item_input}
           options={categoryOptions}
-          value={selectedCategory ? String(selectedCategory) : undefined}
+          value={selectedCategory || undefined}
           onChange={(val) => {
-            setSelectedCategory(val as keyof typeof SKILL_CATEGORY | '');
+            setSelectedCategory(val);
             setSelectedSubcategory('');
             setErrors((prev) => ({ ...prev, category: '' }));
           }}

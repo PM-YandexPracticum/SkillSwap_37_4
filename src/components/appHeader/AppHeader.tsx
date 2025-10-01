@@ -23,12 +23,7 @@ export const AppHeader: React.FC<THeaderProps> = ({ userAuth }) => {
   };
 
   if (location.pathname === "/register") {
-    return (
-      <header className={clsx(styles.header, styles.header_register)}>
-        <Logo onClick={handleRedirect} />
-        <CloseButton onClick={handleRedirect} />
-      </header>
-    );
+    return null;
   }
 
   return (

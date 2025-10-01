@@ -15,6 +15,7 @@ import { LoginPage } from '../../pages/login-page';
 import { DefaultLayout } from '../../layouts/DefaultLayout';
 import { AuthLayout } from '../../layouts/AuthLayout';
 import { checkUserAuthThunk } from '../../services/slices/userSlice/userSlice';
+import { ThirdStepRegistrationForm } from '../thirdStepRegistrationForm/thirdStepRegistrationForm';
 
 function App() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(checkUserAuthThunk());
+    // dispatch(checkUserAuthThunk());
   }, [dispatch]);
 
   // todo protectedRoutes
@@ -49,7 +50,7 @@ function App() {
             path='/register'
             element={
               <ProtectedRoute onlyUnAuth>
-                <h1>Register</h1>
+                <ThirdStepRegistrationForm />
               </ProtectedRoute>
             }
           />

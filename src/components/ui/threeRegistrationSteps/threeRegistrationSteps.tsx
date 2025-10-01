@@ -10,7 +10,7 @@ export const ThreeRegistrationSteps = () => {
   const currentStep = Math.min(Math.max(parseInt(stepNumber ?? '1', 10), 1), TOTAL_STEPS);
 
   return (
-    <div className={clsx(styles.stepContainer)}>
+    <div className={clsx(styles.stepContainer, )}>
       <div className={styles.stepText}>Шаг {currentStep} из {TOTAL_STEPS}</div>
       <div className={styles.progressBar}>
         {[...Array(TOTAL_STEPS)].map((_, index) => (
