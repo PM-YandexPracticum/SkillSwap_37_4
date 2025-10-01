@@ -9,7 +9,12 @@ import { NotFound404 } from '../../pages/404';
 import { InternalError500 } from '../../pages/500';
 import { AppHeader } from '../appHeader/AppHeader';
 import { CatalogPage } from '../../pages/catalog-page';
+import { SkillPage } from '../../pages/skill-page';
 import ProfileDetailsPage from '../../pages/profile/ProfilePage';
+import { LoginPage } from '../../pages/login-page';
+import { DefaultLayout } from '../../layouts/DefaultLayout';
+import { AuthLayout } from '../../layouts/AuthLayout';
+import { checkUserAuthThunk } from '../../services/slices/userSlice/userSlice';
 
 function App() {
   const navigate = useNavigate();
@@ -21,7 +26,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    'load data here';
+    dispatch(checkUserAuthThunk());
   }, [dispatch]);
 
   // todo protectedRoutes
@@ -29,58 +34,53 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <AppHeader/>
       <Routes>
-        <Route
-          path='/'
-          element={<CatalogPage/>}
-        />
-        <Route
-          path='/login'
-          element={
-            <ProtectedRoute onlyUnAuth>
-              <h1>loginPage</h1>
-              {/* todo */}
-              {/* <Login /> */}
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/register'
-          element={
-            <ProtectedRoute onlyUnAuth>
-              <h1>Register</h1>
-              {/* todo */}
-              {/* <Register /> */}
-            </ProtectedRoute>
-          }
-        />
-        <Route path='/profile'>
+        {/* Auth layout */}
+        <Route element={<AuthLayout />}>
           <Route
-            index
+            path='/login'
             element={
-              <ProtectedRoute onlyUnAuth={false}>
-                <h1>Profile</h1>
-                {/* todo */}
-                {/* <Profile /> */}
+              <ProtectedRoute onlyUnAuth>
+                <LoginPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/register'
+            element={
+              <ProtectedRoute onlyUnAuth>
+                <h1>Register</h1>
               </ProtectedRoute>
             }
           />
         </Route>
-        <Route
-          path='/profile/*'
-          element={
-            <ProtectedRoute>
-              <ProfileDetailsPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route path='*' element={<NotFound404 />} />
-        <Route path='/500' element={<InternalError500 />} />
+
+        {/* Default layout */}
+        <Route element={<DefaultLayout />}>
+          <Route path='/' element={<CatalogPage />} />
+          <Route path='/profile'>
+            <Route
+              index
+              element={
+                <ProtectedRoute onlyUnAuth={false}>
+                  <h1>Profile</h1>
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+          <Route
+            path='/profile/*'
+            element={
+              <ProtectedRoute>
+                <ProfileDetailsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path='/skill/:id' element={<SkillPage />} />
+          <Route path='*' element={<NotFound404 />} />
+          <Route path='/500' element={<InternalError500 />} />
+        </Route>
       </Routes>
-      <AppFooter />
-      {/* todo */}
-      {/* <AppFooter /> */}
     </div>
   );
 }
