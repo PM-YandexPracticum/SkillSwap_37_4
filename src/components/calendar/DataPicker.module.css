@@ -14,7 +14,7 @@
 }
 
 .label {
-  margin-bottom: 4px;
+  /*margin-bottom: 4px;*/
   font-family: var(--font-secondary);
   font-weight: 400;
   font-size: 16px;
@@ -26,7 +26,7 @@
 .input {
   position: relative;
   max-width: 208px;
-  min-height: 38px;
+  min-height: 33px;
   padding: 8px;
   font-family: 'Roboto', sans-serif;
   background-image: url('../app/assets/static/iconsUi/calendar.svg');
@@ -35,6 +35,12 @@
   border: 1px solid #69735d;
   border-radius: 12px;
   caret-color: var(--color-text-link);
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.02em;
+  color: var(--color-text-primary);
 
   &:focus {
     outline: none;
@@ -111,6 +117,8 @@
   .react-datepicker__header {
     background: transparent !important;
     border: none !important;
+    background-color: var(--color-card-background);
+    border-bottom: 1px solid var(--color-card-background);
   }
 
   .footer__qnrzg {

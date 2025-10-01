@@ -4,9 +4,9 @@ import { GreenButton } from '../buttons/GreenButton/GreenButton';
 import GreenBorderButton from '../buttons/GreenBorderButton';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { ru } from 'date-fns/locale';
-import styles from './DataPicker.module.css';
 import { format } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+import styles from './DataPicker.module.css';
 
 registerLocale('ru', ru);
 
@@ -39,13 +39,13 @@ const getLocalizedMonths = (locale: any): MonthOption[] =>
 const useLocalizedMonths = (locale: any = ru): MonthOption[] =>
   useMemo(() => getLocalizedMonths(locale), [locale]);
 
-// Утилита для получения списка годов
+// Утилита для получения списка годов *format(new Date(year), 'yyyy', { locale: ru })
 const getYears = (startYear: number, count: number): YearOption[] =>
   Array.from({ length: count }, (_, index) => {
     const year = startYear - index;
     return {
       value: year.toString(),
-      label: format(new Date(year), 'yyyy', { locale: ru })
+      label: year.toString()
     };
   });
 
@@ -67,7 +67,7 @@ export const DatePickerComponent: React.FC<DatePickerProps> = ({
   const datePickerRef = useRef<any>(null);
   const months = useLocalizedMonths(ru);
   const years = useYears();
-
+  // console.log(months, years);
   const handleDateChange = (date: Date | null) => {
     if (date && date > new Date()) {
       setSelectedDate(null);
@@ -101,12 +101,12 @@ export const DatePickerComponent: React.FC<DatePickerProps> = ({
     const selectedYear = years.find(
       (y) => y.value === date.getFullYear().toString()
     );
-
+    //console.log(selectedMonth);
     return (
       <div className={styles.custom__header}>
         <DropDown
           options={months}
-          value={selectedMonth?.label}
+          //value={selectedMonth?.label}
           onChange={(option) => {
             if (typeof option === 'string') {
               changeMonth(Number(option));
@@ -134,7 +134,6 @@ export const DatePickerComponent: React.FC<DatePickerProps> = ({
       <label className={styles.label}>Дата рождения</label>
       <DatePicker
         ref={datePickerRef}
-        showIcon
         selected={selectedDate}
         onChange={handleDateChange}
         locale='ru'
@@ -154,14 +153,14 @@ export const DatePickerComponent: React.FC<DatePickerProps> = ({
               <GreenBorderButton
                 onClick={handleCancel}
                 type='button'
-                className='disabled'
+                /*className='disabled'*/
               >
                 Отменить
               </GreenBorderButton>
               <GreenButton
                 onClick={handleConfirm}
-                type='button'
-                className='active'
+                /*className={styles.confirm_button}*/
+                type='submit'
               >
                 Выбрать
               </GreenButton>

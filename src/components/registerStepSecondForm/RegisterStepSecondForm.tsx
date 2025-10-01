@@ -30,17 +30,19 @@ export const RegisterStepSecondForm = memo(
     const [selectedCategories, setSelectedCategories] = useState('');
     const [selectedSubcategories, setSelectedSubcategories] = useState('');
     const [date, setDate] = useState<Date | null>(null);
-    const [selectedGender, setSelectedGender] = useState<GenderType>('Не указан');
+    const [selectedGender, setSelectedGender] =
+      useState<GenderType>('Не указан');
 
     useEffect(() => {
       setSelectedGender(registerData.gender || 'Не указан');
     }, [registerData.gender]);
 
-    useEffect(() => {
-      return () => {
+    useEffect(
+      () => () => {
         dispatch(resetRegisterData());
-      };
-    }, [dispatch]);
+      },
+      [dispatch]
+    );
 
     const getSubcategories = (): string[] => {
       if (!selectedCategories) return [];
@@ -93,18 +95,15 @@ export const RegisterStepSecondForm = memo(
         setSelectedGender(value as GenderType);
         dispatch(setRegisterData({ gender: value as GenderType }));
       }
-    }
-
-    const isFormValid = (): boolean => {
-      return (
-        !!registerData.name.trim() && // Проверяем не пустую строку
-        !!registerData.dateOfBirth && // Проверяем дату
-        !!registerData.gender &&      // Проверяем пол
-        !!registerData.city.trim() && // Проверяем город
-        !!registerData.categorySkillToLearn && // Проверяем категорию
-        !!registerData.subcategorySkillToLearn // Проверяем подкатегорию
-      );
     };
+
+    const isFormValid = (): boolean =>
+      !!registerData.name.trim() && // Проверяем не пустую строку
+      !!registerData.dateOfBirth && // Проверяем дату
+      !!registerData.gender && // Проверяем пол
+      !!registerData.city.trim() && // Проверяем город
+      !!registerData.categorySkillToLearn && // Проверяем категорию
+      !!registerData.subcategorySkillToLearn; // Проверяем подкатегорию
 
     const handleNext = () => {
       if (!isFormValid()) {
