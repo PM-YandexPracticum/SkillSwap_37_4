@@ -26,13 +26,13 @@ interface CardState {
   error: string | null;
 }
 
-
-export const transformApiDataToCardData = (apiData: TCardDataApi): TCardData => ({
+export const transformApiDataToCardData = (
+  apiData: TCardDataApi
+): TCardData => ({
   ...apiData,
   canTeach: apiData.canTeach.map((skill) => ({ name: skill })),
   wantLearn: apiData.wantLearn.map((skill) => ({ name: skill }))
 });
-
 
 const createInitialFilterState = (): SkillsFilterState => {
   const filterState: SkillsFilterState = {};

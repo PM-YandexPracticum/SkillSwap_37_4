@@ -1,7 +1,7 @@
 import { TSkillTag } from '../../components/cardTag/CardTag';
 import { TUser } from '../../types/user';
 
-const URL = process.env.SKILSWAP_API_URL || 'http://localhost:5000';
+const URL = process.env.SKILSWAP_API_URL || 'http://localhost:5050';
 
 export type TPureUserItem = {
   id: string;
