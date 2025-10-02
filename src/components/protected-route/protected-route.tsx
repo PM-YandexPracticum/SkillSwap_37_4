@@ -1,14 +1,20 @@
 import { useSelector } from '../../services/store/store';
 import { Navigate, useLocation } from 'react-router';
-import { Preloader } from '../ui/preloader/preloader';//todo
-import { userSelector, isAuthSelector } from '../../services/slices/userSlice/userSlice';
+import { Preloader } from '../ui/preloader/preloader'; //todo
+import {
+  userSelector,
+  isAuthSelector
+} from '../../services/slices/userSlice/userSlice';
 
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
   children: React.ReactElement;
 };
 
-export const ProtectedRoute = ({ onlyUnAuth, children }: ProtectedRouteProps) => {
+export const ProtectedRoute = ({
+  onlyUnAuth,
+  children
+}: ProtectedRouteProps) => {
   const isAuthChecked = useSelector(isAuthSelector);
   const user = useSelector(userSelector); //  userDataSelector — селектор получения пользователя из store
   const location = useLocation();

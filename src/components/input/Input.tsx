@@ -37,47 +37,44 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange?.(e);
     };
-  
 
     return (
-    <div className={clsx(styles.field__container, fields__container)}>
-      {label && (
-        <label htmlFor={id} className={styles.label}>
-          {label}
-        </label>
-      )}
-
-      <div className={styles.input__container}>
-        {leftIcon}
-        <input
-          ref={ref}
-          id={id}
-          className={clsx(styles.input, className)}
-          onChange={handleChange}
-          {...props}
-        />
-        {rightIcon && (
-          <button
-            type='button'
-            aria-label={rightIconAriaLabel}
-            className={clsx(styles.rightIcon, styles.icon)}
-            onClick={onRightIconClick}
-            style={{ right: iconPaddingRight }}
-          >
-            {rightIcon}
-          </button>
+      <div className={clsx(styles.field__container, fields__container)}>
+        {label && (
+          <label htmlFor={id} className={styles.label}>
+            {label}
+          </label>
         )}
+
+        <div className={styles.input__container}>
+          {leftIcon}
+          <input
+            ref={ref}
+            id={id}
+            className={clsx(styles.input, className)}
+            onChange={handleChange}
+            {...props}
+          />
+          {rightIcon && (
+            <button
+              type='button'
+              aria-label={rightIconAriaLabel}
+              className={clsx(styles.rightIcon, styles.icon)}
+              onClick={onRightIconClick}
+              style={{ right: iconPaddingRight }}
+            >
+              {rightIcon}
+            </button>
+          )}
+        </div>
+        {subLabel && <span className={styles.subLabel}>{subLabel}</span>}
+        {error && <span className={styles.errorText}>{error}</span>}
       </div>
-      {subLabel && <span className={styles.subLabel}>{subLabel}</span>}
-      {error && <span className={styles.errorText}>{error}</span>}
-    </div>
-  )
-}
+    );
+  }
 );
 
 Input.displayName = 'Input';

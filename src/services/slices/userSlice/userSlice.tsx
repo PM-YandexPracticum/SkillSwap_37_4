@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TUser } from './type';
-import { getUserApi, loginUserApi, logoutApi, registerUserApi, updateUserApi } from './userApi';
+import {
+  getUserApi,
+  loginUserApi,
+  logoutApi,
+  registerUserApi,
+  updateUserApi
+} from './userApi';
 
 type UserProfile = {
   user: TUser | null;
@@ -8,7 +14,6 @@ type UserProfile = {
   loading: boolean;
   error: string | null;
 };
-
 
 export const mockUser: TUser = {
   id: 1,
@@ -106,22 +111,25 @@ const userSlice = createSlice({
     userSelector: (state) => state.user,
     isAuthSelector: (state) => state.isAuthChecked,
     userLoadingSelector: (state) => state.loading
-  }, 
+  },
   extraReducers: (builder) => {
-     builder
+    builder
       .addCase(checkUserAuthThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(checkUserAuthThunk.fulfilled, (state, action: PayloadAction<TUser>) => {
-        state.user = action.payload;
-        state.isAuthChecked = true;
-        state.loading = false;
-      })
-      .addCase(checkUserAuthThunk.rejected, (state, action) => {
-          state.user = null;
+      .addCase(
+        checkUserAuthThunk.fulfilled,
+        (state, action: PayloadAction<TUser>) => {
+          state.user = action.payload;
           state.isAuthChecked = true;
           state.loading = false;
-          state.error = action.error.message || 'Ошибка проверки авторизации';
+        }
+      )
+      .addCase(checkUserAuthThunk.rejected, (state, action) => {
+        state.user = null;
+        state.isAuthChecked = true;
+        state.loading = false;
+        state.error = action.error.message || 'Ошибка проверки авторизации';
       });
 
     // --- userLoginThunk
@@ -129,11 +137,14 @@ const userSlice = createSlice({
       .addCase(userLoginThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(userLoginThunk.fulfilled, (state, action: PayloadAction<TUser>) => {
-        state.user = action.payload;
-        state.loading = false;
-        state.isAuthChecked = true;
-      })
+      .addCase(
+        userLoginThunk.fulfilled,
+        (state, action: PayloadAction<TUser>) => {
+          state.user = action.payload;
+          state.loading = false;
+          state.isAuthChecked = true;
+        }
+      )
       .addCase(userLoginThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Ошибка входа';
@@ -144,11 +155,14 @@ const userSlice = createSlice({
       .addCase(userRegisterThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(userRegisterThunk.fulfilled, (state, action: PayloadAction<TUser>) => {
-        state.user = action.payload;
-        state.loading = false;
-        state.isAuthChecked = true;
-      })
+      .addCase(
+        userRegisterThunk.fulfilled,
+        (state, action: PayloadAction<TUser>) => {
+          state.user = action.payload;
+          state.loading = false;
+          state.isAuthChecked = true;
+        }
+      )
       .addCase(userRegisterThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Ошибка регистрации';
@@ -159,10 +173,13 @@ const userSlice = createSlice({
       .addCase(updateUserThunk.pending, (state) => {
         state.loading = true;
       })
-      .addCase(updateUserThunk.fulfilled, (state, action: PayloadAction<TUser>) => {
-        state.user = action.payload;
-        state.loading = false;
-      })
+      .addCase(
+        updateUserThunk.fulfilled,
+        (state, action: PayloadAction<TUser>) => {
+          state.user = action.payload;
+          state.loading = false;
+        }
+      )
       .addCase(updateUserThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Ошибка обновления данных';

@@ -56,10 +56,7 @@ export function ProfilePageUserInfo() {
       ) : (
         <>
           {skills.map((skill) => (
-            <div
-              key={skill.id}
-              className={styles.skillCard}
-            >
+            <div key={skill.id} className={styles.skillCard}>
               <h3 className={styles.skillCategory}>{skill.category}</h3>
               <p className={styles.skillSubcategory}>{skill.subCategory}</p>
               <p className={styles.skillName}>{skill.name}</p>

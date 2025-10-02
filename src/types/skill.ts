@@ -1,6 +1,6 @@
 export interface TSkill {
   id: string;
-  ownerId:string;
+  ownerId: string;
   photoUrl: string[];
   name: string;
   category: string;

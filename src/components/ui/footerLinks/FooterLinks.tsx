@@ -5,28 +5,28 @@ export const FooterLinks = () => (
   <nav className={styles.nav_menu}>
     <ul className={`${styles.linksList}`}>
       <li>
-        <AppLink to={'/about'} text={'О проекте'}/>
+        <AppLink to={'/about'} text={'О проекте'} />
       </li>
       <li>
-        <AppLink to={'/all_skills'} text={'Все навыки'}/>
-      </li>
-    </ul>
-
-    <ul className={styles.linksList}>
-      <li>
-        <AppLink to={'/contacts'} text={'Контакты'}/>
-      </li>
-      <li>
-        <AppLink to={'/blog'} text={'Блог'}/>
+        <AppLink to={'/all_skills'} text={'Все навыки'} />
       </li>
     </ul>
 
     <ul className={styles.linksList}>
       <li>
-        <AppLink to={'/privacy'} text={'Политика конфиденциальности'}/>
+        <AppLink to={'/contacts'} text={'Контакты'} />
       </li>
       <li>
-        <AppLink to={'/terms'} text={'Пользовательское соглашение'}/>
+        <AppLink to={'/blog'} text={'Блог'} />
+      </li>
+    </ul>
+
+    <ul className={styles.linksList}>
+      <li>
+        <AppLink to={'/privacy'} text={'Политика конфиденциальности'} />
+      </li>
+      <li>
+        <AppLink to={'/terms'} text={'Пользовательское соглашение'} />
       </li>
     </ul>
   </nav>

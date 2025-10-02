@@ -11,7 +11,9 @@ export const CatalogPage = () => {
 
   return (
     <div className={style.catalogPage}>
-      <div><FilterForm/></div>
+      <div>
+        <FilterForm />
+      </div>
       <CatalogPageUI hasFilter={hasFilter} cardDataArray={cardDataArray} />
     </div>
   );

@@ -19,7 +19,7 @@ export const CardUI: FC<TCardUI> = ({
 }) => {
   const [liked, setLiked] = useState(false);
   const handleLike = () => {
-    setLiked(prevLiked => !prevLiked);
+    setLiked((prevLiked) => !prevLiked);
   };
 
   const navigate = useNavigate();
@@ -36,7 +36,11 @@ export const CardUI: FC<TCardUI> = ({
           <p className={styles.userName}>{userName}</p>
           <p className={styles.userInfo}>{`${city}, ${age}`}</p>
         </div>
-        <button className={styles.like} onClick={handleLike} aria-label="Поставить лайк">
+        <button
+          className={styles.like}
+          onClick={handleLike}
+          aria-label='Поставить лайк'
+        >
           <img
             src={liked ? likeIconActive : likeIcon}
             alt='лайк'
@@ -50,11 +54,7 @@ export const CardUI: FC<TCardUI> = ({
           <h4 className={styles.skillsTitle}>Может научить:</h4>
           <div className={styles.skillsTags}>
             {canTeach.slice(0, 2).map((skill, index) => (
-              <CardTag
-                key={index}
-                name={skill.name}
-                color={skill.color}
-              />
+              <CardTag key={index} name={skill.name} color={skill.color} />
             ))}
           </div>
         </div>
@@ -62,17 +62,10 @@ export const CardUI: FC<TCardUI> = ({
           <h4 className={styles.skillsTitle}>Хочет научиться:</h4>
           <div className={styles.learnTags}>
             {wantLearn.slice(0, 2).map((skill, index) => (
-              <CardTag
-                key={index}
-                name={skill.name}
-                color={skill.color}
-              />
+              <CardTag key={index} name={skill.name} color={skill.color} />
             ))}
             {remainingWantLearn > 0 && (
-              <CardTag
-                name={`+${remainingWantLearn}`}
-                color='#e8ecf7'
-              />
+              <CardTag name={`+${remainingWantLearn}`} color='#e8ecf7' />
             )}
           </div>
         </div>
@@ -82,6 +75,13 @@ export const CardUI: FC<TCardUI> = ({
           Подробнее
         </GreenButton>
       </div>}
+      {onClick && (
+        <div className={styles.buttonContainer}>
+          <GreenButton onClick={onClick} className={styles.buttonWidth}>
+            Подробнее
+          </GreenButton>
+        </div>
+      )}
     </div>
   );
 };

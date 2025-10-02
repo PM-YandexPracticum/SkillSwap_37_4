@@ -18,7 +18,7 @@ export const PasswordField: React.FC<PasswordFieldProps> = ({
   label = 'Пароль',
   value,
   onChange,
-  id, 
+  id,
   inputRef,
   subLabel
 }) => {

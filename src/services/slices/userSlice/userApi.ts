@@ -15,7 +15,10 @@ export const getUserApi = async (): Promise<{ user: TUser }> => {
 /**
  * Логин пользователя
  */
-export const loginUserApi = async (data: { email: string; password: string }): Promise<{ user: TUser; accessToken: string; refreshToken: string }> => {
+export const loginUserApi = async (data: {
+  email: string;
+  password: string;
+}): Promise<{ user: TUser; accessToken: string; refreshToken: string }> => {
   await sleep(500);
   // пока всегда возвращаем мокнутого пользователя
   if (data.email === mockUser.email && data.password === mockUser.password) {
@@ -31,7 +34,9 @@ export const loginUserApi = async (data: { email: string; password: string }): P
 /**
  * Регистрация нового пользователя
  */
-export const registerUserApi = async (data: Partial<TUser>): Promise<{ user: TUser; accessToken: string; refreshToken: string }> => {
+export const registerUserApi = async (
+  data: Partial<TUser>
+): Promise<{ user: TUser; accessToken: string; refreshToken: string }> => {
   await sleep(500);
   // возвращаем копию mockUser с новыми полями
   const newUser: TUser = {
@@ -49,7 +54,9 @@ export const registerUserApi = async (data: Partial<TUser>): Promise<{ user: TUs
 /**
  * Обновление профиля (пароль, почта, город и т.д.)
  */
-export const updateUserApi = async (data: Partial<TUser>): Promise<{ user: TUser }> => {
+export const updateUserApi = async (
+  data: Partial<TUser>
+): Promise<{ user: TUser }> => {
   await sleep(500);
   const updatedUser: TUser = { ...mockUser, ...data };
   return { user: updatedUser };

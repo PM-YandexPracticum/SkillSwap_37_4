@@ -140,7 +140,13 @@ export const SkillsFilter: FC<SkillsFilterProps> = ({
 
       {categories.length > 6 && (
         <ExpandButton
-          text={showAllCategories ? 'Скрыть' : title === 'Город' ? 'Все города' : 'Все категории'}
+          text={
+            showAllCategories
+              ? 'Скрыть'
+              : title === 'Город'
+                ? 'Все города'
+                : 'Все категории'
+          }
           color='#508826'
           className={styles.allCategoriesButton}
           onClick={() => setShowAllCategories(!showAllCategories)}

@@ -7,15 +7,17 @@ export const AuthLayout: FC = () => {
   const navigate = useNavigate();
   return (
     <>
-      <header style={{
-        backgroundColor: '#f9faf7',
-        boxSizing: 'border-box',
-        padding: '36px',
-        height: '104px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
+      <header
+        style={{
+          backgroundColor: '#f9faf7',
+          boxSizing: 'border-box',
+          padding: '36px',
+          height: '84px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}
+      >
         <Logo />
         <CloseButton onClick={() => navigate('/')} />
       </header>
@@ -25,5 +27,3 @@ export const AuthLayout: FC = () => {
 };
 
 export default AuthLayout;
-
-
