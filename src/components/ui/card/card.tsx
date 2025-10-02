@@ -54,7 +54,6 @@ export const CardUI: FC<TCardUI> = ({
                 key={index}
                 name={skill.name}
                 color={skill.color}
-                onClick={() => navigate(`/skill/${index}`)}
               />
             ))}
           </div>
@@ -67,7 +66,6 @@ export const CardUI: FC<TCardUI> = ({
                 key={index}
                 name={skill.name}
                 color={skill.color}
-                onClick={() => navigate(`/skill/${index}`)}
               />
             ))}
             {remainingWantLearn > 0 && (
