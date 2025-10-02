@@ -185,7 +185,7 @@ export const RegisterStepSecondForm = memo(
       <div className={styles.page_container}>
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <div className={styles.icon__container}>
-            <label htmlFor='avatar' className={styles.avatar__label}>            
+            <label htmlFor='avatar' className={styles.avatar__label}>
               <input
                 type='file'
                 name='avatar'
