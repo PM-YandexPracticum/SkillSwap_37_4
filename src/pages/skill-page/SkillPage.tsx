@@ -4,7 +4,7 @@ import styles from './SkillPage.module.css';
 
 import GreenButton from '../../components/buttons/GreenButton';
 import { TCard } from '../../components/card/type';
-import {TCardData} from '../../services/slices/cardSlice/type';
+import { TCardData } from '../../services/slices/cardSlice/type';
 import { SkillCardProps } from '../../components/skillCard/SkillCard';
 import { Card } from '../../components/card';
 import { SkillCard } from '../../components/skillCard/SkillCard';
@@ -13,7 +13,10 @@ import { CardCarousel } from '../../components/cardCarousel';
 import { TSkillTag } from '../../components/cardTag/CardTag';
 
 import { useDispatch, useSelector } from '../../services/store/store';
-import { getSkillPageById, getSkillCardById } from '../../services/store/slices/skillSlice/skillSlice';
+import {
+  getSkillPageById,
+  getSkillCardById
+} from '../../services/store/slices/skillSlice/skillSlice';
 
 const toCard = (c: TCardData, onClick?: () => void): TCard =>
   onClick ? { ...c, onClick } : (c as TCard);
@@ -133,8 +136,8 @@ const SkillPage: FC = () => {
         <SkillCard {...(skillData as SkillCardProps)}>
           <GreenButton
             onClick={() => {
-              alert('Кнопка нажата!')}
-          }
+              alert('Кнопка нажата!');
+            }}
             className={styles.buttonWidth}
           >
             Предложить обмен

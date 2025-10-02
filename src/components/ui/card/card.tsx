@@ -73,12 +73,7 @@ export const CardUI: FC<TCardUI> = ({
       {onClick && (
         <div className={styles.buttonContainer}>
           {canTeach.slice(0, 2).map((skill, index) => (
-            <GreenButton
-              onClick={() => {
-                navigate(`/skill/${index}`);
-              }}
-              className={styles.buttonWidth}
-            >
+            <GreenButton onClick={onClick} className={styles.buttonWidth}>
               Подробнее
             </GreenButton>
           ))}
