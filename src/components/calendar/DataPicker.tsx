@@ -1,11 +1,12 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { DropDown } from '../DropDown';
 import { GreenButton } from '../buttons/GreenButton/GreenButton';
+import GreenBorderButton from '../buttons/GreenBorderButton';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { ru } from 'date-fns/locale';
-import styles from './DataPicker.module.css';
 import { format } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
+import styles from './DataPicker.module.css';
 
 registerLocale('ru', ru);
 
@@ -28,28 +29,25 @@ interface YearOption extends SelectOption {
 }
 
 // Утилита для получения локализованных месяцев
-const getLocalizedMonths = (locale: any): MonthOption[] => {
-  return Array.from({ length: 12 }, (_, monthIndex) => ({
+const getLocalizedMonths = (locale: any): MonthOption[] =>
+  Array.from({ length: 12 }, (_, monthIndex) => ({
     value: monthIndex.toString(),
-    label: format(new Date(2023, monthIndex), 'LLLL', { locale }),
+    label: format(new Date(2023, monthIndex), 'LLLL', { locale })
   }));
-};
 
 // Хук для получения месяцев
-const useLocalizedMonths = (locale: any = ru): MonthOption[] => {
-  return useMemo(() => getLocalizedMonths(locale), [locale]);
-};
+const useLocalizedMonths = (locale: any = ru): MonthOption[] =>
+  useMemo(() => getLocalizedMonths(locale), [locale]);
 
-// Утилита для получения списка годов
-const getYears = (startYear: number, count: number): YearOption[] => {
-  return Array.from({ length: count }, (_, index) => {
+// Утилита для получения списка годов *format(new Date(year), 'yyyy', { locale: ru })
+const getYears = (startYear: number, count: number): YearOption[] =>
+  Array.from({ length: count }, (_, index) => {
     const year = startYear - index;
     return {
       value: year.toString(),
-      label: format(new Date(year, 0, 1), 'yyyy', { locale: ru }),
+      label: year.toString()
     };
   });
-};
 
 // Хук для получения годов
 const useYears = (): YearOption[] => {
@@ -64,12 +62,12 @@ interface DatePickerProps {
 
 export const DatePickerComponent: React.FC<DatePickerProps> = ({
   selectedDate,
-  setSelectedDate,
+  setSelectedDate
 }) => {
   const datePickerRef = useRef<any>(null);
   const months = useLocalizedMonths(ru);
   const years = useYears();
-
+  // console.log(months, years);
   const handleDateChange = (date: Date | null) => {
     if (date && date > new Date()) {
       setSelectedDate(null);
@@ -88,7 +86,7 @@ export const DatePickerComponent: React.FC<DatePickerProps> = ({
     datePickerRef.current?.setOpen(false);
   };
 
-const renderCustomHeader = ({
+  const renderCustomHeader = ({
     date,
     changeYear,
     changeMonth
@@ -103,12 +101,11 @@ const renderCustomHeader = ({
     const selectedYear = years.find(
       (y) => y.value === date.getFullYear().toString()
     );
-
+    //console.log(selectedMonth);
     return (
-      <div className={styles['custom-header']}>
+      <div className={styles.custom__header}>
         <DropDown
           options={months}
-          value={selectedMonth?.value}
           onChange={(option) => {
             if (typeof option === 'string') {
               changeMonth(Number(option));
@@ -136,7 +133,6 @@ const renderCustomHeader = ({
       <label className={styles.label}>Дата рождения</label>
       <DatePicker
         ref={datePickerRef}
-        showIcon
         selected={selectedDate}
         onChange={handleDateChange}
         locale='ru'
@@ -153,17 +149,17 @@ const renderCustomHeader = ({
           <div className={styles['calendar-container']}>
             {children}
             <div className={styles.footer}>
-              <GreenButton
+              <GreenBorderButton
                 onClick={handleCancel}
                 type='button'
-                className='disabled'
+                /*className='disabled'*/
               >
                 Отменить
-              </GreenButton>
+              </GreenBorderButton>
               <GreenButton
                 onClick={handleConfirm}
-                type='button'
-                className='active'
+                /*className={styles.confirm_button}*/
+                type='submit'
               >
                 Выбрать
               </GreenButton>
