@@ -70,16 +70,18 @@ export const CardUI: FC<TCardUI> = ({
           </div>
         </div>
       </div>
-      {onClick && <div className={styles.buttonContainer}>
-        <GreenButton onClick={() => navigate(`/skill/${canTeach}`)} className={styles.buttonWidth}>
-          Подробнее
-        </GreenButton>
-      </div>}
       {onClick && (
         <div className={styles.buttonContainer}>
-          <GreenButton onClick={onClick} className={styles.buttonWidth}>
-            Подробнее
-          </GreenButton>
+          {canTeach.slice(0, 2).map((skill, index) => (
+            <GreenButton
+              onClick={() => {
+                navigate(`/skill/${index}`);
+              }}
+              className={styles.buttonWidth}
+            >
+              Подробнее
+            </GreenButton>
+          ))}
         </div>
       )}
     </div>
