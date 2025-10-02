@@ -1,6 +1,5 @@
 import { useEffect, useState, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from '../../services/store/store';
 import iconPlus from '../app/assets/static/iconsUi/add.svg';
 import genderData from '../../const/gender.json';
@@ -18,7 +17,6 @@ import {
   resetRegisterData,
   GenderType
 } from '../../services/slices/registerSlice';
-import { errorSelector, userLoadingSelector, userLoginThunk } from '../../services/slices/userSlice/userSlice';
 
 interface RegisterStepSecondFormProps {
   buttonPrevText: string;
@@ -34,62 +32,6 @@ export const RegisterStepSecondForm = memo(
     const [date, setDate] = useState<Date | null>(null);
     const [selectedGender, setSelectedGender] =
       useState<GenderType>('Не указан');
-    const navigate = useNavigate();
-    const location = useLocation();
-    const loading = useSelector(userLoadingSelector);
-    const [errors, setErrors] = useState<{ 
-      avatar?: string; 
-      name?: string;
-      dateOfBirth?: string;
-      gender?: string;
-      city?: string;
-      categorySkillToLearn?: string;
-      subcategorySkillToLearn?: string
-    }>({});  
-    const [isFormValid, setIsFormValid] = useState(false);
-
-    const [touched, setTouched] = useState<{ 
-      avatar: boolean; 
-      name: boolean;
-      dateOfBirth: boolean;
-      gender: boolean;
-      city: boolean;
-      categorySkillToLearn: boolean;
-      subcategorySkillToLearn: boolean
-    }>({
-      avatar: false,
-      name: false,
-      dateOfBirth: false,
-      gender: false,
-      city: false,
-      categorySkillToLearn: false,
-      subcategorySkillToLearn: false
-    });
-
-    const validate = () => {
-      const newErrors: { 
-        avatar?: string; 
-        name?: string;
-        dateOfBirth?: string;
-        gender?: string;
-        city?: string;
-        categorySkillToLearn?: string;
-        subcategorySkillToLearn?: string
-      } = {};
-
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
-        if(touched.email) newErrors.email = 'Неверный формат email';
-      }
-
-      if (passwordValue.length < 8) {
-      if(touched.password) newErrors.password = 'Пароль должен содержать не менее 8 знаков';
-      }
-
-      setErrors(newErrors);
-      setIsFormValid(Object.keys(newErrors).length === 0)
-
-      return Object.keys(newErrors).length === 0;
-    };
 
     useEffect(() => {
       setSelectedGender(registerData.gender || 'Не указан');
@@ -155,19 +97,26 @@ export const RegisterStepSecondForm = memo(
       }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
+    const useValidation = (conditions: boolean[]) => {
+      const [isValid, setValid] = useState<boolean>();
 
-      setTouched({ email: true, password: true });
-      if (validate()) {
-        const result = await dispatch(userLoginThunk({ email: emailValue, password: passwordValue }));
-        
-        if (userLoginThunk.fulfilled.match(result)) {
-          const from = location.state?.from?.pathname || '/';
-          navigate(from, { replace: true });
-        }
-      }
+      const getValid = () => !conditions.some((condition) => !condition);
+
+      useEffect(() => {
+        setValid(getValid());
+      }, conditions);
+
+      return isValid;
     };
+
+    const isFormValid = useValidation([
+      registerData.name !== null,
+      registerData.dateOfBirth !== null,
+      registerData.gender !== null,
+      registerData.city !== null,
+      registerData.categorySkillToLearn !== null,
+      registerData.subcategorySkillToLearn !== null
+    ]);
 
     const handleNext = () => {
       if (!isFormValid) {
@@ -183,7 +132,7 @@ export const RegisterStepSecondForm = memo(
 
     return (
       <div className={styles.page_container}>
-        <form className={styles.form_container} onSubmit={handleSubmit}>
+        <form className={styles.form_container}>
           <div className={styles.icon__container}>
             <label htmlFor='avatar' className={styles.avatar__label}>
               <input
@@ -283,10 +232,10 @@ export const RegisterStepSecondForm = memo(
 
             <GreenButton
               className={styles.button_width}
-              type='submit'
-              disabled={!isFormValid || loading} 
+              onClick={handleNext}
+              disabled={!isFormValid}
             >
-              {loading ? 'Вход...' : buttonNextText}
+              {buttonNextText}
             </GreenButton>
           </div>
         </form>
