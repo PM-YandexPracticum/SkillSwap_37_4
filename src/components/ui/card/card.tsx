@@ -78,7 +78,7 @@ export const CardUI: FC<TCardUI> = ({
         </div>
       </div>
       {onClick && <div className={styles.buttonContainer}>
-        <GreenButton onClick={onClick} className={styles.buttonWidth}>
+        <GreenButton onClick={() => navigate(`/skill/${canTeach}`)} className={styles.buttonWidth}>
           Подробнее
         </GreenButton>
       </div>}
