@@ -49,8 +49,8 @@ const initialState: CardState = {
 const getCardSkills = (card: TCard) =>
   [...card.canTeach, ...card.wantLearn].map((skill) => skill.name);
 
-const applyFilters = (cards: TCard[], filterObj: FilterObject): TCard[] => {
-  return cards.filter((card) => {
+const applyFilters = (cards: TCard[], filterObj: FilterObject): TCard[] =>
+  cards.filter((card) => {
     const cardSkills = getCardSkills(card);
 
     if (filterObj.category?.length || filterObj.subcategory?.length) {
@@ -85,7 +85,6 @@ const applyFilters = (cards: TCard[], filterObj: FilterObject): TCard[] => {
 
     return true;
   });
-};
 
 const applySorting = (cards: TCard[], filterObj: FilterObject): TCard[] => {
   if (filterObj.sortByNew) {

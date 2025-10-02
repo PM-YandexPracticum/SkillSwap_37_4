@@ -6,31 +6,29 @@ import { TCatalogPageUI } from './type';
 export const CatalogPageUI: FC<TCatalogPageUI> = ({
   hasFilter,
   cardDataArray
-}) => {
-  return (
-    <div className={style.catalogBlockContainer}>
-      {hasFilter ? (
-        <div>
-          <CatalogBlock
-            title={`Подходящие предложения: ${cardDataArray.length}`}
-            card={cardDataArray}
-            limit={12}
-            scroll={true}
-            buttonFilter={true}
-          />
-        </div>
-      ) : (
-        <div>
-          <CatalogBlock title='Популярное' card={cardDataArray} limit={3} />
-          <CatalogBlock title='Новое' card={cardDataArray} limit={3} />
-          <CatalogBlock
-            title='Рекомендуем'
-            card={cardDataArray}
-            limit={9}
-            scroll={true}
-          />
-        </div>
-      )}
-    </div>
-  );
-};
+}) => (
+  <div className={style.catalogBlockContainer}>
+    {hasFilter ? (
+      <div>
+        <CatalogBlock
+          title={`Подходящие предложения: ${cardDataArray.length}`}
+          card={cardDataArray}
+          limit={12}
+          scroll
+          buttonFilter
+        />
+      </div>
+    ) : (
+      <div>
+        <CatalogBlock title='Популярное' card={cardDataArray} limit={3} />
+        <CatalogBlock title='Новое' card={cardDataArray} limit={3} />
+        <CatalogBlock
+          title='Рекомендуем'
+          card={cardDataArray}
+          limit={9}
+          scroll
+        />
+      </div>
+    )}
+  </div>
+);

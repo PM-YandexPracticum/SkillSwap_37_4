@@ -10,7 +10,7 @@ export type TCardData = {
   avatar_url: string;
   canTeach: TSkillTag[];
   wantLearn: TSkillTag[];
-}
+};
 export type TCardDataApi = {
   userEmail: string;
   likes: string[];
@@ -21,7 +21,7 @@ export type TCardDataApi = {
   avatar_url: string;
   canTeach: string[];
   wantLearn: string[];
-}
+};
 
 export type TCard = TCardData & {
   onClick?: () => void;

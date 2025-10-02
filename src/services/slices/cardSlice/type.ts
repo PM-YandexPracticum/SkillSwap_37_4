@@ -1,4 +1,4 @@
-import { TSkillTag } from "../../../components/cardTag/CardTag";
+import { TSkillTag } from '../../../components/cardTag/CardTag';
 
 export type TCardData = {
   userEmail: string;
@@ -10,7 +10,7 @@ export type TCardData = {
   avatar_url: string;
   canTeach: TSkillTag[];
   wantLearn: TSkillTag[];
-}
+};
 
 export type TCardDataApi = {
   userEmail: string;
@@ -22,7 +22,7 @@ export type TCardDataApi = {
   avatar_url: string;
   canTeach: string[];
   wantLearn: string[];
-}
+};
 
 export interface CardState {
   cards: TCardData[];
@@ -41,4 +41,4 @@ export interface FilterParams {
   sortByLike?: boolean;
   city?: string;
   gender?: string;
-};
+}

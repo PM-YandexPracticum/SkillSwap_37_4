@@ -4,7 +4,13 @@ import { CatalogBlockUI } from '../ui/catalogBlock/catalogBlock';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useScroll } from '../../hooks/useScroll';
 
-export const CatalogBlock: FC<TCatalogBlock> = ({ title, card, limit, scroll, buttonFilter }) => {
+export const CatalogBlock: FC<TCatalogBlock> = ({
+  title,
+  card,
+  limit,
+  scroll,
+  buttonFilter
+}) => {
   const [visibleCount, setVisibleCount] = useState<number>(9);
   const [loading, setLoading] = useState<boolean>(false);
   const [allLoaded, setAllLoaded] = useState<boolean>(false);

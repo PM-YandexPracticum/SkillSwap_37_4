@@ -1,5 +1,9 @@
 import { FC } from 'react';
-import { differenceInMinutes, differenceInHours, differenceInDays } from 'date-fns';
+import {
+  differenceInMinutes,
+  differenceInHours,
+  differenceInDays
+} from 'date-fns';
 import notificationLightIcon from '../../components/app/assets/static/icons/notification-light.svg';
 import GreenButton from '../buttons/GreenButton';
 import styles from './NotificationItem.module.css';

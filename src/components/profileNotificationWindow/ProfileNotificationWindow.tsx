@@ -17,27 +17,37 @@ type Props = {
 export const ProfileNotificationWindow: FC<Props> = ({ initial }) => {
   const [items, setItems] = useState(initial);
 
-  const { newItems, viewedItems } = useMemo(() => ({
-    newItems: items.filter(n => !n.viewed),
-    viewedItems: items.filter(n => n.viewed),
-  }), [items]);
+  const { newItems, viewedItems } = useMemo(
+    () => ({
+      newItems: items.filter((n) => !n.viewed),
+      viewedItems: items.filter((n) => n.viewed)
+    }),
+    [items]
+  );
 
   const markAllAsRead = () => {
-    setItems(prev => prev.map(n => ({ ...n, viewed: true })));
-    const allIds = items.map(n => n.notifyId);
+    setItems((prev) => prev.map((n) => ({ ...n, viewed: true })));
+    const allIds = items.map((n) => n.notifyId);
     localStorage.setItem('viewedNotifications', JSON.stringify(allIds));
   };
 
   const clearViewed = () => {
-    setItems(prev => prev.filter(n => !n.viewed));
+    setItems((prev) => prev.filter((n) => !n.viewed));
     localStorage.removeItem('viewedNotifications');
   };
 
   const handleGo = (id: string) => {
-    setItems(prev => prev.map(n => n.notifyId === id ? { ...n, viewed: true } : n));
-    const saved = JSON.parse(localStorage.getItem('viewedNotifications') || '[]');
+    setItems((prev) =>
+      prev.map((n) => (n.notifyId === id ? { ...n, viewed: true } : n))
+    );
+    const saved = JSON.parse(
+      localStorage.getItem('viewedNotifications') || '[]'
+    );
     if (!saved.includes(id)) {
-      localStorage.setItem('viewedNotifications', JSON.stringify([...saved, id]));
+      localStorage.setItem(
+        'viewedNotifications',
+        JSON.stringify([...saved, id])
+      );
     }
   };
 
@@ -53,7 +63,7 @@ export const ProfileNotificationWindow: FC<Props> = ({ initial }) => {
       </header>
 
       <div className={styles.list}>
-        {newItems.map(n => (
+        {newItems.map((n) => (
           <NotificationItem
             key={n.notifyId}
             title={n.title}
@@ -77,7 +87,7 @@ export const ProfileNotificationWindow: FC<Props> = ({ initial }) => {
       </header>
 
       <div className={styles.list}>
-        {viewedItems.map(n => (
+        {viewedItems.map((n) => (
           <NotificationItem
             key={n.notifyId}
             title={n.title}
@@ -92,4 +102,3 @@ export const ProfileNotificationWindow: FC<Props> = ({ initial }) => {
     </section>
   );
 };
-

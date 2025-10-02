@@ -16,16 +16,22 @@ export const HeaderLinks = () => {
     <div className={styles.section}>
       <ul className={`${styles.linksList}`}>
         <li>
-          <AppLink to={'/about'} text={'О проекте'}/>
+          <AppLink to={'/about'} text={'О проекте'} />
         </li>
         <li>
           <ExpandButton
-            text="Все навыки"
+            text='Все навыки'
             isOpen={isOpen}
             onClick={handleToggle}
             className={styles.expand_button}
           />
-        <SkillsNavMenu isOpen={isOpen} onClose={() => {handleToggle}} className={styles.skillsNavMenu} />
+          <SkillsNavMenu
+            isOpen={isOpen}
+            onClose={() => {
+              handleToggle;
+            }}
+            className={styles.skillsNavMenu}
+          />
         </li>
       </ul>
     </div>

@@ -10,9 +10,7 @@ export const ExchangeCreatedModal: FC<TModalProps> = ({ onClose }) => (
       <img src={successIcon} alt='success icon' className={styles.icon} />
       <div className={styles.content}>
         <h2 className={styles.title}>Ваше предложение создано</h2>
-        <p className={styles.description}>
-          Теперь вы можете предложить обмен
-        </p>
+        <p className={styles.description}>Теперь вы можете предложить обмен</p>
         <GreenButton className={styles.button} onClick={onClose}>
           Готово
         </GreenButton>

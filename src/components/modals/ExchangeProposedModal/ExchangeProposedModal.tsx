@@ -24,4 +24,3 @@ export const ExchangeProposedModal: FC<TModalProps> = ({ onClose }) => (
     </div>
   </Modal>
 );
-

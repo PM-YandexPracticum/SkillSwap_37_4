@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Checkbox } from '../ui/checkbox/Checkbox';
-import style from "./CheckGroup.module.css"
+import style from './CheckGroup.module.css';
 
 export type CheckGroupItem = {
   id: string;
@@ -18,20 +18,18 @@ export const CheckGroup: FC<CheckGroupProps> = ({
   nameGroup,
   items,
   checkedItems,
-  onChange,
-}) => {
-  return (
-    <div className={style.group}>
-      <h3 className={style.title_group}>{nameGroup}</h3>
-      {items.map((item) => (
-        <Checkbox
-          key={item.id}
-          id={item.id}
-          label={item.label}
-          checked={!!checkedItems[item.id]}
-          onChange={onChange}
-        />
-      ))}
-    </div>
-  );
-};
+  onChange
+}) => (
+  <div className={style.group}>
+    <h3 className={style.title_group}>{nameGroup}</h3>
+    {items.map((item) => (
+      <Checkbox
+        key={item.id}
+        id={item.id}
+        label={item.label}
+        checked={!!checkedItems[item.id]}
+        onChange={onChange}
+      />
+    ))}
+  </div>
+);

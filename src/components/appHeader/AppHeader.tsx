@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Logo } from '../ui/logo/Logo';
 import { HeaderLinks } from '../ui/headerLinks/HeaderLinks';
 import styles from './AppHeader.module.css';
@@ -6,13 +6,12 @@ import { Input } from '../input/Input';
 import { SearchIcon } from 'lucide-react';
 import { UserMenu } from '../UserMenu';
 import { nanoid } from '@reduxjs/toolkit';
-import clsx from "clsx";
-import { CloseButton } from "../buttons/CloseButton/CloseButton";
+import clsx from 'clsx';
+import { CloseButton } from '../buttons/CloseButton/CloseButton';
 
 export type THeaderProps = {
   userAuth?: boolean;
 };
-
 
 export const AppHeader: React.FC<THeaderProps> = ({ userAuth }) => {
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ export const AppHeader: React.FC<THeaderProps> = ({ userAuth }) => {
     navigate('/');
   };
 
-  if (location.pathname === "/register") {
+  if (location.pathname === '/register') {
     return null;
   }
 
@@ -31,7 +30,7 @@ export const AppHeader: React.FC<THeaderProps> = ({ userAuth }) => {
       <Logo onClick={handleRedirect} />
       <HeaderLinks />
       <Input
-        placeholder="Искать навык"
+        placeholder='Искать навык'
         leftIcon={<SearchIcon width={24} height={24} />}
         className={styles.headerSearchInput}
         fields__container={styles.Input}
@@ -39,7 +38,7 @@ export const AppHeader: React.FC<THeaderProps> = ({ userAuth }) => {
       />
       <UserMenu
         onThemeToggle={() => {
-          console.log("представьте, что тема изменилась))");
+          console.log('представьте, что тема изменилась))');
         }}
         isDarkTheme={false}
       />

@@ -18,7 +18,7 @@ export const RadioGroup: FC<RadioGroupProps> = ({
   items,
   onChange,
   name,
-  title,
+  title
 }) => {
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);

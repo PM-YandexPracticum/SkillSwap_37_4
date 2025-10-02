@@ -9,7 +9,13 @@ type CheckboxProps = {
   variant?: 'check' | 'minus';
 };
 
-export const Checkbox: FC<CheckboxProps> = ({ id, label, checked, onChange, variant = 'check' }) => {
+export const Checkbox: FC<CheckboxProps> = ({
+  id,
+  label,
+  checked,
+  onChange,
+  variant = 'check'
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(id, event.target.checked);
   };
@@ -18,7 +24,7 @@ export const Checkbox: FC<CheckboxProps> = ({ id, label, checked, onChange, vari
     <label className={style.label}>
       <input
         id={id}
-        type="checkbox"
+        type='checkbox'
         checked={checked}
         onChange={handleChange}
         className={`${style.input} ${variant === 'minus' ? style.iconMinus : style.iconCheck}`}
