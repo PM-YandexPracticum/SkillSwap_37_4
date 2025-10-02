@@ -22,6 +22,9 @@ interface RegisterStepSecondFormProps {
   buttonPrevText: string;
   buttonNextText: string;
 }
+interface ValidationErrors {
+  [key: string]: string;
+}
 
 export const RegisterStepSecondForm = memo(
   ({ buttonPrevText, buttonNextText }: RegisterStepSecondFormProps) => {
@@ -30,8 +33,11 @@ export const RegisterStepSecondForm = memo(
     const [selectedCategories, setSelectedCategories] = useState('');
     const [selectedSubcategories, setSelectedSubcategories] = useState('');
     const [date, setDate] = useState<Date | null>(null);
-    const [selectedGender, setSelectedGender] =
-      useState<GenderType>('Не указан');
+    const [selectedGender, setSelectedGender] = useState<GenderType>(
+      'Не указан' as GenderType
+    );
+
+    const [errors, setErrors] = useState<ValidationErrors>({});
 
     useEffect(() => {
       setSelectedGender(registerData.gender || 'Не указан');
@@ -91,36 +97,18 @@ export const RegisterStepSecondForm = memo(
     };
 
     const handleGenderChange = (value: string) => {
-      if (['Мужской', 'Женский', 'Не указан'].includes(value)) {
-        setSelectedGender(value as GenderType);
-        dispatch(setRegisterData({ gender: value as GenderType }));
-      }
+      setSelectedGender(value as GenderType);
+      dispatch(setRegisterData({ gender: value as GenderType }));
+
+      setErrors({
+        ...errors,
+        gender: ''
+      });
     };
-
-    const useValidation = (conditions: boolean[]) => {
-      const [isValid, setValid] = useState<boolean>();
-
-      const getValid = () => !conditions.some((condition) => !condition);
-
-      useEffect(() => {
-        setValid(getValid());
-      }, conditions);
-
-      return isValid;
-    };
-
-    const isFormValid = useValidation([
-      registerData.name !== null,
-      registerData.dateOfBirth !== null,
-      registerData.gender !== null,
-      registerData.city !== null,
-      registerData.categorySkillToLearn !== null,
-      registerData.subcategorySkillToLearn !== null
-    ]);
 
     const handleNext = () => {
-      if (!isFormValid) {
-        alert('Заполните все обязательные поля');
+      if (!validateForm()) {
+        alert('Пожалуйста, заполните все обязательные поля');
         return;
       }
       // Логика перехода к следующему шагу
@@ -129,6 +117,73 @@ export const RegisterStepSecondForm = memo(
     const handleBack = () => {
       // Логика перехода к предыдущему шагу
     };
+
+    // Функция проверки валидности формы
+    const validateForm = (): boolean => {
+      let isValid = true;
+      const newErrors: ValidationErrors = {};
+
+      // Проверка имени
+      if (!registerData.name || registerData.name.trim() === '') {
+        newErrors.name = 'Имя не может быть пустым';
+        isValid = false;
+      }
+
+      // Проверка даты рождения
+      if (!date) {
+        newErrors.dateOfBirth = 'Выберите дату рождения';
+        isValid = false;
+      }
+
+      // Проверка пола
+      if (!registerData.gender || registerData.gender === 'Не указан') {
+        newErrors.gender = 'Пожалуйста, выберите ваш пол';
+        isValid = false;
+      }
+
+      // Проверка города
+      if (!registerData.city || registerData.city === 'Не указан') {
+        newErrors.city = 'Выберите город';
+        isValid = false;
+      }
+
+      // Проверка категории навыка
+      if (!selectedCategories || selectedCategories === '') {
+        newErrors.category = 'Выберите категорию навыка';
+        isValid = false;
+      }
+
+      // Проверка подкатегории навыка
+      if (!selectedSubcategories || selectedSubcategories === '') {
+        newErrors.subcategory = 'Выберите подкатегорию навыка';
+        isValid = false;
+      } else {
+        const validSubcategories = getSubcategories();
+        if (!validSubcategories.includes(selectedSubcategories)) {
+          newErrors.subcategory =
+            'Подкатегория не соответствует выбранной категории';
+          isValid = false;
+        }
+      }
+
+      // Обновляем состояние ошибок только если есть изменения
+      if (JSON.stringify(newErrors) !== JSON.stringify(errors)) {
+        setErrors(newErrors);
+      }
+
+      return isValid;
+    };
+
+    useEffect(() => {
+      validateForm();
+    }, [
+      registerData.name,
+      date,
+      registerData.gender,
+      registerData.city,
+      selectedCategories,
+      selectedSubcategories
+    ]);
 
     return (
       <div className={styles.page_container}>
@@ -166,6 +221,7 @@ export const RegisterStepSecondForm = memo(
             onChange={(e) => handleChange(e)}
             name='name'
             className={styles.input_label}
+            error={errors.name}
           />
 
           <div className={styles.input__drops_container}>
@@ -174,6 +230,9 @@ export const RegisterStepSecondForm = memo(
                 selectedDate={date}
                 setSelectedDate={setDate}
               />
+              {errors.dateOfBirth && (
+                <span className={styles.error_text}>{errors.dateOfBirth}</span>
+              )}
             </div>
 
             <div className={styles.input__drops_gender}>
@@ -184,6 +243,9 @@ export const RegisterStepSecondForm = memo(
                 onChange={handleGenderChange}
                 placeholder='Не указан'
               />
+              {errors.gender && (
+                <span className={styles.error_text}>{errors.gender}</span>
+              )}
             </div>
           </div>
 
@@ -195,6 +257,9 @@ export const RegisterStepSecondForm = memo(
               onChange={(value) => dispatch(setRegisterData({ city: value }))}
               placeholder='Не указан'
             />
+            {errors.city && (
+              <span className={styles.error_text}>{errors.city}</span>
+            )}
           </div>
 
           <div className={styles.input__drops}>
@@ -207,6 +272,9 @@ export const RegisterStepSecondForm = memo(
               value={selectedCategories}
               onChange={handleCategoryChange}
             />
+            {errors.category && (
+              <span className={styles.error_text}>{errors.category}</span>
+            )}
           </div>
 
           <div className={styles.input__drops}>
@@ -219,13 +287,16 @@ export const RegisterStepSecondForm = memo(
               value={selectedSubcategories}
               onChange={handleSubcategoryChange}
             />
+            {errors.subcategory && (
+              <span className={styles.error_text}>{errors.subcategory}</span>
+            )}
           </div>
 
           <div className={styles.button__group}>
             <GreenBorderButton
               className={styles.button_width}
               onClick={handleBack}
-              disabled={!isFormValid}
+              //disabled={!validateForm()}
             >
               {buttonPrevText}
             </GreenBorderButton>
@@ -233,7 +304,7 @@ export const RegisterStepSecondForm = memo(
             <GreenButton
               className={styles.button_width}
               onClick={handleNext}
-              disabled={!isFormValid}
+              disabled={!validateForm()}
             >
               {buttonNextText}
             </GreenButton>

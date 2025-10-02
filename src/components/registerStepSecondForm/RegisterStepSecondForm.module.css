@@ -8,6 +8,7 @@
   --color-caption: #69735d;
   --font-primary: 'Jost', sans-serif;
   --font-secondary: 'Roboto', sans-serif;
+  --color-error: red;
   
   display: flex;
   align-items: flex-start;
@@ -132,7 +133,7 @@
 }
 
 .error_text {
-  color: #bf3920;
+  color: var(--color-error, red);
   font-size: 12px;
   line-height: 16px;
   position: relative;
