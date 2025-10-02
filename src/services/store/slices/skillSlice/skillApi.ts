@@ -5,7 +5,7 @@ import {
   UpdateSkillRequest
 } from '../../../../types/skill';
 
-const URL = process.env.SKILLSWAP_API_URL || 'http://localhost:5000';
+const URL = process.env.SKILLSWAP_API_URL || 'http://localhost:5050';
 
 export interface CreateSkillResponse extends TSkill {
   message: string;
