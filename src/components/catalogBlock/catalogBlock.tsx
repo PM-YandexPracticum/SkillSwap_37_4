@@ -9,7 +9,8 @@ export const CatalogBlock: FC<TCatalogBlock> = ({
   card,
   limit,
   scroll,
-  buttonFilter
+  buttonFilter, 
+  moreButton
 }) => {
   const [visibleCount, setVisibleCount] = useState<number>(9);
   const [loading, setLoading] = useState<boolean>(false);
@@ -51,6 +52,7 @@ export const CatalogBlock: FC<TCatalogBlock> = ({
       limit={visibleCount}
       loading={loading}
       scroll={scroll}
+      moreButton={moreButton}
       buttonFilter={buttonFilter}
     />
   );

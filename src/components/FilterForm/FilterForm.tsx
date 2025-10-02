@@ -18,7 +18,7 @@ export type FilterObject = {
   sortByLike?: boolean;
   city?: string;
   gender?: string;
-  likedByCurrentUser?: boolean;
+  likedByUser?: boolean;
 };
 
 const buildFilterObject = (

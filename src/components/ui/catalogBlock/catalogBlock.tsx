@@ -13,7 +13,8 @@ export const CatalogBlockUI: FC<TCatalogBlockUI> = ({
   limit,
   loading,
   scroll = false,
-  buttonFilter = false
+  buttonFilter = false, 
+  moreButton= true
 }) => {
   const visibleCount = typeof limit === 'number' ? limit : card.length;
 
@@ -35,7 +36,7 @@ export const CatalogBlockUI: FC<TCatalogBlockUI> = ({
             </TransparentButton>
           </div>
         ) : (
-          !scroll && (
+          !scroll && moreButton && (
             <div className={style.header}>
               <TransparentButton>
                 Смотреть все

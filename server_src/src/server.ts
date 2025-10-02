@@ -8,7 +8,7 @@ import { skillRoutes } from './routes/skills';
 import { notifyRoutes } from './routes/notify';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5050;
 const path = require('path');
 // Middleware
 app.use(cors());

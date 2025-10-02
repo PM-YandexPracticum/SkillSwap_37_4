@@ -6,4 +6,5 @@ export type TCatalogBlock = {
   limit: number | 'infinityLoad';
   scroll?: boolean;
   buttonFilter?: boolean;
+  moreButton?: boolean;
 };
