@@ -6,6 +6,7 @@ import { Card } from '../../card';
 import { FC } from 'react';
 import { TCatalogBlockUI } from './type';
 import { Preloader } from '../preloader/preloader';
+import { useNavigate } from 'react-router-dom';
 
 export const CatalogBlockUI: FC<TCatalogBlockUI> = ({
   title,
@@ -17,7 +18,7 @@ export const CatalogBlockUI: FC<TCatalogBlockUI> = ({
   moreButton = true
 }) => {
   const visibleCount = typeof limit === 'number' ? limit : card.length;
-
+  const navigate = useNavigate();
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -53,7 +54,13 @@ export const CatalogBlockUI: FC<TCatalogBlockUI> = ({
       </div>
       <div className={style.cardContainer}>
         {card.slice(0, visibleCount).map((cardData, index) => (
-          <Card key={index} {...cardData} />
+          <Card
+            key={index}
+            {...cardData}
+            onClick={() => {
+              navigate(`/skill/${index}`);
+            }}
+          />
         ))}
         {loading && (
           <div className={style.preloaderOverlay}>

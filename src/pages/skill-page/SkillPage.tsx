@@ -4,14 +4,26 @@ import styles from './SkillPage.module.css';
 
 import GreenButton from '../../components/buttons/GreenButton';
 import { TCard } from '../../components/card/type';
+import { TCardData } from '../../services/slices/cardSlice/type';
 import { SkillCardProps } from '../../components/skillCard/SkillCard';
 import { Card } from '../../components/card';
 import { SkillCard } from '../../components/skillCard/SkillCard';
 import { Preloader } from '../../components/ui/preloader/preloader';
 import { CardCarousel } from '../../components/cardCarousel';
+import { TSkillTag } from '../../components/cardTag/CardTag';
+
+import { useDispatch, useSelector } from '../../services/store/store';
+import {
+  getSkillPageById,
+  getSkillCardById
+} from '../../services/store/slices/skillSlice/skillSlice';
+
+const toCard = (c: TCardData, onClick?: () => void): TCard =>
+  onClick ? { ...c, onClick } : (c as TCard);
 
 const SkillPage: FC = () => {
   const { id } = useParams<{ id: string }>();
+  const dispatch = useDispatch();
 
   const [cardData, setCardData] = useState<TCard | null>(null);
   const [skillData, setSkillData] = useState<SkillCardProps | null>(null);
@@ -89,20 +101,25 @@ const SkillPage: FC = () => {
         }, 500)
       );
 
+      dispatch(getSkillPageById(id));
+
       const { card, skill, similar } = response as {
         card: TCard;
         skill: SkillCardProps;
-        similar: TCard[];
+        similar: TCardData[];
       };
 
-      setCardData(card);
+      //setCardData(card);
+      //setSkillData(skill);
+      //setCardCarouselData(similar);
+      setCardData(toCard(card, () => alert('Нажали на карточку!')));
       setSkillData(skill);
-      setCardCarouselData(similar);
+      setCardCarouselData(similar.map((c) => toCard(c)));
       setLoading(false);
     };
 
     fetchData();
-  }, [id]);
+  }, [id, dispatch]);
 
   if (loading || !cardData || !skillData) {
     return (
@@ -118,7 +135,9 @@ const SkillPage: FC = () => {
         <Card {...(cardData as TCard)} />
         <SkillCard {...(skillData as SkillCardProps)}>
           <GreenButton
-            onClick={() => alert('Кнопка нажата!')}
+            onClick={() => {
+              alert('Кнопка нажата!');
+            }}
             className={styles.buttonWidth}
           >
             Предложить обмен
