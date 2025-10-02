@@ -9,7 +9,7 @@ export const CatalogBlock: FC<TCatalogBlock> = ({
   card,
   limit,
   scroll,
-  buttonFilter, 
+  buttonFilter,
   moreButton
 }) => {
   const [visibleCount, setVisibleCount] = useState<number>(9);
