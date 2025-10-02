@@ -1,4 +1,4 @@
-import { TCard } from "../../../card/type";
+import { TCard } from '../../../card/type';
 
 export type TCatalogPageUI = {
   hasFilter: boolean;

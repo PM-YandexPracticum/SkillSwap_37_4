@@ -27,14 +27,12 @@ const buildFilterObject = (
   skillsState: SkillsFilterState,
   cityState: SkillsFilterState
 ): FilterObject => {
-  const searchType:
-    | 'wantLearn'
-    | 'canLearn'
-    | 'all' = generalFilterId === 'wantToLearn'
-    ? 'wantLearn'
-    : generalFilterId === 'canTeach'
-    ? 'canLearn'
-    : 'all';
+  const searchType: 'wantLearn' | 'canLearn' | 'all' =
+    generalFilterId === 'wantToLearn'
+      ? 'wantLearn'
+      : generalFilterId === 'canTeach'
+        ? 'canLearn'
+        : 'all';
 
   const category: string[] = Object.keys(skillsState).filter(
     (key) => skillsState[key].selected
@@ -59,7 +57,10 @@ const buildFilterObject = (
   };
 };
 
-const updateURL = (navigate: ReturnType<typeof useNavigate>, filters: FilterObject) => {
+const updateURL = (
+  navigate: ReturnType<typeof useNavigate>,
+  filters: FilterObject
+) => {
   const params = new URLSearchParams();
   if (filters.searchType) params.set('searchType', filters.searchType);
   if (filters.category) params.set('category', filters.category.join(','));

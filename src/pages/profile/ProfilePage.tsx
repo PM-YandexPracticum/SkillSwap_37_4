@@ -10,7 +10,10 @@ import { ProfilePageMessageText } from '../../components/profilePageMessageText/
 import { ProfilePageLike } from '../../components/profilePageLike/ProfilePageLike';
 import { ProfilePageUserInfo } from '../../components/profilePageUserInfo/ProfilePageUserInfo';
 
-import { userSelector, updateUserThunk } from '../../services/slices/userSlice/userSlice';
+import {
+  userSelector,
+  updateUserThunk
+} from '../../services/slices/userSlice/userSlice';
 
 export default function ProfileDetailsPage() {
   const dispatch = useDispatch();
@@ -28,14 +31,18 @@ export default function ProfileDetailsPage() {
     city: user?.city,
     gender: user?.gender,
     wantLearn: user?.wantLearn,
-    canLearn: user?.canLearn,
+    canLearn: user?.canLearn
   });
 
   const handleSubmit = () => {
     dispatch(updateUserThunk(formValue));
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     setFormValue((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -52,8 +59,15 @@ export default function ProfileDetailsPage() {
               path='/details'
               element={
                 <>
-                  <ProfilePageAvatar user={formValue} handleInputChange={handleInputChange}/>
-                  <ProfilePageForm user={formValue} handleSubmit={handleSubmit} handleInputChange={handleInputChange}/> 
+                  <ProfilePageAvatar
+                    user={formValue}
+                    handleInputChange={handleInputChange}
+                  />
+                  <ProfilePageForm
+                    user={formValue}
+                    handleSubmit={handleSubmit}
+                    handleInputChange={handleInputChange}
+                  />
                 </>
               }
             />

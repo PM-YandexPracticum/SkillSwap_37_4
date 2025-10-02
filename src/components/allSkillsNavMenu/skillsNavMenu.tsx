@@ -1,5 +1,8 @@
 import { forwardRef, useMemo } from 'react';
-import { SKILL_CATEGORY, getSkillValue } from '../../const/skillsCategoryMapping';
+import {
+  SKILL_CATEGORY,
+  getSkillValue
+} from '../../const/skillsCategoryMapping';
 import styles from './skillsNavMenu.module.css';
 import clsx from 'clsx';
 
@@ -15,8 +18,8 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
   ({ isOpen, onClose, className }, ref) => {
     if (!isOpen) return null;
 
-    const renderCategory = useMemo(() => {
-      return (category: { categoryName: string; subcategoryName: string[] }) => {
+    const renderCategory = useMemo(
+      () => (category: { categoryName: string; subcategoryName: string[] }) => {
         const { color, icon } = getSkillValue(category.categoryName);
 
         return (
@@ -67,8 +70,9 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
             </div>
           </div>
         );
-      };
-    }, [styles]);
+      },
+      [styles]
+    );
 
     const firstColumn = SKILL_CATEGORY.slice(0, COLUMN_BREAK_POINT);
     const secondColumn = SKILL_CATEGORY.slice(COLUMN_BREAK_POINT);
@@ -80,14 +84,10 @@ export const SkillsNavMenu = forwardRef<HTMLDivElement, SkillsNavMenuProps>(
         aria-label='Навигация по категориям навыков'
       >
         <div className={styles.skillsColumn}>
-          {firstColumn.map((category) =>
-            renderCategory(category)
-          )}
+          {firstColumn.map((category) => renderCategory(category))}
         </div>
         <div className={styles.skillsColumn}>
-          {secondColumn.map((category) =>
-            renderCategory(category)
-          )}
+          {secondColumn.map((category) => renderCategory(category))}
         </div>
       </div>
     );

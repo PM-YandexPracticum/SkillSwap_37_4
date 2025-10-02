@@ -27,7 +27,7 @@ const initialState: RegisterState = {
   categorySkillToLearn: '',
   subcategorySkillToLearn: '',
   categories: [],
-  subcategories: [],
+  subcategories: []
 };
 
 const registerSlice = createSlice({
@@ -35,19 +35,15 @@ const registerSlice = createSlice({
   initialState,
   reducers: {
     // Основное действие для обновления данных
-    setRegisterData: (
-      state,
-      action: PayloadAction<Partial<RegisterState>>
-    ) => {
+    setRegisterData: (state, action: PayloadAction<Partial<RegisterState>>) =>
       // Используем spread оператор для иммутабельности
-      return {
+      ({
         ...state,
-        ...action.payload,
-      };
-    },
+        ...action.payload
+      }),
     // Действие для сброса данных
-    resetRegisterData: () => initialState,
-  },
+    resetRegisterData: () => initialState
+  }
   // Добавляем дополнительные действия через extraReducers если нужно
 });
 
@@ -63,13 +59,10 @@ export const {
   categorySkillToLearn,
   subcategorySkillToLearn,
   categories: selectCategories,
-  subcategories: selectSubcategories,
+  subcategories: selectSubcategories
 } = selectRegisterState as any;
 
 // Экспортируем действия
-export const {
-  setRegisterData,
-  resetRegisterData,
-} = registerSlice.actions;
+export const { setRegisterData, resetRegisterData } = registerSlice.actions;
 
 export default registerSlice.reducer;

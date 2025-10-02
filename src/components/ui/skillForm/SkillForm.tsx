@@ -1,4 +1,3 @@
-
 import styles from './SkillForm.module.css';
 import clsx from 'clsx';
 import { useState, useRef } from 'react';
@@ -58,20 +57,22 @@ export const SkillForm: React.FC<SkillFormProps> = ({ languageConst }) => {
     label: cat.categoryName
   }));
 
-  const subcategoryOptions =
-    selectedCategory
-      ? (
-          SKILL_CATEGORY.find((cat) => cat.categoryName === selectedCategory)?.subcategoryName || []
-        ).map((sub) => ({
-          value: sub,
-          label: sub
-        }))
-      : [];
+  const subcategoryOptions = selectedCategory
+    ? (
+        SKILL_CATEGORY.find((cat) => cat.categoryName === selectedCategory)
+          ?.subcategoryName || []
+      ).map((sub) => ({
+        value: sub,
+        label: sub
+      }))
+    : [];
 
   return (
     <form className={styles.skill_form} noValidate onSubmit={handleSubmit}>
       <div className={styles.skill_form_item}>
-        <p className={styles.skill_form_item_text}>{languageConst.name_item_text}</p>
+        <p className={styles.skill_form_item_text}>
+          {languageConst.name_item_text}
+        </p>
         <Input
           ref={nameRef}
           fields__container={styles.skill_form_item_input_container}

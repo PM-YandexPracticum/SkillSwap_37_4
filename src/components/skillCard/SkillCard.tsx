@@ -29,13 +29,13 @@ export const SkillCard: FC<SkillCardProps> = ({
       <section className={styles.skillCard}>
         <div className={styles.upperButtons}>
           <button>
-            <Like></Like>
+            <Like />
           </button>
           <button>
-            <Share></Share>
+            <Share />
           </button>
           <button>
-            <More></More>
+            <More />
           </button>
         </div>
         <div className={styles.mainSection}>
@@ -60,39 +60,39 @@ export const SkillCard: FC<SkillCardProps> = ({
                       )
                     }
                   >
-                    <ChevronRight></ChevronRight>
+                    <ChevronRight />
                   </button>
 
                   <button
                     className={`${styles.nav} ${styles.next}`}
                     onClick={() => setActive((i) => (i + 1) % photoUrl.length)}
                   >
-                    <ChevronLeft></ChevronLeft>
+                    <ChevronLeft />
                   </button>
                 </>
               )}
             </div>
 
             <div className={styles.thumbs}>
-  {photoUrl.slice(1, 3).map((url, index) => (
-    <img
-      key={index}
-      className={styles.thumb}
-      src={url}
-      onClick={() => setActive(index + 1)}
-      role="button"
-      onKeyDown={(e) => e.key === "Enter" && setActive(index + 1)}
-      alt={`preview-${index + 1}`}
-    />
-  ))}
+              {photoUrl.slice(1, 3).map((url, index) => (
+                <img
+                  key={index}
+                  className={styles.thumb}
+                  src={url}
+                  onClick={() => setActive(index + 1)}
+                  role='button'
+                  onKeyDown={(e) => e.key === 'Enter' && setActive(index + 1)}
+                  alt={`preview-${index + 1}`}
+                />
+              ))}
 
-  {photoUrl.length > 3 && (
-    <div className={clsx(styles.thumb, styles.withOverlay)}>
-      <img src={photoUrl[3]} alt="more preview" />
-      <p className={styles.moreBadge}>+{photoUrl.length - 3}</p>
-    </div>
-  )}
-</div>
+              {photoUrl.length > 3 && (
+                <div className={clsx(styles.thumb, styles.withOverlay)}>
+                  <img src={photoUrl[3]} alt='more preview' />
+                  <p className={styles.moreBadge}>+{photoUrl.length - 3}</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

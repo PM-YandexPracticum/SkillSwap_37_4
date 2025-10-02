@@ -1,5 +1,5 @@
-import { TSkillTag } from "../../components/cardTag/CardTag";
-import { TUser } from "../../types/user";
+import { TSkillTag } from '../../components/cardTag/CardTag';
+import { TUser } from '../../types/user';
 
 const URL = process.env.SKILSWAP_API_URL || 'http://localhost:5000';
 
@@ -13,7 +13,7 @@ export type TPureUserItem = {
   city: string;
   age: string;
   gender: string;
-}
+};
 
 export type TUserItem = {
   id: string;
@@ -27,7 +27,7 @@ export type TUserItem = {
   gender: string;
   canTeach: string[];
   wantLearn: string[];
-}
+};
 
 export enum ENotifyStatus {
   PENDING = 'pending',
@@ -36,12 +36,12 @@ export enum ENotifyStatus {
 }
 export type TNotifyHistoryItem = {
   id: string;
-  skillId: string;//нужен ли
+  skillId: string; //нужен ли
   fromUser: string;
   toUser: string;
   notifyDate: Date;
   status: ENotifyStatus;
-}
+};
 export type TSkillItem = {
   id: string;
   ownerId: string;
@@ -53,7 +53,7 @@ export type TSkillItem = {
   avatar_url: string;
   likes: string[];
   requested: string[];
-}
+};
 
 export type TCard = {
   skillId: string;
@@ -66,7 +66,7 @@ export type TCard = {
   onRequest: boolean;
   // canTeach: TSkillTag[];
   // wantLearn: TSkillTag[];
-}
+};
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
@@ -82,7 +82,7 @@ type TPureUserResponse = TServerResponse<{
   data: TPureUserItem[];
 }>;
 type TLoginResponse = TServerResponse<{
-  user: TPureUserItem,
+  user: TPureUserItem;
   message: string;
 }>;
 
@@ -101,9 +101,9 @@ type TSortObject = {
 };
 
 export type TLoginData = {
-    email: string,
-    password:string
-}
+  email: string;
+  password: string;
+};
 
 export const getUserApi = (number: string) =>
   fetch(`${URL}/api/users/${number}`, {
@@ -113,13 +113,15 @@ export const getUserApi = (number: string) =>
     }
   }).then((res) => checkResponse<TPureUserResponse>(res));
 
-  
-  export const loginUserApi = (email: string, password: string): Promise<TLoginResponse> => {
+export const loginUserApi = (
+  email: string,
+  password: string
+): Promise<TLoginResponse> => {
   const loginData: TLoginData = {
     email: email,
     password: password
   };
-  
+
   return fetch(`${URL}/api/users/login`, {
     method: 'POST',
     headers: {
@@ -127,7 +129,7 @@ export const getUserApi = (number: string) =>
     },
     body: JSON.stringify(loginData)
   })
-    .then((res) => { 
+    .then((res) => {
       console.log('Response status:', res.status);
       console.log('Response headers:', res.headers);
       return checkResponse<TLoginResponse>(res);

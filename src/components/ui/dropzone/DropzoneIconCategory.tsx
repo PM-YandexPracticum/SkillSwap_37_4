@@ -58,7 +58,8 @@ export const DropzoneIconCategory: React.FC<DropzoneIconCategoryProps> = ({
         {isDragActive ? 'Отпустите файлы для загрузки' : placeholder}
       </p>
       <button type='button' className={styles.button} onClick={open}>
-        <div className={styles.svg}></div><p className={styles.text_button}>{buttonText}</p>
+        <div className={styles.svg} />
+        <p className={styles.text_button}>{buttonText}</p>
       </button>
       {error && <div className={styles.error}>{error}</div>}
     </div>

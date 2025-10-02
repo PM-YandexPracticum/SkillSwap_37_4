@@ -5,7 +5,11 @@ interface LogoProps {
 }
 
 export const Logo = ({ onClick }: LogoProps) => (
-  <div className={styles.logoContainer} onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
+  <div
+    className={styles.logoContainer}
+    onClick={onClick}
+    style={{ cursor: onClick ? 'pointer' : 'default' }}
+  >
     <div className={styles.logoWrapper}>
       <div className={styles.logoCircle} />
       <div className={styles.logoIcon} />

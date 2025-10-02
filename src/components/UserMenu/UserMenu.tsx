@@ -23,13 +23,15 @@ export const UserMenu: React.FC<UserMenuProps> = ({
 
   const user = useSelector(userSelector);
   // const user: TUser | null = null;
-    {/*const user: TUser= {
+  {
+    /*const user: TUser= {
       id: '123',
       name: 'aziz',
       email: '12',
       isAuthenticated: true,
       avatar: "https://i.ytimg.com/vi/2mcK35I8sXE/maxresdefault.jpg"
-    };*/}
+    };*/
+  }
 
   const handleProfileClick = () => {
     // navigate('/profile');

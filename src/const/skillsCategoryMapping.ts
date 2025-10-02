@@ -106,7 +106,7 @@ export const CITY_CATEGORY: SkillCategory[] = [
   {
     categoryName: 'Казань',
     subcategoryName: []
-  },
+  }
 ];
 
 // Простая функция для получения цвета и иконки по названию категории

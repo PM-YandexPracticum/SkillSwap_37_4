@@ -10,4 +10,3 @@ export interface UserMenuProps {
   onThemeToggle?: () => void;
   isDarkTheme?: boolean;
 }
-

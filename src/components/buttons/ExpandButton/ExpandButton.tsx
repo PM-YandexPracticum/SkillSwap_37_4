@@ -9,24 +9,20 @@ export const ExpandButton: React.FC<ExpandButtonProps> = ({
   text = 'Все навыки',
   iconSize = 24,
   isOpen = false
-}) => {
-  return (
-    <button
-      className={`${styles.expandButton} ${className}`}
-      onClick={onClick}
-      type="button"
-      aria-label={text}
-    >
-      <span className={styles.expandButton__text}>
-        {text}
-      </span>
-      <ChevronDownIcon
-        width={iconSize}
-        height={iconSize}
-        className={`${styles.expandButton__arrow} ${isOpen ? styles['expandButton__arrow--rotated'] : ''}`}
-      />
-    </button>
-  );
-};
+}) => (
+  <button
+    className={`${styles.expandButton} ${className}`}
+    onClick={onClick}
+    type='button'
+    aria-label={text}
+  >
+    <span className={styles.expandButton__text}>{text}</span>
+    <ChevronDownIcon
+      width={iconSize}
+      height={iconSize}
+      className={`${styles.expandButton__arrow} ${isOpen ? styles['expandButton__arrow--rotated'] : ''}`}
+    />
+  </button>
+);
 
 export default ExpandButton;

@@ -9,9 +9,17 @@ interface SearchableInputProps {
 
 export const RelatedInput: React.FC<SearchableInputProps> = ({
   items = [
-    'Санкт-Петербург', 'Самара', 'Саратов', 'Саранск', 'Севастополь',
-    'Москва', 'Мурманск', 'Магадан',
-    'Новосибирск', 'Нижний Новгород', 'Норильск'
+    'Санкт-Петербург',
+    'Самара',
+    'Саратов',
+    'Саранск',
+    'Севастополь',
+    'Москва',
+    'Мурманск',
+    'Магадан',
+    'Новосибирск',
+    'Нижний Новгород',
+    'Норильск'
   ],
   placeholder = 'Не указан'
 }) => {
@@ -25,7 +33,7 @@ export const RelatedInput: React.FC<SearchableInputProps> = ({
     if (!query) {
       return [];
     }
-    return items.filter(item =>
+    return items.filter((item) =>
       item.toLowerCase().startsWith(query.toLowerCase())
     );
   }, [query, items]);
@@ -41,7 +49,7 @@ export const RelatedInput: React.FC<SearchableInputProps> = ({
     setQuery(item);
     setValue(item);
   };
-  
+
   // Обработчик клика по кнопке "очистить"
   const handleClearClick = () => {
     setQuery('');
@@ -52,7 +60,7 @@ export const RelatedInput: React.FC<SearchableInputProps> = ({
     <div className={styles.searchContainer}>
       <div className={styles.inputWrapper}>
         <input
-          type="text"
+          type='text'
           className={styles.searchInput}
           placeholder={placeholder}
           value={query}
@@ -64,7 +72,7 @@ export const RelatedInput: React.FC<SearchableInputProps> = ({
           </button>
         )}
       </div>
-      
+
       {/* Показываем список, только если есть отфильтрованные элементы и не выбрано точное значение */}
       {filteredItems.length > 0 && !value && (
         <ul className={styles.suggestionsList}>

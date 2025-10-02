@@ -3,31 +3,35 @@ import { useState, ChangeEvent } from 'react';
 import { DatePickerComponent } from '../calendar/DataPicker';
 import styles from './ProfilePageForm.module.css';
 import { GreenButton } from '../buttons/GreenButton/GreenButton';
-import { TSkillTag } from "../../components/cardTag/CardTag"
-import { cities } from "../../const/cities"
+import { TSkillTag } from '../../components/cardTag/CardTag';
+import { cities } from '../../const/cities';
 
 export type ProfilePageFormProps = {
   user: {
-    id: number | undefined,
-    name: string | undefined,
-    email: string | undefined,
-    password: string | undefined,
-    avatarUrl: string | undefined,
-    birthday: Date | undefined,
-    aboutMe: string | undefined,
-    city: string | undefined,
-    gender: string | undefined,
-    wantLearn: TSkillTag[] | undefined, 
-    canLearn: TSkillTag[] | undefined
-  }
+    id: number | undefined;
+    name: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
+    avatarUrl: string | undefined;
+    birthday: Date | undefined;
+    aboutMe: string | undefined;
+    city: string | undefined;
+    gender: string | undefined;
+    wantLearn: TSkillTag[] | undefined;
+    canLearn: TSkillTag[] | undefined;
+  };
   handleSubmit: () => void;
-  handleInputChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  handleInputChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => void;
 };
 
-export function ProfilePageForm({ user, handleSubmit, handleInputChange }: ProfilePageFormProps) {
-   const [date, setDate] = useState(
-    user?.birthday ? user.birthday : null,
-  );
+export function ProfilePageForm({
+  user,
+  handleSubmit,
+  handleInputChange
+}: ProfilePageFormProps) {
+  const [date, setDate] = useState(user?.birthday ? user.birthday : null);
 
   return (
     <div className={styles.profileForm}>
@@ -65,17 +69,18 @@ export function ProfilePageForm({ user, handleSubmit, handleInputChange }: Profi
             setSelectedDate={(newDate) => {
               setDate(newDate);
               handleInputChange({
-              target: {
-                name: "birthday",
-                value: newDate,
-              },
-            } as any)}}
+                target: {
+                  name: 'birthday',
+                  value: newDate
+                }
+              } as any);
+            }}
           />
           <div className={styles.profileInputBlock}>
             <label>Пол</label>
             <div className={styles.profileGenderInputWrapper}>
               <div className={styles.profileSelectInputWrapper}>
-                <select 
+                <select
                   name='gender'
                   value={user?.gender}
                   onChange={handleInputChange}
@@ -101,18 +106,18 @@ export function ProfilePageForm({ user, handleSubmit, handleInputChange }: Profi
               className={styles.profileSelectInputWrapper}
               style={{ width: '100%' }}
             >
-              <select 
+              <select
                 name='city'
                 style={{ width: '100%' }}
                 onChange={handleInputChange}
                 value={user?.city}
               >
-              {cities.map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
             </div>
             <span
               className={`${styles.profileChevronIcon} ${styles.iconChevron}`}
@@ -136,10 +141,7 @@ export function ProfilePageForm({ user, handleSubmit, handleInputChange }: Profi
         </div>
       </div>
       <div className={styles.profileSaveBtnWrapper}>
-        <GreenButton
-          type='submit'
-          onClick={handleSubmit}
-        >
+        <GreenButton type='submit' onClick={handleSubmit}>
           {'Сохранить'}
         </GreenButton>
       </div>

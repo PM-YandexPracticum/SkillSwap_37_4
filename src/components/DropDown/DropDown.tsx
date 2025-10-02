@@ -38,7 +38,10 @@ export const DropDown: React.FC<DropDownProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
         setFocusedIndex(-1);
       }
@@ -103,13 +106,17 @@ export const DropDown: React.FC<DropDownProps> = ({
           setIsOpen(true);
           setFocusedIndex(options.length - 1);
         } else {
-          setFocusedIndex((prev) => (prev - 1 + options.length) % options.length);
+          setFocusedIndex(
+            (prev) => (prev - 1 + options.length) % options.length
+          );
         }
         break;
     }
   };
 
-  const selectedOption = options.find(option => option.value === selectedValue);
+  const selectedOption = options.find(
+    (option) => option.value === selectedValue
+  );
 
   return (
     <div ref={dropdownRef} className={`${styles.dropdown} ${className}`}>
@@ -150,9 +157,7 @@ export const DropDown: React.FC<DropDownProps> = ({
               onKeyDown={handleKeyDown}
               className={`${styles.option} ${
                 option.value === selectedValue ? styles.optionSelected : ''
-              } ${
-                index === focusedIndex ? styles.optionFocused : ''
-              }`}
+              } ${index === focusedIndex ? styles.optionFocused : ''}`}
               role='option'
               aria-selected={option.value === selectedValue}
               tabIndex={-1}
