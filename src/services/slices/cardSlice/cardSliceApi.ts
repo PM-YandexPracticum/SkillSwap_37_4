@@ -27,7 +27,7 @@ export interface FilterParams {
   searchType?: string;
 }
 
-const URL = process.env.SKILLSWAP_API_URL || 'http://localhost:5000';
+const URL = process.env.SKILLSWAP_API_URL || 'http://localhost:5050';
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));

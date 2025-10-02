@@ -3,6 +3,7 @@ import { TCard } from '../../../components/card/type';
 import { SkillsFilterState } from '../../../components/skillsFilter/SkillsFilter';
 import { SKILL_CATEGORY } from '../../../const/skillsCategoryMapping';
 import { cardDataArray } from '../../../pages/catalog-page/cardsMockup';
+import { TCardData, TCardDataApi } from './type';
 
 export interface FilterObject {
   category: string[];
@@ -24,6 +25,14 @@ interface CardState {
   loading: boolean;
   error: string | null;
 }
+
+
+export const transformApiDataToCardData = (apiData: TCardDataApi): TCardData => ({
+  ...apiData,
+  canTeach: apiData.canTeach.map((skill) => ({ name: skill })),
+  wantLearn: apiData.wantLearn.map((skill) => ({ name: skill }))
+});
+
 
 const createInitialFilterState = (): SkillsFilterState => {
   const filterState: SkillsFilterState = {};

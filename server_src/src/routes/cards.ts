@@ -21,7 +21,7 @@ cardRoutes.post('/', async (req, res) => {
         s.id as skillId,
         s.createDate,
         s.skillName as skillName,
-        u.name,
+        u.name as userName,
         u.city,
         CAST(strftime('%Y', 'now') - strftime('%Y', u.birthday) AS INTEGER) as age,
         u.avatarUrl as avatar_url,
