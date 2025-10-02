@@ -7,8 +7,6 @@ import { SearchIcon } from 'lucide-react';
 import { UserMenu } from '../UserMenu';
 import { nanoid } from '@reduxjs/toolkit';
 import clsx from "clsx";
-import { useEffect } from "react";
-import TransparentButton from "../buttons/TransparentButton";
 import { CloseButton } from "../buttons/CloseButton/CloseButton";
 
 export type THeaderProps = {
@@ -24,13 +22,8 @@ export const AppHeader: React.FC<THeaderProps> = ({ userAuth }) => {
     navigate('/');
   };
 
-  if (location.pathname === "/registration") {
-    return (
-      <header className={clsx(styles.header, styles.header_register)}>
-        <Logo onClick={handleRedirect} />
-        <CloseButton onClick={handleRedirect} />
-      </header>
-    );
+  if (location.pathname === "/register") {
+    return null;
   }
 
   return (

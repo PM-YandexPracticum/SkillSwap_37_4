@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { FooterLinks } from '../ui/footerLinks/FooterLinks';
 import { Logo } from '../ui/logo/Logo';
@@ -6,7 +7,11 @@ import styles from './AppFooter.module.css';
 export const AppFooter = () => {
   const navigate = useNavigate();
   const year = new Date().getFullYear();
+  const location = useLocation();
 
+  if (location.pathname === '/register') {
+    return null;
+  }
   const handleLogoClick = () => {
     navigate('/');
   };

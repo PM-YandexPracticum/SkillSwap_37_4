@@ -11,7 +11,7 @@ export const AuthLayout: FC = () => {
         backgroundColor: '#f9faf7',
         boxSizing: 'border-box',
         padding: '36px',
-        height: '104px',
+        height: '84px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between'
