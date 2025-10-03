@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CardState, TCardData, TCardDataApi, FilterParams } from './type';
 import { getCardsApi, FilterParams as ApiFilterParams } from './cardSliceApi';
-import { transformApiDataToCardData } from './cardSlice';
 
 const initialState: CardState = {
   cards: [],
@@ -10,6 +9,14 @@ const initialState: CardState = {
   loading: false,
   error: null
 };
+
+export const transformApiDataToCardData = (
+  apiData: TCardDataApi
+): TCardData => ({
+  ...apiData,
+  canTeach: apiData.canTeach.map((skill) => ({ name: skill })),
+  wantLearn: apiData.wantLearn.map((skill) => ({ name: skill }))
+});
 
 // Общая функция для создания thunk
 const createCardsThunk = (

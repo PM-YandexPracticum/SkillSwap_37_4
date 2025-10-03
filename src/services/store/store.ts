@@ -3,6 +3,7 @@ import userReducer from '../slices/userSlice/userSlice';
 import skillReducer from './slices/skillSlice/skillSlice';
 import notifyReducer from '../slices/notifySlice/notifySlice';
 import registerReducer from '../slices/registerSlice';
+import cardReducer from '../slices/cardSlice/cardSlice';
 
 import {
   TypedUseSelectorHook,
@@ -14,7 +15,8 @@ const rootReducer = {
   user: userReducer,
   skill: skillReducer,
   notify: notifyReducer,
-  register: registerReducer
+  register: registerReducer,
+  cards: cardReducer
 };
 
 const store = configureStore({
