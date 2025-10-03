@@ -1,0 +1,14 @@
+.filters__container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}

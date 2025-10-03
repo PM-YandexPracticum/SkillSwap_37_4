@@ -1,0 +1,241 @@
+/* 5. Блок формы */
+
+.profileForm {
+  inline-size: 460px;
+}
+
+.profileFormInputRow {
+  display: flex;
+  gap: 24px;
+  width: 460px;
+  max-width: 100%;
+}
+
+.profileFormInputBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profileFormInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profileFormInputHalf {
+  box-sizing: border-box;
+  min-width: 218px;
+}
+
+
+/* 6. Инпуты формы */
+
+.profileInputRow {
+  display: flex;
+  justify-content: space-around;
+  gap: 24px;
+}
+
+.profileInputHalf {
+  box-sizing: border-box;
+  min-width: 218px;
+  height: 48px;
+  padding: 12px;
+  border: 1px solid #69735d;
+  border-radius: 12px;
+  appearance: none;
+}
+
+.profileGenderInputWrapper {
+  position: relative;
+}
+
+.profileCityInputWrapper {
+  position: relative;
+}
+
+.profileSelectInputWrapper select {
+  block-size: 48px;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* 7. Иконка chevron для select */
+
+.iconEdit,
+.iconCalendar,
+.iconChevron,
+.profileGalleryEdit,
+.profileChevronIcon,
+.profileCalendarIcon,
+.profileAboutEditIcon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: var(--text, #253017);
+}
+
+.profileGenderInputWrapper .profileChevronIcon,
+.profileCityInputWrapper .profileChevronIcon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
+}
+
+/* 8. Email поле */
+
+.profileEmailInputWrapper {
+  position: relative;
+  inline-size: 460px;
+  margin-top: 4px;
+}
+
+.profileEmailInput {
+  box-sizing: border-box;
+  min-inline-size: 100%;
+  min-block-size: 48px;
+  padding: 12px 12px 11px 18px;
+  border: 1px solid #69735d;
+  border-radius: 12px;
+  opacity: 1;
+}
+
+.profileEditIcon {
+  position: absolute;
+  top: 52%;
+  right: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+/* 9. День рождение поле */
+
+.profileDateInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-inline-size: 218px;
+  block-size: 48px;
+  cursor: pointer;
+}
+
+.profileDateInput {
+  inline-size: 100%;
+  min-block-size: 100%;
+  padding-left: 19px;
+  border: 1px solid #69735d;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.profileDateInput::-webkit-calendar-picker-indicator {
+  display: none;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.profileCalendarIcon {
+  position: absolute;
+  top: 50%;
+  right: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+/* 10. Блок "О себе" */
+
+.profileAboutInputWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-inline-size: 460px;
+  min-block-size: 120px;
+  margin-block-end: 32px;
+  border: 1px solid #69735d;
+  border-radius: 12px;
+}
+
+.profileAboutTextarea {
+  box-sizing: border-box;
+  min-inline-size: 386px;
+  block-size: 96px;
+  overflow: hidden;
+  color: #253017;
+  line-height: 24px;
+  letter-spacing: 0.52px;
+  border: none;
+  resize: none;
+}
+
+.profileAboutTextarea:focus,
+.profileAboutTextarea:active {
+  border: none;
+  outline: none;
+}
+
+.profileAboutEditIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 11. Кнопка 'Изменить пароль' */
+
+.profileChangePasswordBtn {
+  margin-top: 15px;
+  margin-bottom: 19px;
+  padding: 0;
+  color: #508826;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 12. Кнопка 'Сохранить' */
+
+.profileSaveBtn {
+  min-block-size: 48px;
+  color: #69735d;
+  background: #e4e8df;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.errorText {
+  margin-top: 4px;
+  color: #ff4d4f;
+  font-size: 12px;
+}
+
+.iconEdit {
+  mask-image: url('../app/assets/static/iconsUi/edit.svg');
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+.iconCalendar {
+  mask-image: url('../app/assets/static/iconsUi/calendar.svg');
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+.iconChevron {
+  mask-image: url('../app/assets/static/iconsUi/chevron-down.svg');
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}

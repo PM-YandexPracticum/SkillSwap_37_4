@@ -1,0 +1,81 @@
+.login__form {
+  --social_button__font-color: #253017;
+  --border-color: #69735D;
+
+  border-radius: 12px;
+  background: #fff;
+  padding: 132px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 436px;
+  font-family: Roboto, sans-serif;
+}
+
+.social_button__container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.social__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Roboto, sans-serif;
+  gap: 12px;
+  padding-block: 11px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 24px;
+  color: var(--social_button__font-color, #253017);
+  background-color: transparent;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #69735D);
+}
+
+.social__button span {
+  display: flex;
+}
+
+.form_divider {
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #253017;
+  line-height: 24px;;
+}
+
+.form_divider::after {
+  margin-inline-start: 4px;
+}
+
+.form_divider::before {
+  margin-inline-end: 4px;
+}
+
+.form_divider::after, 
+.form_divider::before {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #E4E8DF; 
+}
+
+.text__input {
+  border: none;
+  padding: 12px 20px;
+  border: 1px solid var(--border-color, #69735D);
+  border-radius: 12px;
+}
+
+.confirm_button {
+  width: 100%;
+  margin-block-start: 32px;
+}
+
+.errorText {
+  color: red;
+}

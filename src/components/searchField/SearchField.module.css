@@ -1,0 +1,21 @@
+* {
+  --leftIconColor: #69735D;
+  --rightIconColor: #253017;
+}
+
+.search-input__right-icon {
+  color: var(--rightIconColor);
+}
+
+.search_input__container {
+  padding: 12px;
+}
+
+.search_input {
+  padding-inline-end: 50px;
+  border: none;
+}
+  
+.left__icon {
+  color: var(--leftIconColor);
+}

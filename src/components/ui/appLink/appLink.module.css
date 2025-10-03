@@ -1,0 +1,14 @@
+.link_about {
+  color: rgba(37, 48, 23, 1);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 2%;
+  color: #253017;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.link_about:hover {
+  color: #5a8e22;
+}

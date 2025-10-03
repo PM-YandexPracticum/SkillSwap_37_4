@@ -1,0 +1,87 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 284px;
+}
+
+.learn, .teach {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skillsTitle {
+  min-height: 24px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.info {
+  margin-left: 10px;
+}
+
+.learnTags {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.like {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.userName {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.userInfo {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+h4, p {
+  margin: 0;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+}
+
+.buttonWidth {
+  flex: 1;
+}

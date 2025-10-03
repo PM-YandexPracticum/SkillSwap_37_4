@@ -1,0 +1,81 @@
+@import url('../app/assets/fonts/font.css');
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 436px;
+}
+
+.message {
+  display: grid;
+  column-gap: 8px;
+  align-items: center;
+  margin-top: auto;
+  grid-template-columns: 40px auto auto;
+  grid-template-rows: 24px 16px;
+  grid-template-areas:
+    "icon title date"
+    "icon description .";
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  grid-area: icon;
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  margin: 0;
+  color: #253017;
+  grid-area: title;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  margin: 0;
+  color: #253017;
+  grid-area: description;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #69735D;
+  grid-area: date;
+  justify-self: self-end;
+  margin-left: 12px;
+}
+
+.button {
+  width: 114px;
+  height: 48px;
+}

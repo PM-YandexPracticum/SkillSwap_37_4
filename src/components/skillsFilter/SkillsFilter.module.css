@@ -1,0 +1,38 @@
+.skillsFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 284px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #253017;
+  margin: 0;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subcategories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 32px;
+}
+
+.allCategoriesButton {
+  align-self: flex-start;
+  margin-top: 8px;
+}
