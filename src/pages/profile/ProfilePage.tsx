@@ -31,7 +31,7 @@ export default function ProfileDetailsPage() {
     city: user?.city,
     gender: user?.gender,
     wantLearn: user?.wantLearn,
-    canLearn: user?.canLearn
+    canTeach: user?.canTeach
   });
 
   const handleSubmit = () => {

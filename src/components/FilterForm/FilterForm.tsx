@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   CITY_CATEGORY,
   SKILL_CATEGORY
@@ -12,7 +12,7 @@ import styles from './FilterForm.module.css';
 export type FilterObject = {
   category?: string[];
   subcategory?: string[];
-  searchType?: 'wantLearn' | 'canLearn' | 'all';
+  searchType?: 'wantLearn' | 'canTeach' | 'all';
   matchName?: string;
   sortByNew?: boolean;
   sortByLike?: boolean;
@@ -21,17 +21,111 @@ export type FilterObject = {
   likedByUser?: boolean;
 };
 
+const fromApiSearchType = (
+  v: string | null
+): 'all' | 'wantToLearn' | 'canTeach' => {
+  if (v === 'wantLearn') return 'wantToLearn';
+  if (v === 'canTeach') return 'canTeach';
+  return 'all';
+};
+
+const toApiSearchType = (id: string): 'all' | 'wantLearn' | 'canTeach' => {
+  if (id === 'wantToLearn') return 'wantLearn';
+  if (id === 'canTeach') return 'canTeach';
+  return 'all';
+};
+
+const parseCSV = (s: string | null) =>
+  s ? s.split(',').map((x) => x.trim()).filter(Boolean) : [];
+
+const buildEmptySkillsState = (cats = SKILL_CATEGORY): SkillsFilterState => {
+  const st: SkillsFilterState = {};
+  cats.forEach((c) => {
+    st[c.categoryName] = {
+      selected: false,
+      subcategories: Object.fromEntries(
+        c.subcategoryName.map((sub) => [sub, false])
+      ),
+    };
+  });
+  return st;
+};
+
+const hydrateSkillsState = (
+  base: SkillsFilterState,
+  selectedCats: string[],
+  selectedSubs: string[]
+): SkillsFilterState => {
+  const st: SkillsFilterState = JSON.parse(JSON.stringify(base));
+  selectedCats.forEach((c) => {
+    if (st[c]) st[c].selected = true;
+  });
+  selectedSubs.forEach((sub) => {
+    Object.keys(st).forEach((cat) => {
+      if (sub in st[cat].subcategories) st[cat].subcategories[sub] = true;
+    });
+  });
+  return st;
+};
+
+const buildEmptyCityState = (cats = CITY_CATEGORY): SkillsFilterState => {
+  const st: SkillsFilterState = {};
+  cats.forEach((c) => {
+    st[c.categoryName] = { selected: false, subcategories: {} };
+  });
+  return st;
+};
+
+const hydrateCityState = (
+  base: SkillsFilterState,
+  selectedCity?: string | null
+): SkillsFilterState => {
+  if (!selectedCity) return base;
+  const st: SkillsFilterState = JSON.parse(JSON.stringify(base));
+  if (st[selectedCity]) st[selectedCity].selected = true;
+  return st;
+};
+
+const updateURL = (
+  navigate: ReturnType<typeof useNavigate>,
+  filters: FilterObject
+) => {
+
+  const params = new URLSearchParams(window.location.search);
+
+  const setOrDelete = (key: string, value?: string | null) => {
+    if (!value) params.delete(key);
+    else params.set(key, value);
+  };
+
+  setOrDelete('searchType', filters.searchType || null);
+  setOrDelete(
+    'category',
+    filters.category && filters.category.length ? filters.category.join(',') : null
+  );
+  setOrDelete(
+    'subcategory',
+    filters.subcategory && filters.subcategory.length
+      ? filters.subcategory.join(',')
+      : null
+  );
+  setOrDelete('gender', filters.gender || null);
+  setOrDelete('city', filters.city || null);
+
+  navigate(`?${params.toString()}`, { replace: true });
+};
+
 const buildFilterObject = (
   generalFilterId: string,
   genderFilterId: string,
   skillsState: SkillsFilterState,
   cityState: SkillsFilterState
 ): FilterObject => {
-  const searchType: 'wantLearn' | 'canLearn' | 'all' =
+  const searchType: 'wantLearn' | 'canTeach' | 'all' =
     generalFilterId === 'wantToLearn'
       ? 'wantLearn'
       : generalFilterId === 'canTeach'
-        ? 'canLearn'
+        ? 'canTeach'
         : 'all';
 
   const category: string[] = Object.keys(skillsState).filter(
@@ -57,23 +151,9 @@ const buildFilterObject = (
   };
 };
 
-const updateURL = (
-  navigate: ReturnType<typeof useNavigate>,
-  filters: FilterObject
-) => {
-  const params = new URLSearchParams();
-  if (filters.searchType) params.set('searchType', filters.searchType);
-  if (filters.category) params.set('category', filters.category.join(','));
-  if (filters.subcategory)
-    params.set('subcategory', filters.subcategory.join(','));
-  if (filters.gender) params.set('gender', filters.gender);
-  if (filters.city) params.set('city', filters.city);
-
-  navigate(`?${params.toString()}`, { replace: true });
-};
-
 export const FilterForm = ({}) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const generalFilterItems: RadioItem[] = [
     { id: 'all', label: 'Всё', checked: true },
     { id: 'wantToLearn', label: 'Хочу научиться' },
@@ -90,6 +170,25 @@ export const FilterForm = ({}) => {
   const [genders, setGender] = useState(genderFilterItems);
   const [skillsState, setSkillsState] = useState<SkillsFilterState>({});
   const [cityState, setCityState] = useState<SkillsFilterState>({});
+
+   useEffect(() => {
+    const p = new URLSearchParams(location.search);
+    const searchTypeFromUrl = fromApiSearchType(p.get('searchType'));
+    const catArr = parseCSV(p.get('category'));
+    const subArr = parseCSV(p.get('subcategory'));
+    const genderFromUrl = p.get('gender') ?? 'any';
+    const cityFromUrl = p.get('city');
+
+    setFilter((prev) =>
+      prev.map((it) => ({ ...it, checked: it.id === searchTypeFromUrl }))
+    );
+    setGender((prev) =>
+      prev.map((it) => ({ ...it, checked: it.id === genderFromUrl }))
+    );
+
+    setSkillsState(hydrateSkillsState(buildEmptySkillsState(), catArr, subArr));
+    setCityState(hydrateCityState(buildEmptyCityState(), cityFromUrl));
+  }, [location.search]);
 
   const updateGeneralFilter = (filterId: string) => {
     setFilter(

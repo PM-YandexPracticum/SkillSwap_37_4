@@ -4,12 +4,13 @@ import { SkillsFilterState } from '../../../components/skillsFilter/SkillsFilter
 import { SKILL_CATEGORY } from '../../../const/skillsCategoryMapping';
 import { cardDataArray } from '../../../pages/catalog-page/cardsMockup';
 import { TCardData, TCardDataApi } from './type';
+import type { RootState } from '../../store/store';
 
 export interface FilterObject {
   category: string[];
   subcategory: string[];
   wantLearn?: string;
-  canLearn?: string;
+  canTeach?: string;
   all?: string;
   matchName?: string;
   sortByNew?: boolean;
@@ -78,8 +79,8 @@ const applyFilters = (cards: TCard[], filterObj: FilterObject): TCard[] =>
     )
       return false;
     if (
-      filterObj.canLearn &&
-      !card.canTeach.some((skill) => skill.name.includes(filterObj.canLearn!))
+      filterObj.canTeach &&
+      !card.canTeach.some((skill) => skill.name.includes(filterObj.canTeach!))
     )
       return false;
 
@@ -170,3 +171,5 @@ const cardSlice = createSlice({
 export const { getCards, setLike, setDislike, updateFilterState } =
   cardSlice.actions;
 export default cardSlice.reducer;
+
+

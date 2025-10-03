@@ -35,7 +35,7 @@ export interface CardState {
 export interface FilterParams {
   category?: string[];
   subcategory?: string[];
-  searchType?: 'wantLearn' | 'canLearn' | 'all';
+  searchType?: 'wantLearn' | 'canTeach' | 'all';
   matchName?: string;
   sortByNew?: boolean;
   sortByLike?: boolean;

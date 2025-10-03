@@ -20,9 +20,25 @@ export const CardUI: FC<TCardUI> = ({
   const [liked, setLiked] = useState(false);
   const handleLike = () => {
     setLiked((prevLiked) => !prevLiked);
-  };
 
+  };
+  
   const navigate = useNavigate();
+
+  const goToTag = (tag: string) => {
+  const params = new URLSearchParams(window.location.search);
+  params.set('searchType', 'all');        // всегда ищем везде
+  params.set('subcategory', tag);         // фильтр по конкретному навыку
+  navigate(`?${params.toString()}`, { replace: true });
+  window.location.reload();               // перезагрузить страницу, чтобы подтянулось
+};
+
+  const goToTags = (tags: string[]) => {
+  const params = new URLSearchParams();
+  params.set('searchType', 'canTeach');
+  params.set('subcategory', tags.join(','));
+  navigate(`/catalog?${params.toString()}`);
+};
 
   return (
     <div className={styles.card}>
@@ -54,7 +70,7 @@ export const CardUI: FC<TCardUI> = ({
           <h4 className={styles.skillsTitle}>Может научить:</h4>
           <div className={styles.skillsTags}>
             {canTeach.slice(0, 2).map((skill, index) => (
-              <CardTag key={index} name={skill.name} color={skill.color} />
+              <CardTag key={index} name={skill.name} color={skill.color} onClick={() => {goToTag(skill.name)}} />
             ))}
           </div>
         </div>
@@ -62,11 +78,18 @@ export const CardUI: FC<TCardUI> = ({
           <h4 className={styles.skillsTitle}>Хочет научиться:</h4>
           <div className={styles.learnTags}>
             {wantLearn.slice(0, 2).map((skill, index) => (
-              <CardTag key={index} name={skill.name} color={skill.color} />
+              <CardTag key={index} name={skill.name} color={skill.color} onClick={() => {goToTag(skill.name)}} />
             ))}
-            {remainingWantLearn > 0 && (
-              <CardTag name={`+${remainingWantLearn}`} color='#e8ecf7' />
-            )}
+             {remainingWantLearn > 0 && (() => {
+      const hidden = wantLearn.slice(2);
+      return (
+        <CardTag
+          name={`+${hidden.length}`}
+          color="#e8ecf7"
+          onClick={() => goToTags(hidden.map(s => s.name))}
+        />
+      );
+    })()}
           </div>
         </div>
       </div>

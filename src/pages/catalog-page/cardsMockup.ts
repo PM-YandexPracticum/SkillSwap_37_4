@@ -11,7 +11,7 @@ export const cardDataArray = [
     wantLearn: [
       { name: 'Тайм менеджмент', color: '#e7f2f6' },
       { name: 'Медитация', color: '#e9f7e7' },
-      { name: 'Тест 1', color: '#8cc84b' },
+      { name: 'Фотография', color: '#8cc84b' },
       { name: 'Тест2 1', color: '#e535ab' },
       { name: 'Тест3 1', color: '#8cc84b' }
     ],
@@ -27,7 +27,7 @@ export const cardDataArray = [
     avatar_url: 'https://i.ibb.co/1YmL5xnT/Photo2.png',
     canTeach: [{ name: 'Игра на барабанах', color: '#f7e7f2' }],
     wantLearn: [
-      { name: 'Тайм менеджмент', color: '#e7f2f6' },
+      { name: 'Фотография', color: '#e7f2f6' },
       { name: 'Медитация', color: '#e9f7e7' },
       { name: 'Тест 2', color: '#8cc84b' },
       { name: 'Тест2 2', color: '#e535ab' },

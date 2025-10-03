@@ -30,7 +30,7 @@ export const mockUser: TUser = {
     { name: 'Медитация' },
     { name: 'Английский язык' }
   ],
-  canLearn: [
+  canTeach: [
     { name: 'Игра на барабанах' },
     { name: 'React JS' },
     { name: 'Node.js' }

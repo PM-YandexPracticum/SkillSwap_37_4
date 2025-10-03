@@ -11,5 +11,5 @@ export type TUser = {
   city: string;
   gender: string;
   wantLearn: TSkillTag[];
-  canLearn: TSkillTag[];
+  canTeach: TSkillTag[];
 };

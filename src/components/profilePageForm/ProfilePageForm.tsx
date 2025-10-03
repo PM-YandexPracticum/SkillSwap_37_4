@@ -18,7 +18,7 @@ export type ProfilePageFormProps = {
     city: string | undefined;
     gender: string | undefined;
     wantLearn: TSkillTag[] | undefined;
-    canLearn: TSkillTag[] | undefined;
+    canTeach: TSkillTag[] | undefined;
   };
   handleSubmit: () => void;
   handleInputChange: (
